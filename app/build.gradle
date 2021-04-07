@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "com.github.bumptech.glide:compiler:4.10.0"
     kapt "com.google.dagger:hilt-android-compiler:2.31.2-alpha"
     implementation "androidx.appcompat:appcompat:1.2.0"
