@@ -1,4 +1,4 @@
-package com.depromeet.muyaho.fragment
+package com.depromeet.muyaho.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
