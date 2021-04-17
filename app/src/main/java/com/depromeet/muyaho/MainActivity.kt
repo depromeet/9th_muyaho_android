@@ -5,12 +5,16 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.depromeet.muyaho.base.BaseActivity
 import com.depromeet.muyaho.databinding.ActivityMainBinding
+import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewModel.ViewAction>() {
     override val layoutResId: Int
         get() = R.layout.activity_main
     override val vm: MainViewModel by viewModels()
 
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
