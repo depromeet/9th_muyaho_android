@@ -1,6 +1,5 @@
 package com.depromeet.muyaho
 
-import android.util.Log
 import androidx.activity.viewModels
 import com.depromeet.muyaho.base.BaseActivity
 import com.depromeet.muyaho.databinding.ActivityMainBinding
@@ -13,13 +12,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewMo
     override val vm: MainViewModel by viewModels()
 
     override fun observeActionCommand(action: MainViewModel.ViewAction) {
-        Log.d("!@#", action.toString())
         when (action) {
-            MainViewModel.ViewAction.ChangeMainText -> changeMainText()
+            MainViewModel.ViewAction.ChangeMainText -> showActivity()
         }
     }
 
-    private fun changeMainText() {
+    private fun showActivity() {
         binding.tvTest.text = "테스트 입니다~\n이런 흐름으로 viewmodel에서 action 통해서 view 와 통신? 상호작용? 하는 방식입니다~"
     }
 }

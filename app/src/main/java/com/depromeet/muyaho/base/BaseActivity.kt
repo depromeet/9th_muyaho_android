@@ -1,15 +1,15 @@
 package com.depromeet.muyaho.base
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.collect
 
-abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel<A>, A : Action>(
-) : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel<A>, A : Action> :
+    AppCompatActivity() {
     protected lateinit var binding: T
 
     abstract val layoutResId: Int
@@ -19,17 +19,16 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel<A>, A : Actio
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutResId)
         binding.lifecycleOwner = this
+        if (vm !is NoViewModel) binding.setVariable(BR.vm, vm)
 
         observeViewModel()
     }
 
     protected open fun observeViewModel() {
-        Log.d("!@# vm", vm.toString())
         if (vm is NoViewModel) return
 
         lifecycleScope.launchWhenStarted {
             vm.actionReceiver.collect { action ->
-                Log.d("!@#", action.toString())
                 observeActionCommand(action)
             }
         }
