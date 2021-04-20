@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.collect
 
 abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Action> : Fragment() {
     protected lateinit var binding: T
@@ -29,6 +31,18 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Actio
         super.onViewCreated(view, savedInstanceState)
 
         if (vm !is NoViewModel) binding.setVariable(BR.vm, vm)
+        observeViewModel()
     }
 
+    protected open fun observeViewModel() {
+        if (vm is NoViewModel) return
+
+        lifecycleScope.launchWhenStarted {
+            vm.actionReceiver.collect { action ->
+                observeActionCommand(action)
+            }
+        }
+    }
+
+    protected open fun observeActionCommand(action: A) = Unit
 }

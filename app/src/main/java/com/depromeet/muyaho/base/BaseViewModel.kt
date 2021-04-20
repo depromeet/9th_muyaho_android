@@ -8,4 +8,10 @@ import kotlinx.coroutines.flow.asFlow
 abstract class BaseViewModel<A : Action> : ViewModel() {
     protected val actionSender = BroadcastChannel<A>(Channel.BUFFERED)
     val actionReceiver = actionSender.asFlow()
+
+    override fun onCleared() {
+        super.onCleared()
+
+        actionSender.cancel()
+    }
 }
