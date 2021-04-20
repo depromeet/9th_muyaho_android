@@ -6,24 +6,18 @@
 
         <variable
             name="vm"
-            type="com.depromeet.muyaho.MainViewModel" />
+            type="com.depromeet.muyaho.splash.SplashViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/black">
 
-        <TextView
-            android:id="@+id/tv_test"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/black"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="@{() -> vm.onClick()}"
-            android:padding="20dp"
-            android:text="여기를 눌러주세요~"
-            android:textColor="@color/white"
+            android:src="@drawable/splash_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

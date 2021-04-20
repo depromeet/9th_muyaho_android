@@ -1,25 +1,23 @@
-package com.depromeet.muyaho.splash
+package com.depromeet.muyaho
 
 import androidx.lifecycle.viewModelScope
 import com.depromeet.muyaho.base.Action
 import com.depromeet.muyaho.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
 
-) : BaseViewModel<SplashViewModel.ViewAction>() {
+) : BaseViewModel<MainViewModel.ViewAction>() {
     sealed class ViewAction : Action {
-        object ShowMain : ViewAction()
+        object ChangeMainText : ViewAction()
     }
 
-    init {
+    fun onClick() {
         viewModelScope.launch {
-            delay(2000)
-            actionSender.send(ViewAction.ShowMain)
+            actionSender.send(ViewAction.ChangeMainText)
         }
     }
 }

@@ -1,34 +1,29 @@
 package com.depromeet.muyaho.splash
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.depromeet.muyaho.MainActivity
+import com.depromeet.muyaho.R
+import com.depromeet.muyaho.base.BaseActivity
+import com.depromeet.muyaho.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-class SplashActivity : AppCompatActivity() {
+class SplashActivity :
+    BaseActivity<ActivityMainBinding, SplashViewModel, SplashViewModel.ViewAction>() {
 
-    private val splashViewModel: SplashViewModel by viewModels()
+    override val layoutResId: Int = R.layout.activity_splash
+    override val vm: SplashViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        lifecycleScope.launch(Dispatchers.Default) {
-
-            delay(2000)
-
-            withContext(Dispatchers.Main) {
-                val intent = Intent(this@SplashActivity, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+    override fun observeActionCommand(action: SplashViewModel.ViewAction) {
+        when (action) {
+            SplashViewModel.ViewAction.ShowMain -> showMain()
         }
+    }
+
+    private fun showMain() {
+        val intent = Intent(this@SplashActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
