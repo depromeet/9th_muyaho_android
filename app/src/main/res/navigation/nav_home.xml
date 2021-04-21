@@ -2,12 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_main"
+    android:id="@+id/nav_home"
     app:startDestination="@id/fragment_home">
 
     <fragment
         android:id="@+id/fragment_home"
-        android:name="com.depromeet.muyaho.fragment.HomeFragment"
+        android:name="com.depromeet.muyaho.home.HomeFragment"
         tools:layout="@layout/fragment_home">
 
     </fragment>
