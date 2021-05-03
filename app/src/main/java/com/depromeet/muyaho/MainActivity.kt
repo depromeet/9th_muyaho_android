@@ -1,6 +1,7 @@
 package com.depromeet.muyaho
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
@@ -36,6 +37,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewMo
         setUpBottomNavigationBar()
     }
 
+    override fun onBackPressed() {
+        if (binding.viewFab.isClicked) {
+            binding.viewFab.toggle()
+            return
+        }
+        super.onBackPressed()
+    }
+
     private fun setUpBottomNavigationBar() {
         val navGraphIds = listOf(
                 R.navigation.nav_home,
@@ -47,8 +56,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewMo
         val controller = binding.bottomNavigation.setupWithNavController(
                 navGraphIds, supportFragmentManager, R.id.nav_host, intent
         )
-
         currentNavController = controller
+
+        binding.bottomNavigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_home -> {
+                    binding.viewFab.visibility = View.VISIBLE
+                }
+                else -> {
+                    binding.viewFab.visibility = View.GONE
+                }
+            }
+            true
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

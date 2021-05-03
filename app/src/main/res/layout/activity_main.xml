@@ -27,6 +27,12 @@
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/menu_bottom_navigation"
             app:layout_constraintBottom_toBottomOf="parent"/>
+        
+        <com.depromeet.muyaho.widget.HomeFABView
+            android:id="@+id/view_fab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="10dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
