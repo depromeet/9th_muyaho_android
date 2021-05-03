@@ -2,10 +2,10 @@ package com.depromeet.muyaho.ui.splash
 
 import android.content.Intent
 import androidx.activity.viewModels
-import com.depromeet.muyaho.MainActivity
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseActivity
 import com.depromeet.muyaho.databinding.ActivityMainBinding
+import com.depromeet.muyaho.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

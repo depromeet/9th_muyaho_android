@@ -1,6 +1,7 @@
 package com.depromeet.muyaho.ui
 
 import androidx.activity.viewModels
+import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseActivity
 import com.depromeet.muyaho.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
