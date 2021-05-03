@@ -1,11 +1,11 @@
-package com.depromeet.muyaho.splash
+package com.depromeet.muyaho.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.depromeet.muyaho.MainActivity
+import com.depromeet.muyaho.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

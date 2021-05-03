@@ -1,4 +1,4 @@
-package com.depromeet.muyaho.home
+package com.depromeet.muyaho.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
