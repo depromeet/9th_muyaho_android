@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--main-->
     <string name="menu_home">home</string>
     <string name="menu_calc">calc</string>
     <string name="menu_board">board</string>
