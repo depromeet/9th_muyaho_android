@@ -1,13 +1,16 @@
 package com.depromeet.muyaho
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
+import com.depromeet.muyaho.addstock.AddStockActivity
 import com.depromeet.muyaho.base.BaseActivity
 import com.depromeet.muyaho.databinding.ActivityMainBinding
 import com.depromeet.muyaho.util.setupWithNavController
+import com.depromeet.muyaho.widget.HomeFABView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +33,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewMo
         if (savedInstanceState == null) {
             setUpBottomNavigationBar()
         }
+
+        binding.viewFab.setSubBtnClickListener(object : HomeFABView.SubBtnClickListener{
+            override fun OnAddBtnClick() {
+                Intent(this@MainActivity, AddStockActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
+
+            override fun OnModifyBtnClick() {
+            }
+        })
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

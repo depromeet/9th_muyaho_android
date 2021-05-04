@@ -11,6 +11,7 @@
 
     <!--common-->
     <string name="percent">%</string>
+    <string name="stock_name">종목명</string>
 
     <!--home-->
     <string name="home_last_budget">최종자산</string>
@@ -20,5 +21,13 @@
     <!--fab-->
     <string name="fab_sub_modify">기존 종목 정보 수정</string>
     <string name="fab_sub_new">신규 종목 추가</string>
+
+    <!--add_stock-->
+    <string name="add_stock_add_new_item">신규항목추가</string>
+    <string name="add_stock_inform_new_item">신규 등록하실\n투자 종목을 알려주세요!</string>
+    <string name="add_stock_domestic_stock">국내주식</string>
+    <string name="add_stock_overseas_stock">해외주식</string>
+    <string name="add_stock_virtual_currency">가상화폐</string>
+    <string name="add_stock_search_stock_name">종목이름으로 검색해주세요.</string>
 
 </resources>

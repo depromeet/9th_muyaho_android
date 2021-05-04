@@ -17,11 +17,61 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
-    <style name="TextTitle">
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">28dp</item>
-        <item name="android:textColor">#FF3C3C3C</item>
+    <style name="TextBase">
+        <item name="android:textColor">@color/white_1</item>
         <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextH1" parent="TextBase">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">36dp</item>
+    </style>
+
+    <style name="TextH2" parent="TextBase">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">30dp</item>
+    </style>
+
+    <style name="TextH2.Light" parent="TextH2">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TextSubtitle1" parent="TextBase">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="TextSubtitle2" parent="TextBase">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="TextBody1" parent="TextBase">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="TextBody2" parent="TextBase">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="TextBody2.Bold" parent="TextBody2">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextCaption1" parent="TextBase">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="TextCaption1.Bold" parent="TextCaption1">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextCaption2" parent="TextBase">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">11dp</item>
     </style>
 
 </resources>

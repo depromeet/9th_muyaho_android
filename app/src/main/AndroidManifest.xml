@@ -21,6 +21,9 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".addstock.AddStockActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
