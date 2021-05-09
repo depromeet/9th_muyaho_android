@@ -9,6 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 
 abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Action> : Fragment() {
@@ -16,6 +17,8 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Actio
 
     abstract val layoutResId: Int
     abstract val vm: R
+
+    private var job: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +28,11 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Actio
         binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        job?.cancel()
+        super.onDestroyView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,7 +45,7 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Actio
     protected open fun observeViewModel() {
         if (vm is NoViewModel) return
 
-        lifecycleScope.launchWhenStarted {
+        job = lifecycleScope.launchWhenStarted {
             vm.actionReceiver.collect { action ->
                 observeActionCommand(action)
             }

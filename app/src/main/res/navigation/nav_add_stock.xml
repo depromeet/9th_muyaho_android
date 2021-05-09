@@ -9,6 +9,21 @@
         android:name="com.depromeet.muyaho.addstock.AddStockSelectTypeFragment"
         tools:layout="@layout/fragment_add_stock_select_type">
 
+        <action
+            android:id="@+id/action_select_type_to_search"
+            app:destination="@id/fragment_add_stock_search"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_add_stock_search"
+        android:name="com.depromeet.muyaho.addstock.AddStockSearchFragment"
+        tools:layout="@layout/fragment_add_stock_search">
+
+        <argument
+            android:name="stockType"
+            app:argType="string"/>
+
     </fragment>
 
 </navigation>

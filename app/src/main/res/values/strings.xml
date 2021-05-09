@@ -30,4 +30,7 @@
     <string name="add_stock_virtual_currency">가상화폐</string>
     <string name="add_stock_search_stock_name">종목이름으로 검색해주세요.</string>
 
+    <!--search_stock-->
+    <string name="add_stock_search_stock">종목 검색하기</string>
+
 </resources>
