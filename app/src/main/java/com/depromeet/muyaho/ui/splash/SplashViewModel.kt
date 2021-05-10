@@ -1,4 +1,4 @@
-package com.depromeet.muyaho.splash
+package com.depromeet.muyaho.ui.splash
 
 import androidx.lifecycle.viewModelScope
 import com.depromeet.muyaho.base.Action

@@ -1,4 +1,4 @@
-package com.depromeet.muyaho.home
+package com.depromeet.muyaho.ui.home
 
 import androidx.fragment.app.viewModels
 import com.depromeet.muyaho.R

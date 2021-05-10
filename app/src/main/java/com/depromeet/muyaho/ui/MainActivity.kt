@@ -1,4 +1,4 @@
-package com.depromeet.muyaho
+package com.depromeet.muyaho.ui
 
 import android.os.Bundle
 import android.view.View
