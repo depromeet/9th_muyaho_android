@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.depromeet.muyaho.splash.SplashViewModel" />
+            type="com.depromeet.muyaho.ui.splash.SplashViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

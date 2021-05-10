@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.depromeet.muyaho.MainViewModel" />
+            type="com.depromeet.muyaho.ui.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
