@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fragment_add_stock_select_type"
-        android:name="com.depromeet.muyaho.addstock.AddStockSelectTypeFragment"
+        android:name="com.depromeet.muyaho.ui.addstock.AddStockSelectTypeFragment"
         tools:layout="@layout/fragment_add_stock_select_type">
 
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/fragment_add_stock_search"
-        android:name="com.depromeet.muyaho.addstock.AddStockSearchFragment"
+        android:name="com.depromeet.muyaho.ui.addstock.AddStockSearchFragment"
         tools:layout="@layout/fragment_add_stock_search">
 
         <argument

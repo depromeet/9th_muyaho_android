@@ -1,4 +1,4 @@
-package com.depromeet.muyaho.addstock
+package com.depromeet.muyaho.ui.addstock
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController

@@ -6,7 +6,8 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import com.depromeet.muyaho.addstock.AddStockActivity
+import com.depromeet.muyaho.R
+import com.depromeet.muyaho.ui.addstock.AddStockActivity
 import com.depromeet.muyaho.base.BaseActivity
 import com.depromeet.muyaho.databinding.ActivityMainBinding
 import com.depromeet.muyaho.util.setupWithNavController

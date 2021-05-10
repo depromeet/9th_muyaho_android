@@ -23,7 +23,7 @@
         <activity android:name=".ui.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".addstock.AddStockActivity"
+            android:name="com.depromeet.muyaho.ui.addstock.AddStockActivity"
             android:screenOrientation="portrait" />
     </application>
 

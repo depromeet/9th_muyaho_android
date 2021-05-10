@@ -1,4 +1,4 @@
-package com.depromeet.muyaho.addstock
+package com.depromeet.muyaho.ui.addstock
 
 import com.depromeet.muyaho.base.Action
 import com.depromeet.muyaho.base.BaseViewModel

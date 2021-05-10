@@ -1,11 +1,10 @@
-package com.depromeet.muyaho.addstock
+package com.depromeet.muyaho.ui.addstock
 
 import android.widget.RadioGroup
 import androidx.lifecycle.viewModelScope
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.Action
 import com.depromeet.muyaho.base.BaseViewModel
-import com.depromeet.muyaho.home.HomeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
