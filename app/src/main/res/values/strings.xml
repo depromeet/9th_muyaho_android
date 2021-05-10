@@ -2,4 +2,23 @@
     <string name="app_name">MuyahoAndroid</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--main-->
+    <string name="menu_home">home</string>
+    <string name="menu_calc">calc</string>
+    <string name="menu_board">board</string>
+    <string name="menu_my">my</string>
+
+    <!--common-->
+    <string name="percent">%</string>
+
+    <!--home-->
+    <string name="home_last_budget">최종자산</string>
+    <string name="home_korea_money_unit">원</string>
+    <string name="home_today_profit">오늘의 수익률</string>
+
+    <!--fab-->
+    <string name="fab_sub_modify">기존 종목 정보 수정</string>
+    <string name="fab_sub_new">신규 종목 추가</string>
+
 </resources>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_main"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:srcCompat="@drawable/ic_pencil_white_32"
+            app:tint="@color/white_2"
+            app:backgroundTint="@color/primary_blue"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="96dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_sub_modify"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_write_modify_white_32"
+            app:tint="@color/white_2"
+            app:backgroundTint="@color/primary_blue"
+            app:fabSize="mini"
+            app:layout_constraintLeft_toLeftOf="@id/fab_main"
+            app:layout_constraintRight_toRightOf="@id/fab_main"
+            app:layout_constraintBottom_toTopOf="@id/fab_main"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_sub_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toLeftOf="@id/fab_sub_modify"
+            app:layout_constraintTop_toTopOf="@id/fab_sub_modify"
+            app:layout_constraintBottom_toBottomOf="@id/fab_sub_modify"
+            android:layout_marginRight="16dp"
+            android:text="@string/fab_sub_modify"
+            android:textSize="16dp"
+            android:textColor="@color/white_2"
+            android:includeFontPadding="false"
+            android:visibility="gone"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_sub_new"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_write_new_white_32"
+            app:tint="@color/white_2"
+            app:backgroundTint="@color/primary_blue"
+            app:fabSize="mini"
+            app:layout_constraintLeft_toLeftOf="@id/fab_main"
+            app:layout_constraintRight_toRightOf="@id/fab_main"
+            app:layout_constraintBottom_toTopOf="@id/fab_sub_modify"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_sub_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toLeftOf="@id/fab_sub_new"
+            app:layout_constraintTop_toTopOf="@id/fab_sub_new"
+            app:layout_constraintBottom_toBottomOf="@id/fab_sub_new"
+            android:layout_marginRight="16dp"
+            android:text="@string/fab_sub_new"
+            android:textSize="16dp"
+            android:textColor="@color/white_2"
+            android:includeFontPadding="false"
+            android:visibility="gone"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

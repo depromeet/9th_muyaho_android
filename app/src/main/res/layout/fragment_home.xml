@@ -1,14 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.HomeFragment">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="vm"
+            type="com.depromeet.muyaho.home.HomeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#f3f3f3">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/iv_refresh"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_baseline_refresh_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="28dp"
+            android:layout_marginRight="20dp"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="111dp"
+            android:gravity="center_vertical|left"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="96dp"
+            android:layout_marginLeft="20dp"
+            android:text="@{vm.title}"
+            style="@style/TextTitle"/>
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_mim"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="239dp">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:background="@drawable/shape_bg_radius_14dp"
+            android:backgroundTint="#494949"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="325dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/home_last_budget"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:id="@+id/tv_budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="60dp"
+                android:text="@{vm.budgetPrice}"
+                android:textSize="26dp"
+                android:textColor="@color/white"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/tv_budget"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="65dp"
+                android:text="@string/home_korea_money_unit"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:includeFontPadding="false"/>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:gravity="center"
+                android:background="@drawable/shape_bg_radius_14dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="60dp"
+                android:layout_marginRight="16dp"
+                android:text="@{vm.budgetPercent}"
+                android:textSize="16dp"
+                android:textColor="#494949"
+                android:includeFontPadding="false"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_profit_percent"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            app:layout_constraintHorizontal_weight="100"
+            android:background="@drawable/shape_bg_radius_14dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/cl_profit_price"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="451dp">
+
+            <TextView
+                android:id="@+id/tv_profit_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="21dp"
+                android:text="@{vm.profitPercent}"
+                android:textSize="26dp"
+                android:textColor="#9d9d9d"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/tv_profit_percent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="28dp"
+                android:text="@string/percent"
+                android:textSize="14dp"
+                android:textColor="#9d9d9d"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="55dp"
+                android:text="@string/home_today_profit"
+                android:textSize="12dp"
+                android:textColor="#7c7c7c"
+                android:includeFontPadding="false"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_profit_price"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            app:layout_constraintHorizontal_weight="204"
+            android:background="@drawable/shape_bg_radius_14dp"
+            app:layout_constraintLeft_toRightOf="@id/cl_profit_percent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="451dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/tv_profit_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="21dp"
+                android:text="@{vm.profitPrice}"
+                android:textSize="26dp"
+                android:textColor="#9d9d9d"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/tv_profit_price"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="28dp"
+                android:text="@string/home_korea_money_unit"
+                android:textSize="14dp"
+                android:textColor="#9d9d9d"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="55dp"
+                android:text="@string/home_today_profit"
+                android:textSize="12dp"
+                android:textColor="#7c7c7c"
+                android:includeFontPadding="false"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primary_blue">#FF4630FF</color>
+    <color name="primary_blue_fade">#FF6451FF</color>
+    <color name="primary_blue_dark">#FF3725D0</color>
+    
+    <color name="secondary_red">#FFFE5436</color>
+    <color name="secondary_red_dark">#FFB73B25</color>
+    
+    <color name="secondary_blue">#FF538AFF</color>
+    <color name="secondary_blue_dark">#FF2F5199</color>
+    
+    <color name="black_1">#FF19182B</color>
+    <color name="black_2">#FF1C1A38</color>
+    <color name="black_3">#FF252044</color>
+    <color name="black_4">#FF292558</color>
+    <color name="black_5">#FF68668C</color>
+    
+    <color name="white_1">#FFF4F4F4</color>
+    <color name="white_2">#FFFFFFFF</color>
+    <color name="white_3">#FFDAD6FF</color>
+    <color name="white_4">#FFB1A7FF</color>
+
+    <color name="gray_100">#FF18181E</color>
+    <color name="gray_80">#FF323238</color>
+    <color name="gray_60">#FF5A5A62</color>
+    <color name="gray_40">#FFA0A0A8</color>
+    <color name="gray_20">#FFC8C8CC</color>
+    
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
