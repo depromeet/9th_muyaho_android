@@ -1,5 +1,6 @@
 package com.depromeet.muyaho.other
 
 object Constants {
-    const val BASE_URL = ""
+    const val BASE_URL = "http://muyaho-api-alb-302156047.ap-northeast-2.elb.amazonaws.com/"
+    const val DATABASE_NAME = "muyaho-db"
 }

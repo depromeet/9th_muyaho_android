@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.Action
 import com.depromeet.muyaho.base.BaseViewModel
+import com.depromeet.muyaho.data.StockType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,22 +15,14 @@ class AddStockSelectTypeViewModel @Inject constructor(
 
 ) : BaseViewModel<AddStockSelectTypeViewModel.ViewAction>() {
     sealed class ViewAction : Action {
-        object startSearchStockFragment: ViewAction()
+        object StartSearchStockFragment: ViewAction()
     }
 
     var selectedStockType = StockType.Domestic
 
-    enum class StockType(
-        name: String
-    ) {
-        Domestic("Domestic"),
-        Overseas("Overseas"),
-        Virtual("Virtual")
-    }
-
     fun onSearchBtnClick() {
         viewModelScope.launch {
-            actionSender.send(ViewAction.startSearchStockFragment)
+            actionSender.send(ViewAction.StartSearchStockFragment)
         }
     }
 
@@ -38,7 +31,7 @@ class AddStockSelectTypeViewModel @Inject constructor(
             when (p1) {
                 R.id.rb_domestic_stock -> selectedStockType = StockType.Domestic
                 R.id.rb_overseas_stock -> selectedStockType = StockType.Overseas
-                R.id.rb_virtual_currency -> selectedStockType = StockType.Virtual
+                R.id.rb_virtual_currency -> selectedStockType = StockType.Bitcoin
             }
         }
     }
