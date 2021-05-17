@@ -35,7 +35,7 @@
             android:layout_marginTop="96dp"
             android:layout_marginLeft="20dp"
             android:text="@{vm.title}"
-            style="@style/TextTitle"/>
+            style="@style/TextBody2"/>
         
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_mim"
