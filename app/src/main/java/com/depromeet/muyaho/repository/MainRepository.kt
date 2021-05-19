@@ -10,8 +10,8 @@ class MainRepository @Inject constructor(
 ) {
     suspend fun getEmployee() = apiHelper.getEmployees()
 
-    suspend fun loadStockList() {
-        apiHelper.getStockList().body()?.let {
+    suspend fun loadStockList(stockType: String) {
+        apiHelper.getStockList(stockType).body()?.let {
             dataBase.stockDao().insertAll(it.data)
         }
     }

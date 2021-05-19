@@ -16,6 +16,7 @@ class AddStockSelectTypeViewModel @Inject constructor(
 ) : BaseViewModel<AddStockSelectTypeViewModel.ViewAction>() {
     sealed class ViewAction : Action {
         object StartSearchStockFragment: ViewAction()
+        object CloseActivity: ViewAction()
     }
 
     var selectedStockType = StockType.Domestic
@@ -23,6 +24,12 @@ class AddStockSelectTypeViewModel @Inject constructor(
     fun onSearchBtnClick() {
         viewModelScope.launch {
             actionSender.send(ViewAction.StartSearchStockFragment)
+        }
+    }
+
+    fun onCloseBtnClick() {
+        viewModelScope.launch {
+            actionSender.send(ViewAction.CloseActivity)
         }
     }
 

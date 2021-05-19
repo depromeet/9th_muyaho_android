@@ -19,9 +19,12 @@ class AddStockSelectTypeFragment :
     override fun observeActionCommand(action: AddStockSelectTypeViewModel.ViewAction) {
         when (action) {
             AddStockSelectTypeViewModel.ViewAction.StartSearchStockFragment -> {
-                AddStockSelectTypeFragmentDirections.actionSelectTypeToSearch(vm.selectedStockType.name).also {
+                AddStockSelectTypeFragmentDirections.actionSelectTypeToSearch(vm.selectedStockType.full_name).also {
                     findNavController().navigate(it)
                 }
+            }
+            AddStockSelectTypeViewModel.ViewAction.CloseActivity -> {
+                requireActivity().finish()
             }
         }
     }

@@ -31,7 +31,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="33dp"
-            android:layout_marginRight="8dp"/>
+            android:layout_marginRight="8dp"
+            android:onClick="@{() -> vm.onCloseBtnClick()}"/>
 
         <TextView
             android:layout_width="wrap_content"

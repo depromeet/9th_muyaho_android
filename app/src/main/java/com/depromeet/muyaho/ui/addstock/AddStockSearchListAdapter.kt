@@ -10,6 +10,11 @@ import com.depromeet.muyaho.databinding.ListItemSearchResultBinding
 
 class AddStockSearchListAdapter: ListAdapter<Stock, RecyclerView.ViewHolder>(StockDiffCallback()) {
 
+    interface OnItemClickListener {
+        fun OnClick(item: Stock)
+    }
+    var mOnItemClickListener: OnItemClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return StockViewHolder(
             ListItemSearchResultBinding.inflate(
@@ -25,13 +30,16 @@ class AddStockSearchListAdapter: ListAdapter<Stock, RecyclerView.ViewHolder>(Sto
         (holder as StockViewHolder).bind(stock)
     }
 
-    class StockViewHolder(
+    inner class StockViewHolder(
         private val binding: ListItemSearchResultBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Stock) {
             binding.apply {
                 tvStockName.text = item.name
                 executePendingBindings()
+            }
+            binding.clRoot.setOnClickListener {
+                mOnItemClickListener?.OnClick(item)
             }
         }
     }

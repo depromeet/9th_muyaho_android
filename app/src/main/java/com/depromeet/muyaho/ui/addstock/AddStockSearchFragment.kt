@@ -7,9 +7,11 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
+import com.depromeet.muyaho.data.Stock
 import com.depromeet.muyaho.databinding.FragmentAddStockSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,7 +35,15 @@ class AddStockSearchFragment :
         // init
         vm.stockType = args.stockType
 
-        val adapter = AddStockSearchListAdapter()
+        val adapter = AddStockSearchListAdapter().apply {
+            mOnItemClickListener = object : AddStockSearchListAdapter.OnItemClickListener{
+                override fun OnClick(item: Stock) {
+                    AddStockSearchFragmentDirections.actionSearchToInput(item).also {
+                        findNavController().navigate(it)
+                    }
+                }
+            }
+        }
         binding.rvSearchResult.adapter = adapter
         vm.stocks.observe(viewLifecycleOwner) {
             adapter.submitList(it)
@@ -58,6 +68,10 @@ class AddStockSearchFragment :
 
         binding.ivDelete.setOnClickListener {
             binding.etSearch.setText("")
+        }
+
+        binding.ivClose.setOnClickListener {
+            requireActivity().finish()
         }
 
         // first exec

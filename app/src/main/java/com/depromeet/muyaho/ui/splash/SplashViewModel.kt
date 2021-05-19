@@ -3,6 +3,7 @@ package com.depromeet.muyaho.ui.splash
 import androidx.lifecycle.viewModelScope
 import com.depromeet.muyaho.base.Action
 import com.depromeet.muyaho.base.BaseViewModel
+import com.depromeet.muyaho.data.StockType
 import com.depromeet.muyaho.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,9 @@ class SplashViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.Default) {
-            mainRepository.loadStockList()
+            mainRepository.loadStockList(StockType.Domestic.full_name)
+            mainRepository.loadStockList(StockType.Overseas.full_name)
+            mainRepository.loadStockList(StockType.Bitcoin.full_name)
             withContext(Dispatchers.Main) {
                 actionSender.send(ViewAction.ShowMain)
             }
