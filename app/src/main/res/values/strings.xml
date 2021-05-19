@@ -18,6 +18,10 @@
     <string name="save">저장하기</string>
     <string name="won">원화</string>
     <string name="dollar">달러</string>
+    <string name="domestic_stock">국내주식</string>
+    <string name="overseas_stock">해외주식</string>
+    <string name="virtual_currency">가상화폐</string>
+    <string name="next">다음</string>
 
     <!--home-->
     <string name="home_last_budget">최종자산</string>
@@ -31,17 +35,22 @@
     <!--add_stock-->
     <string name="add_stock_add_new_item">신규항목추가</string>
     <string name="add_stock_inform_new_item">신규 등록하실\n투자 종목을 알려주세요!</string>
-    <string name="add_stock_domestic_stock">국내주식</string>
-    <string name="add_stock_overseas_stock">해외주식</string>
-    <string name="add_stock_virtual_currency">가상화폐</string>
     <string name="add_stock_search_stock_name">종목이름으로 검색해주세요.</string>
 
-    <!--search_stock-->
+    <!--add_search_stock-->
     <string name="add_stock_search_stock">종목 검색하기</string>
     <string name="add_stock_search_edit_text_hint">종목 이름, 종목 코드로 검색해 주세요</string>
     
-    <!--input_stock-->
+    <!--add_input_stock-->
     <string name="add_stock_input_stock">신규항목추가</string>
     <string name="add_stock_inform_input_stock">투자 종목의\n가격과 수량을 알려주세요!</string>
+
+    <!--modify_stock-->
+    <string name="modify_stock_modify_item">기존정보수정</string>
+    <string name="modify_stock_select_modify_item">수정하실 종목을\n선택해주세요</string>
+
+    <!--modify_input_stock-->
+    <string name="modify_stock_input_item">변경하실 투자 종목의\n가격과 수량을 입력해주세요!</string>
+    <string name="modify_stock_modify_complete">변경완료</string>
 
 </resources>

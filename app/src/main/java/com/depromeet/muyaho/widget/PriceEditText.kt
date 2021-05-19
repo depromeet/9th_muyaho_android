@@ -20,6 +20,10 @@ class PriceEditText@JvmOverloads constructor(
     }
 
     var price: String = ""
+        set(value) {
+            field = value
+            updateFormatPrice()
+        }
     var priceType: PriceType = PriceType.WON
 
     enum class PriceType {
@@ -57,7 +61,6 @@ class PriceEditText@JvmOverloads constructor(
                 price = binding.etPrice.text.toString()
                 binding.etPrice.setText("")
 
-                updateFormatPrice()
                 binding.tvPrice.visibility = View.VISIBLE
 
                 mOnEditCompleteListener?.OnComplete()
@@ -83,7 +86,6 @@ class PriceEditText@JvmOverloads constructor(
         }
 
         // first exec
-        binding.etPrice.setText("0")
         updateFormatPrice()
     }
 

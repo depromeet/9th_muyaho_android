@@ -33,8 +33,6 @@ class AddStockSearchFragment :
         super.onViewCreated(view, savedInstanceState)
 
         // init
-        vm.stockType = args.stockType
-
         val adapter = AddStockSearchListAdapter().apply {
             mOnItemClickListener = object : AddStockSearchListAdapter.OnItemClickListener{
                 override fun OnClick(item: Stock) {
@@ -75,6 +73,8 @@ class AddStockSearchFragment :
         }
 
         // first exec
+        vm.stockType = args.stockType
+
         binding.etSearch.requestFocus()
         imm.showSoftInput(binding.etSearch, 0)
 

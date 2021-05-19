@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/fragment_modify_stock_select">
+
+    <fragment
+        android:id="@+id/fragment_modify_stock_select"
+        android:name="com.depromeet.muyaho.ui.modifystock.ModifyStockSelectFragment"
+        tools:layout="@layout/fragment_modify_stock_select">
+
+        <action
+            android:id="@+id/action_select_to_input"
+            app:destination="@id/fragment_modify_stock_input"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_modify_stock_input"
+        android:name="com.depromeet.muyaho.ui.modifystock.ModifyStockInputFragment"
+        tools:layout="@layout/fragment_modify_stock_input">
+
+        <argument
+            android:name="memberStock"
+            app:argType="com.depromeet.muyaho.data.MemberStock"/>
+
+    </fragment>
+
+</navigation>

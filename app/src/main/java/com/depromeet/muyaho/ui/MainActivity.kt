@@ -7,9 +7,10 @@ import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.depromeet.muyaho.R
-import com.depromeet.muyaho.ui.addstock.AddStockActivity
 import com.depromeet.muyaho.base.BaseActivity
 import com.depromeet.muyaho.databinding.ActivityMainBinding
+import com.depromeet.muyaho.ui.addstock.AddStockActivity
+import com.depromeet.muyaho.ui.modifystock.ModifyStockActivity
 import com.depromeet.muyaho.util.setupWithNavController
 import com.depromeet.muyaho.widget.HomeFABView
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +48,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewMo
             }
 
             override fun OnModifyBtnClick() {
+                Intent(this@MainActivity, ModifyStockActivity::class.java).also {
+                    startActivity(it)
+                }
 
                 if (binding.viewFab.isClicked) {
                     binding.viewFab.toggle()

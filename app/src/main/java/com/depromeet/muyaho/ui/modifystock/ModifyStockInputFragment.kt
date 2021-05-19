@@ -1,26 +1,32 @@
-package com.depromeet.muyaho.ui.addstock
+package com.depromeet.muyaho.ui.modifystock
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
 import com.depromeet.muyaho.data.StockType
-import com.depromeet.muyaho.databinding.FragmentAddStockInputBinding
+import com.depromeet.muyaho.databinding.FragmentModifyStockInputBinding
 import com.depromeet.muyaho.util.NumberFormatUtil
 import com.depromeet.muyaho.widget.PriceEditText
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddStockInputFragment :
-    BaseFragment<FragmentAddStockInputBinding,
-        AddStockInputViewModel,
-        AddStockInputViewModel.ViewAction>(){
+class ModifyStockInputFragment :
+    BaseFragment<FragmentModifyStockInputBinding,
+        ModifyStockInputViewModel,
+        ModifyStockInputViewModel.ViewAction>(){
     override val layoutResId: Int
-        get() = R.layout.fragment_add_stock_input
-    override val vm: AddStockInputViewModel by viewModels()
-    private val args: AddStockInputFragmentArgs by navArgs()
+        get() = R.layout.fragment_modify_stock_input
+    override val vm: ModifyStockInputViewModel by viewModels()
+    private val args: ModifyStockInputFragmentArgs by navArgs()
+
+    private val imm: InputMethodManager by lazy {
+        context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,7 +55,7 @@ class AddStockInputFragment :
         }
 
         binding.tvSave.setOnClickListener {
-            vm.postMemberStock(args.stock.id, binding.petAveragePrice.price.toInt(), binding.petQuantity.price.toInt())
+            vm.putMemberStock(args.memberStock.memberStockId, binding.petAveragePrice.price.toInt(), binding.petQuantity.price.toInt())
         }
 
         // observe
@@ -65,14 +71,14 @@ class AddStockInputFragment :
             updatePrice()
         }
 
-        vm.isPostComplete.observe(viewLifecycleOwner) {
+        vm.isPutComplete.observe(viewLifecycleOwner) {
             if (it) {
                 requireActivity().finish()
             }
         }
 
         // first exec
-        when (args.stock.type) {
+        when (args.memberStock.stock.type) {
             StockType.Domestic.full_name -> {
                 binding.tvStockType.text = "국내주식"
 
@@ -97,7 +103,11 @@ class AddStockInputFragment :
             }
         }
 
-        binding.tvStockName.text = args.stock.name
+        binding.tvStockName.text = args.memberStock.stock.name
+        binding.tvStockPrice.text = NumberFormatUtil.numWithComma(args.memberStock.purchaseAmount.toFloat())
+        binding.petAveragePrice.price = args.memberStock.purchasePrice
+        binding.petPurchasePrice.price = args.memberStock.purchaseAmount
+        binding.petQuantity.price = args.memberStock.quantity
     }
 
     fun updatePrice() {
