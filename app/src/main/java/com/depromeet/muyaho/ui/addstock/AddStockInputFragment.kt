@@ -60,19 +60,6 @@ class AddStockInputFragment :
             vm.setDollarState(isOn)
         }
 
-        // observe
-        vm.isDollar.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.petAveragePrice.price = ""
-                binding.petAveragePrice.priceType = PriceEditText.PriceType.DOLLAR
-            } else {
-                binding.petAveragePrice.price = ""
-                binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
-            }
-            binding.petAveragePrice.updateFormatPrice()
-            updatePrice()
-        }
-
         binding.petAveragePrice.mOnEditCompleteListener = object : PriceEditText.OnEditCompleteListener{
             override fun OnComplete() {
                 updatePrice()
@@ -92,7 +79,26 @@ class AddStockInputFragment :
         }
 
         binding.tvSave.setOnClickListener {
-            
+            vm.postMemberStock(args.stock.id, binding.petAveragePrice.price.toInt(), binding.petQuantity.price.toInt())
+        }
+
+        // observe
+        vm.isDollar.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.petAveragePrice.price = ""
+                binding.petAveragePrice.priceType = PriceEditText.PriceType.DOLLAR
+            } else {
+                binding.petAveragePrice.price = ""
+                binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
+            }
+            binding.petAveragePrice.updateFormatPrice()
+            updatePrice()
+        }
+
+        vm.isPostComplete.observe(viewLifecycleOwner) {
+            if (it) {
+                requireActivity().finish()
+            }
         }
 
         // first exec

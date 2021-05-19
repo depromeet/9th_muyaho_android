@@ -40,9 +40,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewMo
                 Intent(this@MainActivity, AddStockActivity::class.java).also {
                     startActivity(it)
                 }
+
+                if (binding.viewFab.isClicked) {
+                    binding.viewFab.toggle()
+                }
             }
 
             override fun OnModifyBtnClick() {
+
+                if (binding.viewFab.isClicked) {
+                    binding.viewFab.toggle()
+                }
             }
         })
     }
