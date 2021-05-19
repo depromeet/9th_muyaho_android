@@ -20,5 +20,7 @@
     <!--fab-->
     <string name="fab_sub_modify">기존 종목 정보 수정</string>
     <string name="fab_sub_new">신규 종목 추가</string>
+    <string name="sign_apple">애플 아이디로 계속하기</string>
+    <string name="sign_kakao">카카오 계정으로 계속하기</string>
 
 </resources>

@@ -28,6 +28,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewMo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.vm = vm
+
         if (savedInstanceState == null) {
             setUpBottomNavigationBar()
         }
