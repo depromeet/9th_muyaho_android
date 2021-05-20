@@ -6,5 +6,7 @@ import javax.inject.Inject
 class MainRepository @Inject constructor(
     private val apiHelper: ApiHelper
 ) {
-    suspend fun getEmployee() = apiHelper.getEmployees()
+    suspend fun loginKakao(token: String) = apiHelper.loginKaKao(token)
+    suspend fun signUpKakao(token: String, name: String, profileUrl: String) =
+        apiHelper.signUpKakao(token, name, profileUrl)
 }
