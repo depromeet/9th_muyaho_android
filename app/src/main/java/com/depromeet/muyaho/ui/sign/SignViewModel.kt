@@ -4,8 +4,12 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.depromeet.muyaho.base.Action
 import com.depromeet.muyaho.base.BaseViewModel
+import com.depromeet.muyaho.body.SignUpBody
+import com.depromeet.muyaho.other.Constants.CODE_200_OK
+import com.depromeet.muyaho.other.Constants.CODE_404_NOT_FOUND
 import com.depromeet.muyaho.repository.MainRepository
 import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.user.model.Profile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,35 +23,31 @@ class SignViewModel @Inject constructor(
         object LoginKakao : ViewAction()
     }
 
-    init {
-
-    }
-
-    val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-        if (error != null) {
-            Log.e(TAG, "로그인 실패", error)
-        } else if (token != null) {
-            Log.i(TAG, "로그인 성공 ${token.accessToken}")
-            loginWithKakao(token)
-        }
-    }
-
     fun onClickKakao() {
-        viewModelScope.launch {
-            actionSender.send(ViewAction.LoginKakao)
-        }
+        viewModelScope.launch { actionSender.send(ViewAction.LoginKakao) }
     }
 
-    private fun loginWithKakao(token: OAuthToken) = viewModelScope.launch {
+    fun loginWithKakao(token: OAuthToken, profile: Profile?) = viewModelScope.launch {
+        val nickname = requireNotNull(profile?.nickname)
+        val thumbnailImageUrl = requireNotNull(profile?.thumbnailImageUrl)
+        val body = SignUpBody(token.accessToken, nickname, thumbnailImageUrl)
+
         repo.loginKakao(token.accessToken)
-            .body()
-            ?.code
+            .code()
             .let { code ->
                 when (code) {
-                    "200" -> actionSender.send(ViewAction.GoMain)
-                    "400" -> repo.signUpKakao(token.accessToken) // TODO name, profileUrl 가져와야함
-                    else ->  Log.e(TAG, code ?: "null")
+                    CODE_200_OK -> actionSender.send(ViewAction.GoMain)
+                    CODE_404_NOT_FOUND -> signUpWithKakao(body)
+                    else -> Log.e(TAG, "code $code is not expected")
                 }
             }
+    }
+
+    private fun signUpWithKakao(body: SignUpBody) = viewModelScope.launch {
+        val result = repo.signUpKakao(body)
+        when (result.code()) {
+            CODE_200_OK -> actionSender.send(ViewAction.GoMain)
+            else -> Log.e(TAG, "code ${result.code()} is not expected")
+        }
     }
 }

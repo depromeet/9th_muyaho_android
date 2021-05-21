@@ -2,11 +2,13 @@ package com.depromeet.muyaho.ui.sign
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseActivity
 import com.depromeet.muyaho.databinding.ActivitySignBinding
 import com.depromeet.muyaho.ui.MainActivity
+import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,11 +36,23 @@ class SignActivity : BaseActivity<ActivitySignBinding, SignViewModel, SignViewMo
     }
 
     private fun loginWithKakao() {
-        // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
-            UserApiClient.instance.loginWithKakaoTalk(this, callback = vm.callback)
+            UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
+                if (error == null) token?.let { getUserInfo(it) } ?: Log.e(TAG, "token is null")
+                else Log.d(TAG, "error: $error")
+            }
         } else {
-            UserApiClient.instance.loginWithKakaoAccount(this, callback = vm.callback)
+            UserApiClient.instance.loginWithKakaoAccount(this) { token, error ->
+                if (error == null) token?.let { getUserInfo(it) } ?: Log.e(TAG, "token is null")
+                else Log.d(TAG, "error: $error")
+            }
+        }
+    }
+
+    private fun getUserInfo(token: OAuthToken) {
+        UserApiClient.instance.me { user, error ->
+            if (error == null) vm.loginWithKakao(token, user?.kakaoAccount?.profile)
+            else Log.d(TAG, "error: $error")
         }
     }
 }
