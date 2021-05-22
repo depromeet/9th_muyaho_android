@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.collect
 
 abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel<A>, A : Action> :
     AppCompatActivity() {
+    val TAG = this.toString()
     protected lateinit var binding: T
 
     abstract val layoutResId: Int

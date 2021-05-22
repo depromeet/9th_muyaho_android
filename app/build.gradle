@@ -65,9 +65,12 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "com.google.dagger:hilt-android:2.33-beta"
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
+    implementation "com.kakao.sdk:v2-user:2.5.0" // 카카오 로그인
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
