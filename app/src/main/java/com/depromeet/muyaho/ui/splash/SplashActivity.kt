@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseActivity
 import com.depromeet.muyaho.databinding.ActivityMainBinding
-import com.depromeet.muyaho.ui.MainActivity
+import com.depromeet.muyaho.ui.sign.SignActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +22,7 @@ class SplashActivity :
     }
 
     private fun showMain() {
-        val intent = Intent(this@SplashActivity, MainActivity::class.java)
+        val intent = Intent(this@SplashActivity, SignActivity::class.java)
         startActivity(intent)
         finish()
     }

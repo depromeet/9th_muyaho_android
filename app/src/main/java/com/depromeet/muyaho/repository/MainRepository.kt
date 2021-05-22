@@ -7,6 +7,7 @@ import com.depromeet.muyaho.data.MemberStock
 import com.depromeet.muyaho.other.Constants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import com.depromeet.muyaho.body.SignUpBody
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
@@ -18,6 +19,9 @@ class MainRepository @Inject constructor(
             dataBase.stockDao().insertAll(it.data)
         }
     }
+    suspend fun loginKakao(token: String) = apiHelper.loginKaKao(token)
+    suspend fun signUpKakao(body: SignUpBody) =
+        apiHelper.signUpKakao(body)
 
     fun getStockList(type: String, name: String) = dataBase.stockDao().getStocks(type, name)
 
