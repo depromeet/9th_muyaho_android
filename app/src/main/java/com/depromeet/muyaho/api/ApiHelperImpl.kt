@@ -9,6 +9,14 @@ import javax.inject.Inject
 class ApiHelperImpl @Inject constructor(
     private val apiService: ApiService
 ) : ApiHelper {
+
+    companion object {
+        var SESSION_ID: String = ""
+            set(value) {
+                field = "Bearer $value"
+            }
+    }
+
 	override suspend fun loginKaKao(token: String): Response<LoginResult> =
         apiService.loginKaKao(token)
 
@@ -18,20 +26,17 @@ class ApiHelperImpl @Inject constructor(
     override suspend fun getStockList(stockType: String): Response<ApiDataModel.ResponseStockList> = apiService.getStockList(stockType)
 
     override suspend fun getMemberStock(
-        token: String,
         stockType: String
     ): Response<ApiDataModel.ResponseGetMemberStock>
-    = apiService.getMemberStock(token, stockType)
+    = apiService.getMemberStock(SESSION_ID, stockType)
 
     override suspend fun postMemberStock(
-        token: String,
         body: ApiDataModel.RequestPostMemberStockBody)
     : Response<ApiDataModel.ResponsePostMemberStock>
-    = apiService.postMemberStock(token, body)
+    = apiService.postMemberStock(SESSION_ID, body)
 
     override suspend fun putMemberStock(
-        token: String,
         body: ApiDataModel.RequestPutMemberStockBody)
     : Response<ApiDataModel.ResponsePutMemberStock>
-    = apiService.putMemberStock(token, body)
+    = apiService.putMemberStock(SESSION_ID, body)
 }

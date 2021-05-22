@@ -10,10 +10,10 @@ interface ApiHelper {
     
     suspend fun getStockList(stockType: String): Response<ApiDataModel.ResponseStockList>
 
-    suspend fun getMemberStock(token: String, stockType: String)
+    suspend fun getMemberStock(stockType: String)
     : Response<ApiDataModel.ResponseGetMemberStock>
-    suspend fun postMemberStock(token: String, body: ApiDataModel.RequestPostMemberStockBody)
+    suspend fun postMemberStock(body: ApiDataModel.RequestPostMemberStockBody)
     : Response<ApiDataModel.ResponsePostMemberStock>
-    suspend fun putMemberStock(token: String, body: ApiDataModel.RequestPutMemberStockBody)
+    suspend fun putMemberStock(body: ApiDataModel.RequestPutMemberStockBody)
     : Response<ApiDataModel.ResponsePutMemberStock>
 }
