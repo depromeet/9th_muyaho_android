@@ -35,7 +35,7 @@ class AddStockInputViewModel @Inject constructor(
         isProcessing.value = true
 
         viewModelScope.launch(Dispatchers.Default) {
-            val result = mainRepository.postMemberStock(stockId, purchasePrice, quantity)
+            val result = mainRepository.postMemberStock(stockId, purchasePrice, quantity, if(isDollarState.value == true) "DOLLAR" else "WON")
 
             withContext(Dispatchers.Main) {
                 isProcessing.value = false

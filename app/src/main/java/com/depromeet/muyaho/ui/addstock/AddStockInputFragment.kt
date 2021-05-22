@@ -49,7 +49,16 @@ class AddStockInputFragment :
         }
 
         binding.tvSave.setOnClickListener {
-            vm.postMemberStock(args.stock.id, binding.petAveragePrice.price.toInt(), binding.petQuantity.price.toInt())
+            binding.petAveragePrice.clearFocus()
+            binding.petPurchasePrice.clearFocus()
+            binding.petQuantity.clearFocus()
+            if (isInputDataValidate()) {
+                vm.postMemberStock(
+                    args.stock.id,
+                    binding.petAveragePrice.price.toInt(),
+                    binding.petQuantity.price.toInt()
+                )
+            }
         }
 
         // observe
@@ -75,6 +84,7 @@ class AddStockInputFragment :
         when (args.stock.type) {
             StockType.Domestic.full_name -> {
                 binding.tvStockType.text = "국내주식"
+                binding.lsWonDollar.visibility = View.GONE
 
                 binding.llInputPurchaseAmount.visibility = View.GONE
                 binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
@@ -82,6 +92,7 @@ class AddStockInputFragment :
             }
             StockType.Overseas.full_name -> {
                 binding.tvStockType.text = "해외주식"
+                binding.lsWonDollar.visibility = View.VISIBLE
 
                 binding.llInputPurchaseAmount.visibility = View.GONE
                 binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
@@ -89,6 +100,7 @@ class AddStockInputFragment :
             }
             StockType.Bitcoin.full_name -> {
                 binding.tvStockType.text = "가상화폐"
+                binding.lsWonDollar.visibility = View.GONE
 
                 binding.llInputPurchaseAmount.visibility = View.VISIBLE
                 binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
@@ -125,5 +137,19 @@ class AddStockInputFragment :
         } else {
             binding.tvStockPrice.text = NumberFormatUtil.numWithComma(price)
         }
+    }
+
+    fun isInputDataValidate(): Boolean {
+        val averagePrice = binding.petAveragePrice.price
+        if (averagePrice.isBlank() || averagePrice == "0") {
+            return false
+        }
+
+        val quantity = binding.petQuantity.price
+        if (quantity.isBlank() || quantity == "0") {
+            return false
+        }
+
+        return true
     }
 }

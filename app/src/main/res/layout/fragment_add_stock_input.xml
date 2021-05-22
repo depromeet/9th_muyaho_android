@@ -103,8 +103,8 @@
                         android:layout_marginTop="40dp"
                         android:layout_marginRight="16dp"
                         style="@style/TextSubtitle1"/>
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <com.github.angads25.toggle.widget.LabeledSwitch
                     android:id="@+id/ls_won_dollar"

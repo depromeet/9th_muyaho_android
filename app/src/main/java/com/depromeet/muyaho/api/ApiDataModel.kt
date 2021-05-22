@@ -40,12 +40,14 @@ object ApiDataModel {
     data class RequestPostMemberStockBody(
         val stockId: Int,
         val purchasePrice: Int,
-        val quantity: Int
+        val quantity: Int,
+        val currencyType: String
     )
 
     data class RequestPutMemberStockBody(
         val memberStockId: Int,
         val purchasePrice: Int,
-        val quantity: Int
+        val quantity: Int,
+        val currencyType: String
     )
 }
