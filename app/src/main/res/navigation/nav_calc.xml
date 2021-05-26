@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_calc"
-        android:name="com.depromeet.muyaho.calc.CalcFragment"
+        android:name="com.depromeet.muyaho.ui.calc.CalcFragment"
         tools:layout="@layout/fragment_calc">
 
     </fragment>

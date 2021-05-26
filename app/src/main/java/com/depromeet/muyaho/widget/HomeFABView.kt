@@ -20,10 +20,28 @@ class HomeFABView @JvmOverloads constructor(
     }
 
     var isClicked = false
+
+    interface SubBtnClickListener {
+        fun OnAddBtnClick()
+        fun OnModifyBtnClick()
+    }
+    private var subBtnClickListener: SubBtnClickListener? = null
+    fun setSubBtnClickListener(listener: SubBtnClickListener) {
+        subBtnClickListener = listener
+    }
+
     init {
         addView(binding.root)
         binding.fabMain.setOnClickListener {
             toggle()
+        }
+
+        binding.fabSubNew.setOnClickListener {
+            subBtnClickListener?.OnAddBtnClick()
+        }
+
+        binding.fabSubModify.setOnClickListener {
+            subBtnClickListener?.OnModifyBtnClick()
         }
     }
 

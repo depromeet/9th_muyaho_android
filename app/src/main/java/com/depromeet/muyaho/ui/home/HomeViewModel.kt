@@ -1,4 +1,4 @@
-package com.depromeet.muyaho.home
+package com.depromeet.muyaho.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData

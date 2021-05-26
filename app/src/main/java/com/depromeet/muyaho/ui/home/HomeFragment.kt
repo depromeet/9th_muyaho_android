@@ -4,7 +4,6 @@ import androidx.fragment.app.viewModels
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
 import com.depromeet.muyaho.databinding.FragmentHomeBinding
-import com.depromeet.muyaho.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
