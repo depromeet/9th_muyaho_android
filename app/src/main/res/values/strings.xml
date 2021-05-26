@@ -22,11 +22,20 @@
     <string name="overseas_stock">해외주식</string>
     <string name="virtual_currency">가상화폐</string>
     <string name="next">다음</string>
+    <string name="youngcha">Youngcha</string>
 
     <!--home-->
+    <string name="home_today_benefit_empty">각 투자별 상황을 입력하고\n영찬이를 깨워주세요!</string>
+    <string name="home_today_benefit">오늘의 수익금은</string>
+    <string name="home_invest_status">나의 투자 현황은?</string>
+    <string name="home_input_current_investment">각 투자별 현황을 입력하세요</string>
     <string name="home_last_budget">최종자산</string>
+    <string name="home_benefit_percent">수익률(%)</string>
+    <string name="home_benefit_price">수익금(원)</string>
     <string name="home_korea_money_unit">원</string>
     <string name="home_today_profit">오늘의 수익률</string>
+    <string name="home_look_investment">내 투자 살펴보기</string>
+    <string name="home_regist">등록하기</string>
 
     <!--fab-->
     <string name="fab_sub_modify">기존 종목 정보 수정</string>
