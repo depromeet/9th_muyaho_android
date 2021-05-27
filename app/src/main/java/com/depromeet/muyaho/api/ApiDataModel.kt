@@ -32,22 +32,25 @@ object ApiDataModel {
     data class ResponseMemberStockData(
         val memberStockId: Int,
         val stock: Stock,
-        val purchasePrice: String,
+        val currencyType: String,
         val quantity: String,
-        val purchaseAmount: String
+        val purchasePrice: String,
+        val purchaseAmount: String,
+        val purchaseAmountInWon: String
     )
 
     data class RequestPostMemberStockBody(
         val stockId: Int,
         val purchasePrice: Int,
         val quantity: Int,
-        val currencyType: String
+        val currencyType: String,
+        val purchaseTotalPrice: Int
     )
 
     data class RequestPutMemberStockBody(
         val memberStockId: Int,
         val purchasePrice: Int,
         val quantity: Int,
-        val currencyType: String
+        val purchaseTotalPrice: Int
     )
 }

@@ -7,11 +7,10 @@ import kotlinx.parcelize.Parcelize
 class MemberStock(
     val memberStockId: Int,
     val stock: Stock,
+    val purchase: Purchase,
+    val current: Current,
     val quantity: String,
-    val purchasePrice: String,
-    val purchaseAmount: String,
-    val currentPrice: String,
-    val currentAmount: String,
-    val earningRate: String
+    val currencyType: String,
+    val profitOrLoseRate: String
 ): Parcelable {
 }

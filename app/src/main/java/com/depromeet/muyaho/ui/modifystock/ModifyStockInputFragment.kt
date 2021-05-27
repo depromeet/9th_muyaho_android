@@ -1,9 +1,7 @@
 package com.depromeet.muyaho.ui.modifystock
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.depromeet.muyaho.R
@@ -28,10 +26,6 @@ class ModifyStockInputFragment :
         super.onViewCreated(view, savedInstanceState)
 
         // init
-        binding.lsWonDollar.setOnToggledListener { toggleableView, isOn ->
-            vm.setDollarState(isOn)
-        }
-
         binding.petAveragePrice.mOnEditCompleteListener = object : PriceEditText.OnEditCompleteListener{
             override fun OnComplete() {
                 updatePrice()
@@ -40,12 +34,14 @@ class ModifyStockInputFragment :
 
         binding.petPurchasePrice.mOnEditCompleteListener = object : PriceEditText.OnEditCompleteListener{
             override fun OnComplete() {
+                updateStockCount()
                 updatePrice()
             }
         }
 
         binding.petQuantity.mOnEditCompleteListener = object : PriceEditText.OnEditCompleteListener{
             override fun OnComplete() {
+                updatePurchasePrice()
                 updatePrice()
             }
         }
@@ -60,18 +56,6 @@ class ModifyStockInputFragment :
         }
 
         // observe
-        vm.isDollar.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.petAveragePrice.price = ""
-                binding.petAveragePrice.priceType = PriceEditText.PriceType.DOLLAR
-            } else {
-                binding.petAveragePrice.price = ""
-                binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
-            }
-            binding.petAveragePrice.updateFormatPrice()
-            updatePrice()
-        }
-
         vm.isPutComplete.observe(viewLifecycleOwner) {
             if (it) {
                 requireActivity().finish()
@@ -82,7 +66,6 @@ class ModifyStockInputFragment :
         when (args.memberStock.stock.type) {
             StockType.Domestic.full_name -> {
                 binding.tvStockType.text = "국내주식"
-                binding.lsWonDollar.visibility = View.GONE
 
                 binding.llInputPurchaseAmount.visibility = View.GONE
                 binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
@@ -90,15 +73,13 @@ class ModifyStockInputFragment :
             }
             StockType.Overseas.full_name -> {
                 binding.tvStockType.text = "해외주식"
-                binding.lsWonDollar.visibility = View.VISIBLE
 
                 binding.llInputPurchaseAmount.visibility = View.GONE
-                binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
+                binding.petAveragePrice.priceType = PriceEditText.PriceType.DOLLAR
                 binding.petQuantity.priceType = PriceEditText.PriceType.COUNT
             }
             StockType.Bitcoin.full_name -> {
                 binding.tvStockType.text = "가상화폐"
-                binding.lsWonDollar.visibility = View.GONE
 
                 binding.llInputPurchaseAmount.visibility = View.VISIBLE
                 binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
@@ -106,24 +87,23 @@ class ModifyStockInputFragment :
                 binding.petQuantity.priceType = PriceEditText.PriceType.COUNT
             }
         }
+        vm.stockType = args.memberStock.stock.type
 
         binding.tvStockName.text = args.memberStock.stock.name
-        binding.tvStockPrice.text = NumberFormatUtil.numWithComma(args.memberStock.purchaseAmount.toFloat())
-        binding.petAveragePrice.price = args.memberStock.purchasePrice
-        binding.petPurchasePrice.price = args.memberStock.purchaseAmount
+
+        val isDollar = (args.memberStock.currencyType == "DOLLAR")
+        if (isDollar) {
+            binding.tvStockPrice.text = NumberFormatUtil.numWithComma(args.memberStock.purchase.amount.toFloat() * 1200)
+        } else {
+            binding.tvStockPrice.text = NumberFormatUtil.numWithComma(args.memberStock.purchase.amount.toFloat())
+        }
+        binding.petAveragePrice.price = args.memberStock.purchase.unitPrice
+        binding.petPurchasePrice.price = args.memberStock.purchase.amount
         binding.petQuantity.price = args.memberStock.quantity
     }
 
     fun updatePrice() {
         val averagePrice = binding.petAveragePrice.price.let {
-            if (it.isBlank()) {
-                0.0f
-            } else {
-                it.toFloat()
-            }
-        }
-
-        val stockCount = binding.petQuantity.price.let {
             if (it.isBlank()) {
                 0
             } else {
@@ -131,14 +111,63 @@ class ModifyStockInputFragment :
             }
         }
 
-        val price: Float = averagePrice * stockCount
-
-        val isDollar = vm.isDollar.value?: false
-        if (isDollar) {
-            binding.tvStockPrice.text = NumberFormatUtil.numWithDollar(price)
-        } else {
-            binding.tvStockPrice.text = NumberFormatUtil.numWithComma(price)
+        val stockCount = binding.petQuantity.price.let {
+            if (it.isBlank()) {
+                0.0f
+            } else {
+                it.toFloat()
+            }
         }
+
+        var price: Float = averagePrice * stockCount
+        val isDollar = (vm.stockType == StockType.Overseas.full_name)
+        if (isDollar) {
+            price *= 1200
+        }
+
+        binding.tvStockPrice.text = NumberFormatUtil.numWithComma(price)
+    }
+
+    fun updatePurchasePrice() {
+        val averagePrice = binding.petAveragePrice.price.let {
+            if (it.isBlank()) {
+                0
+            } else {
+                it.toInt()
+            }
+        }
+
+        val stockCount = binding.petQuantity.price.let {
+            if (it.isBlank()) {
+                0.0f
+            } else {
+                it.toFloat()
+            }
+        }
+
+        val price: Int = (averagePrice * stockCount).toInt()
+        binding.petPurchasePrice.price = price.toString()
+    }
+
+    fun updateStockCount() {
+        val averagePrice = binding.petAveragePrice.price.let {
+            if (it.isBlank()) {
+                0
+            } else {
+                it.toInt()
+            }
+        }
+
+        val purchasePrice = binding.petPurchasePrice.price.let {
+            if (it.isBlank()) {
+                0.0f
+            } else {
+                it.toFloat()
+            }
+        }
+
+        val stockCount: Float = purchasePrice / averagePrice
+        binding.petQuantity.price = stockCount.toString()
     }
 
     fun isInputDataValidate(): Boolean {

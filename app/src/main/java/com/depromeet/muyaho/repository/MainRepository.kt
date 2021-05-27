@@ -25,13 +25,13 @@ class MainRepository @Inject constructor(
 
     fun getStockList(type: String, name: String) = dataBase.stockDao().getStocks(type, name)
 
-    suspend fun postMemberStock(stockId: Int, purchasePrice: Int, quantity: Int, currencyType: String): Boolean {
-        val response = apiHelper.postMemberStock(ApiDataModel.RequestPostMemberStockBody(stockId, purchasePrice, quantity, currencyType))
+    suspend fun postMemberStock(stockId: Int, purchasePrice: Int, quantity: Int, currencyType: String, purchaseTotalPrice: Int): Boolean {
+        val response = apiHelper.postMemberStock(ApiDataModel.RequestPostMemberStockBody(stockId, purchasePrice, quantity, currencyType, purchaseTotalPrice))
         return response.isSuccessful
     }
 
-    suspend fun putMemberStock(memberStockId: Int, purchasePrice: Int, quantity: Int, currencyType: String): Boolean {
-        val response = apiHelper.putMemberStock(ApiDataModel.RequestPutMemberStockBody(memberStockId, purchasePrice, quantity, currencyType))
+    suspend fun putMemberStock(memberStockId: Int, purchasePrice: Int, quantity: Int, purchaseTotalPrice: Int): Boolean {
+        val response = apiHelper.putMemberStock(ApiDataModel.RequestPutMemberStockBody(memberStockId, purchasePrice, quantity, purchaseTotalPrice))
         return response.isSuccessful
     }
 

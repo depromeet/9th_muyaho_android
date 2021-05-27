@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.depromeet.muyaho.base.Action
 import com.depromeet.muyaho.base.BaseViewModel
+import com.depromeet.muyaho.data.StockType
 import com.depromeet.muyaho.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,22 +20,16 @@ class ModifyStockInputViewModel @Inject constructor(
     sealed class ViewAction : Action {
 
     }
-
-    private val isDollarState: MutableLiveData<Boolean> = MutableLiveData()
-    val isDollar: LiveData<Boolean> = isDollarState
+    var stockType: String = StockType.Domestic.full_name
 
     val isProcessing: MutableLiveData<Boolean> = MutableLiveData(false)
     val isPutComplete: MutableLiveData<Boolean> = MutableLiveData(false)
-
-    fun setDollarState(state: Boolean) {
-        isDollarState.value = state
-    }
 
     fun putMemberStock(memberStockId: Int, purchasePrice: Int, quantity: Int) {
         isProcessing.value = true
 
         viewModelScope.launch(Dispatchers.Default) {
-            val result = mainRepository.putMemberStock(memberStockId, purchasePrice, quantity, if(isDollarState.value == true) "DOLLAR" else "WON")
+            val result = mainRepository.putMemberStock(memberStockId, purchasePrice, quantity, purchasePrice * quantity)
 
             withContext(Dispatchers.Main) {
                 isProcessing.value = false

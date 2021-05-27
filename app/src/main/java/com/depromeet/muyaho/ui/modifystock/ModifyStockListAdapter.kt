@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.muyaho.data.MemberStock
+import com.depromeet.muyaho.data.StockType
 import com.depromeet.muyaho.databinding.ListItemModifyStockBinding
 import com.depromeet.muyaho.util.NumberFormatUtil
 
@@ -42,11 +43,15 @@ class ModifyStockListAdapter: ListAdapter<MemberStock, RecyclerView.ViewHolder>(
             binding.tvStockName.text = item.stock.name
 
             // TODO: 5/19/21 수익/손실 금액 구현해야함
-            binding.tvPrice.text = NumberFormatUtil.numWithComma(item.purchaseAmount.toFloat())
+            val isDollar = (item.currencyType == "DOLLAR")
+            if (isDollar) {
+                binding.tvPrice.text = NumberFormatUtil.numWithComma(item.purchase.amount.toFloat() * 1200)
+            } else {
+                binding.tvPrice.text = NumberFormatUtil.numWithComma(item.purchase.amount.toFloat())
+            }
 
             if (selectedIndex == position) {
                 binding.root.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F4F4F4"))
-
             } else {
                 binding.root.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#9E9DA9"))
             }
