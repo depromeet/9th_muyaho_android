@@ -106,22 +106,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.github.angads25.toggle.widget.LabeledSwitch
-                    android:id="@+id/ls_won_dollar"
-                    android:layout_width="48dp"
-                    android:layout_height="24dp"
-                    app:textOn="@string/dollar"
-                    app:textOff="@string/won"
-                    app:colorOff="@color/white_2"
-                    app:colorOn="@color/primary_blue_fade"
-                    app:colorBorder="@color/gray_80"
-                    app:layout_constraintTop_toBottomOf="@id/cl_stock_info"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="20dp"
-                    style="@style/TextCaption2"
-                    android:textSize="9dp"/>
-
                 <LinearLayout
                     android:id="@+id/ll_input"
                     android:layout_width="match_parent"

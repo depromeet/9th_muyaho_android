@@ -18,8 +18,6 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Actio
     abstract val layoutResId: Int
     abstract val vm: R
 
-    private var job: Job? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,11 +26,6 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Actio
         binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        job?.cancel()
-        super.onDestroyView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +38,7 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Actio
     protected open fun observeViewModel() {
         if (vm is NoViewModel) return
 
-        job = lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             vm.actionReceiver.collect { action ->
                 observeActionCommand(action)
             }
