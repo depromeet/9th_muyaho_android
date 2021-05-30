@@ -1,6 +1,7 @@
 package com.depromeet.muyaho.api
 
 import com.depromeet.muyaho.data.MemberStock
+import com.depromeet.muyaho.data.MemberStockStatus
 import com.depromeet.muyaho.data.Stock
 
 object ApiDataModel {
@@ -52,5 +53,11 @@ object ApiDataModel {
         val purchasePrice: Int,
         val quantity: Int,
         val purchaseTotalPrice: Int
+    )
+
+    data class ResponseMemberStockStatus(
+        val code: String,
+        val message: String,
+        val data: MemberStockStatus
     )
 }

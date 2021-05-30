@@ -68,7 +68,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     android:layout_marginTop="24dp"
                     android:layout_marginRight="16dp"
-                    style="@style/TextCaption1"
+                    style="@style/TextCaption1.Bold"
                     android:textColor="@color/white_3"/>
 
                 <TextView
@@ -116,7 +116,8 @@
                     app:layout_constraintRight_toRightOf="parent"
                     android:layout_marginTop="52dp"
                     style="@style/TextSubtitle2"
-                    android:textColor="@color/white_2"/>
+                    android:textColor="@color/white_2"
+                    android:drawablePadding="4dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -153,7 +154,8 @@
                     app:layout_constraintRight_toRightOf="parent"
                     android:layout_marginTop="52dp"
                     style="@style/TextSubtitle2"
-                    android:textColor="@color/white_2"/>
+                    android:textColor="@color/white_2"
+                    android:drawablePadding="4dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -47,4 +47,14 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body body: ApiDataModel.RequestPutMemberStockBody
     ): Response<ApiDataModel.ResponsePutMemberStock>
+
+    @GET("/api/v1/member/stock/status")
+    suspend fun getMemberStockStatus(
+        @Header("Authorization") token: String
+    ): Response<ApiDataModel.ResponseMemberStockStatus>
+
+    @GET("/api/v1/member/stock/status/history")
+    suspend fun getMemberStockStatusHistory(
+        @Header("Authorization") token: String
+    ): Response<ApiDataModel.ResponseMemberStockStatus>
 }

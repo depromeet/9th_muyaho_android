@@ -2,18 +2,20 @@ package com.depromeet.muyaho.repository
 
 import com.depromeet.muyaho.api.ApiDataModel
 import com.depromeet.muyaho.api.ApiHelper
+import com.depromeet.muyaho.body.SignUpBody
 import com.depromeet.muyaho.data.AppDatabase
 import com.depromeet.muyaho.data.MemberStock
-import com.depromeet.muyaho.other.Constants
+import com.depromeet.muyaho.data.MemberStockStatus
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import com.depromeet.muyaho.body.SignUpBody
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
     private val apiHelper: ApiHelper,
     private val dataBase: AppDatabase
 ) {
+    private var memberStockStatusCache: MemberStockStatus? = null
+
     suspend fun loadStockList(stockType: String) {
         apiHelper.getStockList(stockType).body()?.let {
             dataBase.stockDao().insertAll(it.data)
@@ -45,6 +47,24 @@ class MainRepository @Inject constructor(
             }
         } else {
             emit(emptyList<MemberStock>())
+        }
+    }
+
+    suspend fun getMemberStockStatusCache(): Flow<MemberStockStatus> = flow {
+        if (memberStockStatusCache == null) {
+            memberStockStatusCache = apiHelper.getMemberStockStatusHistory().body()?.data
+        }
+
+        memberStockStatusCache?.also {
+            emit(it)
+        }
+    }
+
+    suspend fun getMemberStockStatus(): Flow<MemberStockStatus> = flow {
+        memberStockStatusCache = apiHelper.getMemberStockStatus().body()?.data
+
+        memberStockStatusCache?.also {
+            emit(it)
         }
     }
 }

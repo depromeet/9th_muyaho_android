@@ -2,34 +2,31 @@ package com.depromeet.muyaho.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.depromeet.muyaho.api.ApiDataModel
 import com.depromeet.muyaho.base.Action
 import com.depromeet.muyaho.base.BaseViewModel
+import com.depromeet.muyaho.data.MemberStockStatus
+import com.depromeet.muyaho.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-
+    private val mainRepository: MainRepository
 ) : BaseViewModel<HomeViewModel.ViewAction>() {
-
-    val title: LiveData<String> = liveData {
-        emit("주린이 눈물님은\n2,700,000원 넣고\n684,542원 잃었어요!")
-    }
-    val budgetPrice: LiveData<String> = liveData {
-        emit("2,004,002")
-    }
-    val budgetPercent: LiveData<String> = liveData {
-        emit("-12.4%")
-    }
-    val profitPrice: LiveData<String> = liveData {
-        emit("2,000,000")
-    }
-    val profitPercent: LiveData<String> = liveData {
-        emit("20")
-    }
-
     sealed class ViewAction : Action {
 
+    }
+
+    val memberStockStatus: LiveData<MemberStockStatus> = liveData {
+        mainRepository.getMemberStockStatusCache().collect {
+            emit(it)
+        }
+
+        mainRepository.getMemberStockStatus().collect {
+            emit(it)
+        }
     }
 
     init {
