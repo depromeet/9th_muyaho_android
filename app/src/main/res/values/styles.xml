@@ -6,7 +6,7 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <style name="Theme.Muyaho" parent="Base.Theme.Muyaho"/>
+    <style name="Theme.Muyaho" parent="Base.Theme.Muyaho" />
 
     <style name="Theme.Muyaho.NoActionBar">
         <item name="windowActionBar">false</item>

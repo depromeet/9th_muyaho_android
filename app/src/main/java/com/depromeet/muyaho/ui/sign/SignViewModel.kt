@@ -10,6 +10,7 @@ import com.depromeet.muyaho.other.Constants
 import com.depromeet.muyaho.other.Constants.CODE_200_OK
 import com.depromeet.muyaho.other.Constants.CODE_404_NOT_FOUND
 import com.depromeet.muyaho.repository.MainRepository
+import com.depromeet.muyaho.util.PreferenceUtil
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.model.Profile
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,7 +39,8 @@ class SignViewModel @Inject constructor(
             .let { result ->
                 when (result.code()) {
                     CODE_200_OK -> {
-                        ApiHelperImpl.SESSION_ID = result.body()?.data?.sessionId ?: Constants.TEST_SESSION_ID
+                        PreferenceUtil.AccessToken =
+                            result.body()?.data?.sessionId ?: Constants.TEST_SESSION_ID
                         actionSender.send(ViewAction.GoMain)
                     }
                     CODE_404_NOT_FOUND -> signUpWithKakao(body)
