@@ -9,6 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 
 abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Action> : Fragment() {
@@ -37,7 +38,7 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Actio
     protected open fun observeViewModel() {
         if (vm is NoViewModel) return
 
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             vm.actionReceiver.collect { action ->
                 observeActionCommand(action)
             }

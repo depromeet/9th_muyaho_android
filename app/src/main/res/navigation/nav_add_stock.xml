@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/fragment_add_stock_select_type">
+
+    <fragment
+        android:id="@+id/fragment_add_stock_select_type"
+        android:name="com.depromeet.muyaho.ui.addstock.AddStockSelectTypeFragment"
+        tools:layout="@layout/fragment_add_stock_select_type">
+
+        <action
+            android:id="@+id/action_select_type_to_search"
+            app:destination="@id/fragment_add_stock_search"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_add_stock_search"
+        android:name="com.depromeet.muyaho.ui.addstock.AddStockSearchFragment"
+        tools:layout="@layout/fragment_add_stock_search">
+
+        <action
+            android:id="@+id/action_search_to_input"
+            app:destination="@id/fragment_add_stock_input"/>
+
+        <argument
+            android:name="stockType"
+            app:argType="string"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_add_stock_input"
+        android:name="com.depromeet.muyaho.ui.addstock.AddStockInputFragment"
+        tools:layout="@layout/fragment_add_stock_input">
+
+        <argument
+            android:name="stock"
+            app:argType="com.depromeet.muyaho.data.Stock"/>
+
+    </fragment>
+
+</navigation>

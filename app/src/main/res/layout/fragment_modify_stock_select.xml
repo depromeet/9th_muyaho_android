@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.depromeet.muyaho.ui.modifystock.ModifyStockSelectViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_1">
+
+        <TextView
+            style="@style/TextBody1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="47dp"
+            android:text="@string/modify_stock_modify_item"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginRight="8dp"
+            android:onClick="@{() -> vm.onCloseBtnClick()}"
+            android:scaleType="center"
+            android:src="@drawable/ic_cancel_white_24"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TextSubtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="106dp"
+            android:lineSpacingExtra="5dp"
+            android:text="@string/modify_stock_select_modify_item"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rg_stock_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/rb_domestic_stock"
+                style="@style/TextBody2"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_stroke_radius_10dp_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/domestic_stock" />
+
+            <RadioButton
+                android:id="@+id/rb_overseas_stock"
+                style="@style/TextBody2"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_marginLeft="14dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_stroke_radius_10dp_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/overseas_stock" />
+
+            <RadioButton
+                android:id="@+id/rb_virtual_currency"
+                style="@style/TextBody2"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_marginLeft="14dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_stroke_radius_10dp_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/virtual_currency" />
+
+        </RadioGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_stock"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/tv_next"
+            app:layout_constraintTop_toBottomOf="@id/rg_stock_type" />
+
+        <TextView
+            android:id="@+id/tv_next"
+            style="@style/TextCaption1.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/shape_bg_fill_radius_8dp"
+            android:backgroundTint="@color/primary_enable_color_selector"
+            android:enabled="false"
+            android:gravity="center"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_stock" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

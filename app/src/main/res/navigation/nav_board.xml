@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_board"
-        android:name="com.depromeet.muyaho.board.BoardFragment"
+        android:name="com.depromeet.muyaho.ui.board.BoardFragment"
         tools:layout="@layout/fragment_board">
 
     </fragment>
