@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/fragment_my"
         android:name="com.depromeet.muyaho.ui.my.MyFragment"
-        tools:layout="@layout/fragment_my">
+        tools:layout="@layout/fragment_mypage">
 
     </fragment>
 

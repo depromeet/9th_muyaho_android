@@ -1,11 +1,14 @@
 package com.depromeet.muyaho.ui.my
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.depromeet.muyaho.R
+import com.depromeet.muyaho.base.BaseFragment
+import com.depromeet.muyaho.databinding.FragmentMypageBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,7 +20,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [MyFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MyFragment : Fragment() {
+class MyFragment :
+    BaseFragment<FragmentMypageBinding, MyPageViewModel, MyPageViewModel.ViewAction>() {
+
+    override val layoutResId: Int = R.layout.fragment_mypage
+    override val vm: MyPageViewModel by viewModels()
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,7 +43,7 @@ class MyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my, container, false)
+        return inflater.inflate(R.layout.fragment_mypage, container, false)
     }
 
     companion object {
