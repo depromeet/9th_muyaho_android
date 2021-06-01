@@ -2,12 +2,11 @@ package com.depromeet.muyaho.repository
 
 import com.depromeet.muyaho.api.ApiDataModel
 import com.depromeet.muyaho.api.ApiHelper
+import com.depromeet.muyaho.body.SignUpBody
 import com.depromeet.muyaho.data.AppDatabase
 import com.depromeet.muyaho.data.MemberStock
-import com.depromeet.muyaho.other.Constants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import com.depromeet.muyaho.body.SignUpBody
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
@@ -19,21 +18,44 @@ class MainRepository @Inject constructor(
             dataBase.stockDao().insertAll(it.data)
         }
     }
+
     suspend fun loginKakao(token: String) = apiHelper.loginKaKao(token)
     suspend fun signUpKakao(body: SignUpBody) = apiHelper.signUpKakao(body)
+
     suspend fun checkNickName(name: String) = apiHelper.checkName(name)
+    suspend fun getMember(authorization: String) = apiHelper.getMember(authorization)
 
     fun getStockList(type: String, name: String) = dataBase.stockDao().getStocks(type, name)
 
-    suspend fun postMemberStock(stockId: Int, purchasePrice: Int, quantity: Int, currencyType: String, purchaseTotalPrice: Int): Boolean {
-        val response = apiHelper.postMemberStock(ApiDataModel.RequestPostMemberStockBody(stockId, purchasePrice, quantity, currencyType, purchaseTotalPrice))
-        return response.isSuccessful
-    }
+    suspend fun postMemberStock(
+        stockId: Int,
+        purchasePrice: Int,
+        quantity: Int,
+        currencyType: String,
+        purchaseTotalPrice: Int
+    ): Boolean = apiHelper.postMemberStock(
+        ApiDataModel.RequestPostMemberStockBody(
+            stockId,
+            purchasePrice,
+            quantity,
+            currencyType,
+            purchaseTotalPrice
+        )
+    ).isSuccessful
 
-    suspend fun putMemberStock(memberStockId: Int, purchasePrice: Int, quantity: Int, purchaseTotalPrice: Int): Boolean {
-        val response = apiHelper.putMemberStock(ApiDataModel.RequestPutMemberStockBody(memberStockId, purchasePrice, quantity, purchaseTotalPrice))
-        return response.isSuccessful
-    }
+    suspend fun putMemberStock(
+        memberStockId: Int,
+        purchasePrice: Int,
+        quantity: Int,
+        purchaseTotalPrice: Int
+    ): Boolean = apiHelper.putMemberStock(
+        ApiDataModel.RequestPutMemberStockBody(
+            memberStockId,
+            purchasePrice,
+            quantity,
+            purchaseTotalPrice
+        )
+    ).isSuccessful
 
     suspend fun getMemberStock(stockType: String): Flow<List<MemberStock>> = flow {
         val result = apiHelper.getMemberStock(stockType)

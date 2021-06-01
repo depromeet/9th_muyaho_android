@@ -1,14 +1,12 @@
 package com.depromeet.muyaho.my
 
-import androidx.databinding.Bindable
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asFlow
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.depromeet.muyaho.base.Action
 import com.depromeet.muyaho.base.BaseViewModel
+import com.depromeet.muyaho.body.SignUpBody
 import com.depromeet.muyaho.other.Constants.CODE_200_OK
 import com.depromeet.muyaho.other.Constants.CODE_409_CONFLICT
+import com.depromeet.muyaho.other.Extra.SIGN_BODY
 import com.depromeet.muyaho.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -19,14 +17,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NicknameViewModel @Inject constructor(
-    private val repo: MainRepository
+    private val repo: MainRepository,
+    savedStateHandle: SavedStateHandle
 ) : BaseViewModel<NicknameViewModel.ViewAction>() {
 
     sealed class ViewAction : Action {
-        object GoMain : ViewAction()
+        data class GoMain(val body: SignUpBody) : ViewAction()
     }
 
-    @Bindable
+    val body = savedStateHandle.get<SignUpBody>(SIGN_BODY)
     val nickname = MutableLiveData<String>()
     private val _state = MutableLiveData<State>()
     val state: LiveData<State>
@@ -51,7 +50,10 @@ class NicknameViewModel @Inject constructor(
     }
 
     fun onClickStart() = viewModelScope.launch {
-        actionSender.send(ViewAction.GoMain)
+        val token = body?.token ?: throw NullPointerException("token was null")
+        val name = state.value?.nickName ?: return@launch
+        val profileUrl = body.profileUrl
+        actionSender.send(ViewAction.GoMain(SignUpBody(token, name, profileUrl)))
     }
 
     private fun checkConflict(enabled: Boolean, nickname: String) = viewModelScope.launch {

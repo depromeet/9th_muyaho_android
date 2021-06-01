@@ -66,7 +66,7 @@
             android:layout_marginEnd="20dp"
             android:hint="@string/nickname_input_hint"
             android:maxLength="5"
-            android:text="@={vm.}"
+            android:text="@={vm.nickname}"
             android:textAppearance="@style/TextSubtitle2"
             android:textColor="@color/white_2"
             android:textColorHint="@color/white_2_60"

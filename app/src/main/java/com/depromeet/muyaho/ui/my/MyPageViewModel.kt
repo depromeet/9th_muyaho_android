@@ -16,4 +16,8 @@ class MyPageViewModel @Inject constructor(
     init {
 
     }
+
+    fun onClickLeave() {
+
+    }
 }
