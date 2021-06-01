@@ -13,4 +13,7 @@ class ApiHelperImpl @Inject constructor(
 
     override suspend fun signUpKakao(body: SignUpBody): Response<LoginResult> =
         apiService.signUpKaKao(body)
+
+    override suspend fun checkName(name: String): Response<Unit> =
+        apiService.checkName(name)
 }

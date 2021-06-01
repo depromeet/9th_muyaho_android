@@ -42,6 +42,10 @@
         <activity
             android:name=".ui.sign.SignActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.NicknameActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

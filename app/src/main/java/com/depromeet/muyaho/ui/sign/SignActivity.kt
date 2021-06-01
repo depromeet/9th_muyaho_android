@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseActivity
 import com.depromeet.muyaho.databinding.ActivitySignBinding
+import com.depromeet.muyaho.my.NicknameActivity
 import com.depromeet.muyaho.ui.MainActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
@@ -26,11 +27,18 @@ class SignActivity : BaseActivity<ActivitySignBinding, SignViewModel, SignViewMo
         when (action) {
             SignViewModel.ViewAction.LoginKakao -> loginWithKakao()
             SignViewModel.ViewAction.GoMain -> goToMain()
+            SignViewModel.ViewAction.GoNickName -> goToNickname()
         }
     }
 
     private fun goToMain() {
         val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToNickname() {
+        val intent = Intent(this, NicknameActivity::class.java)
         startActivity(intent)
         finish()
     }

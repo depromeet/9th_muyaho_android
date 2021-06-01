@@ -6,7 +6,6 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface ApiService {
     @POST("/api/v1/login/kakao")
@@ -22,8 +21,8 @@ interface ApiService {
     // 200이면 ok 409면 conflict
     @GET("/api/v1/check/name")
     suspend fun checkName(
-        @Query("name") name: String
-    ): Response<LoginResult>
+        @Body name: String
+    ): Response<Unit>
 
     @GET("/api/v1/member")
     suspend fun getMember()

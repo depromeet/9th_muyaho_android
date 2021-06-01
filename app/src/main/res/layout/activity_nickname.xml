@@ -2,10 +2,110 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <data>
+
+        <variable
+            name="vm"
+            type="com.depromeet.muyaho.my.NicknameViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primary_blue">
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <View
+            android:id="@+id/view_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="54dp"
+            android:background="@drawable/ic_arrow_left_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="84dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="59dp"
+            android:background="@drawable/ic_youngcha_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/nickname_title"
+            android:textAppearance="@style/TextH2"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_back" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/nickname_desc"
+            android:textAppearance="@style/TextCaption1.Bold"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_nickname"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="20dp"
+            android:hint="@string/nickname_input_hint"
+            android:maxLength="5"
+            android:text="@={vm.}"
+            android:textAppearance="@style/TextSubtitle2"
+            android:textColor="@color/white_2"
+            android:textColorHint="@color/white_2_60"
+            app:boxStrokeColor="@color/white_4"
+            app:boxStrokeWidth="2dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_desc" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="#B1A7FF"
+            app:layout_constraintTop_toBottomOf="@id/et_nickname" />
+
+        <include
+            layout="@layout/caption_nickname"
+            android:layout_width="100dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/et_nickname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/et_nickname" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="64dp"
+            android:background="@drawable/shape_bg_radius_8dp"
+            android:backgroundTint="#66FFFFFF"
+            android:enabled="@{vm.state.enabled}"
+            android:gravity="center"
+            android:onClick="@{() -> vm.onClickStart()}"
+            android:text="@string/nickname_start"
+            android:textAppearance="@style/TextBody2.Bold"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

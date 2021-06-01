@@ -8,6 +8,6 @@ class MainRepository @Inject constructor(
     private val apiHelper: ApiHelper
 ) {
     suspend fun loginKakao(token: String) = apiHelper.loginKaKao(token)
-    suspend fun signUpKakao(body: SignUpBody) =
-        apiHelper.signUpKakao(body)
+    suspend fun signUpKakao(body: SignUpBody) = apiHelper.signUpKakao(body)
+    suspend fun checkNickName(name: String) = apiHelper.checkName(name)
 }

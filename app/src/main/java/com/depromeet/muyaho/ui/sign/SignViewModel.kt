@@ -21,6 +21,7 @@ class SignViewModel @Inject constructor(
     sealed class ViewAction : Action {
         object GoMain : ViewAction()
         object LoginKakao : ViewAction()
+        object GoNickName : ViewAction()
     }
 
     fun onClickKakao() {
@@ -36,7 +37,7 @@ class SignViewModel @Inject constructor(
             .code()
             .let { code ->
                 when (code) {
-                    CODE_200_OK -> actionSender.send(ViewAction.GoMain)
+                    CODE_200_OK -> actionSender.send(ViewAction.GoNickName) // TODO GoMain 으로 수정해야함
                     CODE_404_NOT_FOUND -> signUpWithKakao(body)
                     else -> Log.e(TAG, "code $code is not expected")
                 }
@@ -46,7 +47,7 @@ class SignViewModel @Inject constructor(
     private fun signUpWithKakao(body: SignUpBody) = viewModelScope.launch {
         val result = repo.signUpKakao(body)
         when (result.code()) {
-            CODE_200_OK -> actionSender.send(ViewAction.GoMain)
+            CODE_200_OK -> actionSender.send(ViewAction.GoNickName)
             else -> Log.e(TAG, "code ${result.code()} is not expected")
         }
     }
