@@ -28,6 +28,11 @@ interface ApiService {
         @Body authorization: String
     ): Response<MemberResult>
 
+    @DELETE("/api/v1/member")
+    suspend fun deleteMember(
+        @Body authorization: String
+    ): Response<Unit>
+
     @GET("api/v1/stock/list")
     suspend fun getStockList(@Query("type") stockType: String): Response<ApiDataModel.ResponseStockList>
 

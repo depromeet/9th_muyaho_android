@@ -24,6 +24,7 @@ class MainRepository @Inject constructor(
 
     suspend fun checkNickName(name: String) = apiHelper.checkName(name)
     suspend fun getMember(authorization: String) = apiHelper.getMember(authorization)
+    suspend fun deleteMember(authorization: String) = apiHelper.deleteMember(authorization)
 
     fun getStockList(type: String, name: String) = dataBase.stockDao().getStocks(type, name)
 

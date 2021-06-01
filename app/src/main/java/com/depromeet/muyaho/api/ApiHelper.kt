@@ -18,6 +18,7 @@ interface ApiHelper {
     suspend fun checkName(name: String): Response<Unit>
 
     suspend fun getMember(authorization: String): Response<MemberResult>
+    suspend fun deleteMember(authorization: String): Response<Unit>
 
     suspend fun getStockList(stockType: String): Response<ResponseStockList>
     suspend fun getMemberStock(stockType: String): Response<ResponseGetMemberStock>

@@ -29,6 +29,9 @@ class ApiHelperImpl @Inject constructor(
     override suspend fun getMember(authorization: String): Response<MemberResult> =
         apiService.getMember(authorization)
 
+    override suspend fun deleteMember(authorization: String): Response<Unit> =
+        apiService.deleteMember(authorization)
+
     override suspend fun getStockList(stockType: String): Response<ResponseStockList> =
         apiService.getStockList(stockType)
 
