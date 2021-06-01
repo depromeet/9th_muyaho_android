@@ -26,6 +26,11 @@ class MyFragment :
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.vm = vm
+    }
+
     private fun showError(action: ShowError) {
         val text = "code: ${action.code}, error: ${action.error}"
         Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()

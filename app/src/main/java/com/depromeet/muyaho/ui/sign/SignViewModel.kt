@@ -51,7 +51,6 @@ class SignViewModel @Inject constructor(
     }
 
     private fun signUpWithKakao(body: SignUpBody) = viewModelScope.launch {
-            actionSender.send(ViewAction.GoNickName(body))
-        }
+        actionSender.send(ViewAction.GoNickName(body))
     }
 }
