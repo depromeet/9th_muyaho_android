@@ -9,7 +9,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 
 abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Action> : Fragment() {

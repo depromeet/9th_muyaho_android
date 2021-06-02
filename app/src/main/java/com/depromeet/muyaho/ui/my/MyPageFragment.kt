@@ -1,10 +1,6 @@
 package com.depromeet.muyaho.ui.my
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.depromeet.muyaho.R
@@ -12,8 +8,10 @@ import com.depromeet.muyaho.base.BaseFragment
 import com.depromeet.muyaho.databinding.FragmentMypageBinding
 import com.depromeet.muyaho.ui.my.MyPageViewModel.ViewAction.ShowError
 import com.depromeet.muyaho.ui.splash.SplashActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-class MyFragment :
+@AndroidEntryPoint
+class MyPageFragment :
     BaseFragment<FragmentMypageBinding, MyPageViewModel, MyPageViewModel.ViewAction>() {
 
     override val layoutResId: Int = R.layout.fragment_mypage
@@ -24,11 +22,6 @@ class MyFragment :
             MyPageViewModel.ViewAction.GoSplash -> goToSplash()
             is ShowError -> showError(action)
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.vm = vm
     }
 
     private fun showError(action: ShowError) {
@@ -42,8 +35,8 @@ class MyFragment :
             .let { intent -> startActivity(intent) }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_mypage, container, false)
+    companion object {
+        @JvmStatic
+        fun newInstance() = MyPageFragment()
+    }
 }

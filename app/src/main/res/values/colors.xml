@@ -18,6 +18,7 @@
 
     <color name="white_1">#FFF4F4F4</color>
     <color name="white_2">#FFFFFFFF</color>
+    <color name="white_2_40">#66FFFFFF</color>
     <color name="white_2_60">#99FFFFFF</color>
     <color name="white_3">#FFDAD6FF</color>
     <color name="white_4">#FFB1A7FF</color>

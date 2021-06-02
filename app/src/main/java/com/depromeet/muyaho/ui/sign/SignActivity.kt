@@ -4,13 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.core.os.bundleOf
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseActivity
 import com.depromeet.muyaho.body.SignUpBody
 import com.depromeet.muyaho.databinding.ActivitySignBinding
 import com.depromeet.muyaho.my.NicknameActivity
-import com.depromeet.muyaho.other.Extra.SIGN_BODY
+import com.depromeet.muyaho.other.Extra.KEY_PROFILE_URL
+import com.depromeet.muyaho.other.Extra.KEY_TOKEN
 import com.depromeet.muyaho.ui.MainActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
@@ -42,7 +42,8 @@ class SignActivity : BaseActivity<ActivitySignBinding, SignViewModel, SignViewMo
 
     private fun goToNickname(body: SignUpBody) {
         val intent = Intent(this, NicknameActivity::class.java)
-            .putExtra(SIGN_BODY, bundleOf(SIGN_BODY to body))
+            .putExtra(KEY_TOKEN, body.token)
+            .putExtra(KEY_PROFILE_URL, body.profileUrl)
         startActivity(intent)
         finish()
     }

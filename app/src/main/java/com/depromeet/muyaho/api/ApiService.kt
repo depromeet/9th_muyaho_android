@@ -20,17 +20,17 @@ interface ApiService {
     // 200이면 ok 409면 conflict
     @GET("/api/v1/check/name")
     suspend fun checkName(
-        @Body name: String
+        @Query("name") name: String
     ): Response<Unit>
 
     @GET("/api/v1/member")
     suspend fun getMember(
-        @Body authorization: String
+        @Header("Authorization") token: String
     ): Response<MemberResult>
 
     @DELETE("/api/v1/member")
     suspend fun deleteMember(
-        @Body authorization: String
+        @Header("Authorization") token: String
     ): Response<Unit>
 
     @GET("api/v1/stock/list")

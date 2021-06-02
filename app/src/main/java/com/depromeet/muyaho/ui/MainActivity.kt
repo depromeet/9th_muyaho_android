@@ -34,17 +34,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewMo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.vm = vm
-
-        if (savedInstanceState == null) {
-            setUpBottomNavigationBar()
-        }
+        if (savedInstanceState == null) setUpBottomNavigationBar()
 
         binding.viewFab.setSubBtnClickListener(object : HomeFABView.SubBtnClickListener {
             override fun OnAddBtnClick() {
-                Intent(this@MainActivity, AddStockActivity::class.java).also {
-                    startActivity(it)
-                }
+                Intent(this@MainActivity, AddStockActivity::class.java)
+                    .also { startActivity(it) }
 
                 if (binding.viewFab.isClicked) {
                     binding.viewFab.toggle()
@@ -52,9 +47,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewMo
             }
 
             override fun OnModifyBtnClick() {
-                Intent(this@MainActivity, ModifyStockActivity::class.java).also {
-                    startActivity(it)
-                }
+                Intent(this@MainActivity, ModifyStockActivity::class.java)
+                    .also { startActivity(it) }
 
                 if (binding.viewFab.isClicked) {
                     binding.viewFab.toggle()
@@ -81,7 +75,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewMo
             R.navigation.nav_home,
             R.navigation.nav_calc,
             R.navigation.nav_board,
-            R.navigation.nav_my
+            R.navigation.nav_mypage
         )
 
         val controller = binding.bottomNavigation.setupWithNavController(

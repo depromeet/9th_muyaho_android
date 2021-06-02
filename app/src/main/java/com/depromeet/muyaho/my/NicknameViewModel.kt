@@ -6,7 +6,8 @@ import com.depromeet.muyaho.base.BaseViewModel
 import com.depromeet.muyaho.body.SignUpBody
 import com.depromeet.muyaho.other.Constants.CODE_200_OK
 import com.depromeet.muyaho.other.Constants.CODE_409_CONFLICT
-import com.depromeet.muyaho.other.Extra.SIGN_BODY
+import com.depromeet.muyaho.other.Extra.KEY_PROFILE_URL
+import com.depromeet.muyaho.other.Extra.KEY_TOKEN
 import com.depromeet.muyaho.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -22,10 +23,12 @@ class NicknameViewModel @Inject constructor(
 ) : BaseViewModel<NicknameViewModel.ViewAction>() {
 
     sealed class ViewAction : Action {
-        data class GoMain(val body: SignUpBody) : ViewAction()
+        object GoMain : ViewAction()
+        data class ShowError(val code: Int, val error: String) : ViewAction()
     }
 
-    val body = savedStateHandle.get<SignUpBody>(SIGN_BODY)
+    private val token = savedStateHandle.get<String>(KEY_TOKEN)
+    private val profileUrl = savedStateHandle.get<String>(KEY_PROFILE_URL)
     val nickname = MutableLiveData<String>()
     private val _state = MutableLiveData<State>()
     val state: LiveData<State>
@@ -42,24 +45,36 @@ class NicknameViewModel @Inject constructor(
             nickname.asFlow()
                 .debounce(500) // Wait 500ms
                 .distinctUntilChanged() // Ignore same value (This is the default operator)
-                .collect { nickname ->
-                    val enabled = nickname != null && nickname.isNotEmpty() && nickname.length < 5
-                    checkConflict(enabled, nickname)
-                }
+                .collect { nickname -> checkConflict(nickname) }
         }
     }
 
     fun onClickStart() = viewModelScope.launch {
-        val token = body?.token ?: throw NullPointerException("token was null")
-        val name = state.value?.nickName ?: return@launch
-        val profileUrl = body.profileUrl
-        actionSender.send(ViewAction.GoMain(SignUpBody(token, name, profileUrl)))
+        val token = token ?: throw NullPointerException("token was null")
+        val name = _state.value?.nickName ?: return@launch
+        checkConflict(name)
+        if (state.value?.enabled == true)
+            repo.signUpKakao(SignUpBody(token, name, profileUrl))
+                .let { response ->
+                    if (response.isSuccessful) actionSender.send(ViewAction.GoMain)
+                    else actionSender.send(
+                        ViewAction.ShowError(response.code(), response.errorBody().toString())
+                    )
+                }
     }
 
-    private fun checkConflict(enabled: Boolean, nickname: String) = viewModelScope.launch {
-        when (repo.checkNickName(nickname).code()) {
-            CODE_200_OK -> _state.value = _state.value?.copy(enabled = enabled, nickName = nickname)
-            CODE_409_CONFLICT -> _state.value = _state.value?.copy(isConflict = true)
+    private fun checkConflict(nickname: String) = viewModelScope.launch {
+        val enabled = nickname.isNotEmpty() && nickname.length <= 5
+        if (!enabled) {
+            _state.value = State(enabled = enabled, nickName = nickname, isConflict = false)
+            return@launch
         }
+        val (isAvailable, isConflict) = when (repo.checkNickName(nickname).code()) {
+            CODE_200_OK -> true to false
+            CODE_409_CONFLICT -> false to true
+            else -> false to false
+        }
+        _state.value = State(enabled = isAvailable, nickName = nickname, isConflict = isConflict)
+
     }
 }
