@@ -12,5 +12,4 @@ class MemberStock(
     val quantity: String,
     val currencyType: String,
     val profitOrLoseRate: String
-): Parcelable {
-}
+) : Parcelable

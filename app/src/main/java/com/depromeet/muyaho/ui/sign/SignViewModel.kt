@@ -2,7 +2,6 @@ package com.depromeet.muyaho.ui.sign
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.depromeet.muyaho.api.ApiHelperImpl
 import com.depromeet.muyaho.base.Action
 import com.depromeet.muyaho.base.BaseViewModel
 import com.depromeet.muyaho.body.SignUpBody
@@ -10,7 +9,7 @@ import com.depromeet.muyaho.other.Constants
 import com.depromeet.muyaho.other.Constants.CODE_200_OK
 import com.depromeet.muyaho.other.Constants.CODE_404_NOT_FOUND
 import com.depromeet.muyaho.repository.MainRepository
-import com.depromeet.muyaho.util.PreferenceUtil
+import com.depromeet.muyaho.util.PreferenceUtil.accessToken
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.model.Profile
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +23,9 @@ class SignViewModel @Inject constructor(
     sealed class ViewAction : Action {
         object GoMain : ViewAction()
         object LoginKakao : ViewAction()
+        data class GoNickName(
+            val body: SignUpBody
+        ) : ViewAction()
     }
 
     fun onClickKakao() {
@@ -39,8 +41,7 @@ class SignViewModel @Inject constructor(
             .let { result ->
                 when (result.code()) {
                     CODE_200_OK -> {
-                        PreferenceUtil.AccessToken =
-                            result.body()?.data?.sessionId ?: Constants.TEST_SESSION_ID
+                        accessToken = result.body()?.data?.sessionId ?: Constants.TEST_SESSION_ID
                         actionSender.send(ViewAction.GoMain)
                     }
                     CODE_404_NOT_FOUND -> signUpWithKakao(body)
@@ -50,10 +51,6 @@ class SignViewModel @Inject constructor(
     }
 
     private fun signUpWithKakao(body: SignUpBody) = viewModelScope.launch {
-        val result = repo.signUpKakao(body)
-        when (result.code()) {
-            CODE_200_OK -> actionSender.send(ViewAction.GoMain)
-            else -> Log.e(TAG, "code ${result.code()} is not expected")
-        }
+        actionSender.send(ViewAction.GoNickName(body))
     }
 }
