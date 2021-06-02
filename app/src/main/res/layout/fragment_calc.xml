@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="53dp"
+            android:onClick="@{() -> vm.onClickHistory()}"
             android:text="기록"
             android:textAppearance="@style/TextBody1"
             android:textColor="@color/white_1"
@@ -43,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="53dp"
+            android:onClick="@{() -> vm.onClickRevenueRate()}"
             android:text="수익률"
             android:textAppearance="@style/TextBody1"
             android:textColor="@color/white_1"
@@ -64,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="53dp"
+            android:onClick="@{() -> vm.onClickWater()}"
             android:text="물타기"
             android:textAppearance="@style/TextBody1"
             android:textColor="@color/white_1"
@@ -84,8 +87,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="93dp"
+            app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/nav_calc" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -33,13 +33,11 @@ class AddStockSelectTypeViewModel @Inject constructor(
         }
     }
 
-    val stockTypeCheckChangeListener = object : RadioGroup.OnCheckedChangeListener{
-        override fun onCheckedChanged(p0: RadioGroup?, p1: Int) {
-            when (p1) {
-                R.id.rb_domestic_stock -> selectedStockType = StockType.Domestic
-                R.id.rb_overseas_stock -> selectedStockType = StockType.Overseas
-                R.id.rb_virtual_currency -> selectedStockType = StockType.Bitcoin
-            }
+    val stockTypeCheckChangeListener = RadioGroup.OnCheckedChangeListener { _, p1 ->
+        when (p1) {
+            R.id.rb_domestic_stock -> selectedStockType = StockType.Domestic
+            R.id.rb_overseas_stock -> selectedStockType = StockType.Overseas
+            R.id.rb_virtual_currency -> selectedStockType = StockType.Bitcoin
         }
     }
 }
