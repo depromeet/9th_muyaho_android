@@ -2,6 +2,7 @@ package com.depromeet.muyaho.api
 
 import com.depromeet.muyaho.body.SignUpBody
 import com.depromeet.muyaho.models.LoginResult
+import com.depromeet.muyaho.models.MemberResult
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -20,10 +21,17 @@ interface ApiService {
     @GET("/api/v1/check/name")
     suspend fun checkName(
         @Query("name") name: String
-    ): Response<LoginResult>
+    ): Response<Unit>
 
     @GET("/api/v1/member")
-    suspend fun getMember()
+    suspend fun getMember(
+        @Header("Authorization") token: String
+    ): Response<MemberResult>
+
+    @DELETE("/api/v1/member")
+    suspend fun deleteMember(
+        @Header("Authorization") token: String
+    ): Response<Unit>
 
     @GET("api/v1/stock/list")
     suspend fun getStockList(@Query("type") stockType: String): Response<ApiDataModel.ResponseStockList>

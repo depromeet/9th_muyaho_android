@@ -12,4 +12,4 @@ data class Stock(
     val code: String,
     val name: String,
     val type: String
-): Parcelable
+) : Parcelable

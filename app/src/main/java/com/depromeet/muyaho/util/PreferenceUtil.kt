@@ -17,7 +17,7 @@ object PreferenceUtil {
         preference = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE)
     }
 
-    var AccessToken: String
+    var accessToken: String
         get() = preference?.getString(KEY_ACCESS_TOKEN, Constants.TEST_SESSION_ID)
             ?: Constants.TEST_SESSION_ID
         set(value) {

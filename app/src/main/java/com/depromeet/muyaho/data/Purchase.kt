@@ -8,4 +8,4 @@ data class Purchase(
     val unitPrice: String,
     val amount: String,
     val amountInWon: String
-): Parcelable
+) : Parcelable

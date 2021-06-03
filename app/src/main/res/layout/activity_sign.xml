@@ -14,6 +14,32 @@
         android:layout_height="match_parent"
         android:background="@color/black_1">
 
+        <View
+            android:layout_width="172dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="230dp"
+            android:background="@drawable/ic_logo_sign"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_line_bg"
+            app:layout_constraintBottom_toTopOf="@id/btn_kakao" />
+
+        <View
+            android:layout_width="80dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="27dp"
+            android:background="@drawable/ic_rocket_sign"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_bg" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_apple"
             android:layout_width="match_parent"
