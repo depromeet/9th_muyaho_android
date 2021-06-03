@@ -1,11 +1,13 @@
 package com.depromeet.muyaho.ui.calc
 
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
 import com.depromeet.muyaho.databinding.FragmentCalcBinding
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class CalcFragment : BaseFragment<FragmentCalcBinding, CalcViewModel, CalcViewModel.ViewAction>() {
@@ -15,14 +17,19 @@ class CalcFragment : BaseFragment<FragmentCalcBinding, CalcViewModel, CalcViewMo
 
     override fun observeActionCommand(action: CalcViewModel.ViewAction) {
         when (action) {
-            CalcViewModel.ViewAction.ShowHistory -> navigate(R.id.action_fragment_calc_to_navigation)
-            CalcViewModel.ViewAction.ShowRevenueRate -> navigate(R.id.action_fragment_calc_to_navigation2)
-            CalcViewModel.ViewAction.ShowWater -> navigate(R.id.action_fragment_calc_to_navigation3)
+            CalcViewModel.ViewAction.ShowHistory -> navigate(HistoryFragment.newInstance())
+            CalcViewModel.ViewAction.ShowRevenueRate -> navigate(RevenueRateFragment.newInstance())
+            CalcViewModel.ViewAction.ShowWater -> navigate(WaterFragment.newInstance())
         }
     }
 
-    private fun navigate(id: Int) {
-        binding.fragmentContainer.findNavController().navigate(id)
+    private fun navigate(child: Fragment) {
+        val childFt: FragmentTransaction = childFragmentManager.beginTransaction()
+        if (!child.isAdded) {
+            childFt.replace(R.id.fragment_container, child)
+            childFt.addToBackStack(null)
+            childFt.commit()
+        }
     }
 
     companion object {
