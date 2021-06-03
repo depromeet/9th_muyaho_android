@@ -1,15 +1,9 @@
 package com.depromeet.muyaho.api
 
-import com.depromeet.muyaho.api.ApiDataModel.RequestPostMemberStockBody
-import com.depromeet.muyaho.api.ApiDataModel.RequestPutMemberStockBody
-import com.depromeet.muyaho.api.ApiDataModel.ResponseGetMemberStock
-import com.depromeet.muyaho.api.ApiDataModel.ResponsePostMemberStock
-import com.depromeet.muyaho.api.ApiDataModel.ResponsePutMemberStock
-import com.depromeet.muyaho.api.ApiDataModel.ResponseStockList
 import com.depromeet.muyaho.body.SignUpBody
 import com.depromeet.muyaho.models.LoginResult
 import com.depromeet.muyaho.models.MemberResult
-import com.depromeet.muyaho.util.PreferenceUtil.accessToken
+import com.depromeet.muyaho.util.PreferenceUtil
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -38,23 +32,23 @@ class ApiHelperImpl @Inject constructor(
     override suspend fun getMemberStock(
         stockType: String
     ): Response<ApiDataModel.ResponseGetMemberStock> =
-        apiService.getMemberStock(PreferenceUtil.AccessToken, stockType)
+        apiService.getMemberStock(PreferenceUtil.accessToken, stockType)
 
     override suspend fun postMemberStock(
         body: ApiDataModel.RequestPostMemberStockBody
     )
             : Response<ApiDataModel.ResponsePostMemberStock> =
-        apiService.postMemberStock(PreferenceUtil.AccessToken, body)
+        apiService.postMemberStock(PreferenceUtil.accessToken, body)
 
     override suspend fun putMemberStock(
         body: ApiDataModel.RequestPutMemberStockBody
     )
             : Response<ApiDataModel.ResponsePutMemberStock> =
-        apiService.putMemberStock(PreferenceUtil.AccessToken, body)
+        apiService.putMemberStock(PreferenceUtil.accessToken, body)
 
     override suspend fun getMemberStockStatus(): Response<ApiDataModel.ResponseMemberStockStatus> =
-        apiService.getMemberStockStatus(PreferenceUtil.AccessToken)
+        apiService.getMemberStockStatus(PreferenceUtil.accessToken)
 
     override suspend fun getMemberStockStatusHistory(): Response<ApiDataModel.ResponseMemberStockStatus> =
-        apiService.getMemberStockStatusHistory(PreferenceUtil.AccessToken)
+        apiService.getMemberStockStatusHistory(PreferenceUtil.accessToken)
 }
