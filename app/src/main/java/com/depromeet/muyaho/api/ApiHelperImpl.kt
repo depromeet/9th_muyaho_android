@@ -46,6 +46,11 @@ class ApiHelperImpl @Inject constructor(
             : Response<ApiDataModel.ResponsePutMemberStock> =
         apiService.putMemberStock(PreferenceUtil.accessToken, body)
 
+    override suspend fun deleteMemberStock(
+        memberStockId: Int
+    ): Response<ApiDataModel.ResponseDeleteMemberStock> =
+        apiService.deleteMemberStock(PreferenceUtil.accessToken, memberStockId)
+
     override suspend fun getMemberStockStatus(): Response<ApiDataModel.ResponseMemberStockStatus> =
         apiService.getMemberStockStatus(PreferenceUtil.accessToken)
 

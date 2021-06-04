@@ -30,6 +30,9 @@ interface ApiHelper {
     suspend fun putMemberStock(body: ApiDataModel.RequestPutMemberStockBody)
             : Response<ApiDataModel.ResponsePutMemberStock>
 
+    suspend fun deleteMemberStock(memberStockId: Int)
+            : Response<ApiDataModel.ResponseDeleteMemberStock>
+
     suspend fun getMemberStockStatus()
             : Response<ApiDataModel.ResponseMemberStockStatus>
 

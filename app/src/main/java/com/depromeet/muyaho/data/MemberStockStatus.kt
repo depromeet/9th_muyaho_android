@@ -9,5 +9,5 @@ data class MemberStockStatus(
     val finalAsset: String,
     val seedAmount: String,
     val finalProfitOrLoseRate: String,
-    val overview: MemberStockStatusOverview
+    var overview: MemberStockStatusOverview
 ): Parcelable

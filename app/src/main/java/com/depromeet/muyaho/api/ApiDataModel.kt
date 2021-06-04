@@ -42,17 +42,23 @@ object ApiDataModel {
 
     data class RequestPostMemberStockBody(
         val stockId: Int,
-        val purchasePrice: Int,
-        val quantity: Int,
+        val purchasePrice: Float,
+        val quantity: Float,
         val currencyType: String,
-        val purchaseTotalPrice: Int
+        val purchaseTotalPrice: Float
+    )
+
+    data class ResponseDeleteMemberStock(
+        val code: String,
+        val message: String,
+        val data: String
     )
 
     data class RequestPutMemberStockBody(
         val memberStockId: Int,
-        val purchasePrice: Int,
-        val quantity: Int,
-        val purchaseTotalPrice: Int
+        val purchasePrice: Float,
+        val quantity: Float,
+        val purchaseTotalPrice: Float
     )
 
     data class ResponseMemberStockStatus(

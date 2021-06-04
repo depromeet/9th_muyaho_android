@@ -31,9 +31,7 @@ class BudgetLayout@JvmOverloads constructor(
     }
 
     fun setData(memberStockStatus: MemberStockStatus) {
-        if (memberStockStatus.seedAmount.isBlank() ||
-                memberStockStatus.finalAsset.isBlank() ||
-                memberStockStatus.todayProfitOrLose.isBlank()) {
+        if (memberStockStatus.seedAmount.isBlank() || memberStockStatus.seedAmount == "0") {
             binding.clInputInvestment.visibility = View.VISIBLE
             binding.clBudget.visibility = View.GONE
         } else {
@@ -44,7 +42,7 @@ class BudgetLayout@JvmOverloads constructor(
         binding.tvSeed.text = "시드 ${NumberFormatUtil.numWithComma(memberStockStatus.seedAmount.toFloat())}"
         binding.tvBudget.text = NumberFormatUtil.numWithComma(memberStockStatus.finalAsset.toFloat())
         binding.tvBenefitPercent.text = "${memberStockStatus.finalProfitOrLoseRate}%"
-        if (memberStockStatus.finalProfitOrLoseRate.toInt() > 0) {
+        if (memberStockStatus.finalProfitOrLoseRate.toFloat() > 0) {
             binding.tvBenefitPercent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_upward_red_16, 0, 0, 0)
         } else {
             binding.tvBenefitPercent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_downward_blue_16, 0, 0, 0)

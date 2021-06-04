@@ -10,6 +10,40 @@
         android:name="com.depromeet.muyaho.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home">
 
+        <action
+            android:id="@+id/action_home_to_detail"
+            app:destination="@id/fragment_home_detail"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_home_detail"
+        android:name="com.depromeet.muyaho.ui.home.HomeDetailFragment"
+        tools:layout="@layout/fragment_home_detail">
+
+        <action
+            android:id="@+id/action_detail_to_modify"
+            app:destination="@id/fragment_modify_stock_input"/>
+
+        <argument
+            android:name="memberStockStatus"
+            app:argType="com.depromeet.muyaho.data.MemberStockStatus"/>
+
+        <argument
+            android:name="pageIndex"
+            app:argType="integer"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_modify_stock_input"
+        android:name="com.depromeet.muyaho.ui.modifystock.ModifyStockInputFragment"
+        tools:layout="@layout/fragment_modify_stock_input">
+
+        <argument
+            android:name="memberStock"
+            app:argType="com.depromeet.muyaho.data.MemberStock"/>
+
     </fragment>
 
 </navigation>

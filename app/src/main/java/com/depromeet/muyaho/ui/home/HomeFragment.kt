@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
 import com.depromeet.muyaho.databinding.FragmentHomeBinding
@@ -24,6 +25,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        vm.getMemberStockStatusCache()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -36,9 +42,47 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
             }
         }
 
+        binding.clInvestDomestic.setOnClickListener {
+            if (vm.memberStockStatus.value?.overview?.domesticStocks?.size?:0 > 0) {
+                navigateToDetail(0)
+            } else {
+                Intent(requireContext(), AddStockActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
+        }
+
+        binding.clInvestOverseas.setOnClickListener {
+            if (vm.memberStockStatus.value?.overview?.foreignStocks?.size?:0 > 0) {
+                navigateToDetail(1)
+            } else {
+                Intent(requireContext(), AddStockActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
+        }
+
+        binding.clInvestBitcoin.setOnClickListener {
+            if (vm.memberStockStatus.value?.overview?.bitCoins?.size?:0 > 0) {
+                navigateToDetail(2)
+            } else {
+                Intent(requireContext(), AddStockActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
+        }
+
+        binding.ivRefresh.setOnClickListener {
+            vm.getMemberStockStatus()
+        }
+
         // observe
         vm.memberStockStatus.observe(viewLifecycleOwner) {
-            if (it.todayProfitOrLose.isBlank()) {
+            if (it == null) {
+                return@observe
+            }
+
+            if (it.seedAmount.isBlank() || it.seedAmount == "0") {
                 // 입력이 되지 않은 상태
                 binding.tvTodayBenefitEmpty.visibility = View.VISIBLE
                 binding.llTodayBenefit.visibility = View.GONE
@@ -46,9 +90,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
             } else {
                 binding.tvTodayBenefitEmpty.visibility = View.GONE
                 binding.llTodayBenefit.visibility = View.VISIBLE
-                binding.tvTodayBenefit.text = it.todayProfitOrLose
+                binding.tvTodayBenefit.text = NumberFormatUtil.numWithComma(it.todayProfitOrLose.toFloat())
 
-                val nTodayProfitOrLose = it.todayProfitOrLose.toInt()
+                val nTodayProfitOrLose = it.todayProfitOrLose.toFloat()
                 if (nTodayProfitOrLose > 0) {
                     // 수익이 난 상태
                     binding.tvTodayBenefit.setTextColor(resources.getColor(R.color.secondary_red, null))
@@ -62,10 +106,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
 
             binding.budget.setData(it)
 
-            var sum = 0
+
             if (it.overview.domesticStocks.isNotEmpty()) {
+                var sum = 0.0f
                 it.overview.domesticStocks.forEach {
-                    val benefit = it.current.won.amountPrice.toInt() - it.purchase.amount.toInt()
+                    val benefit = it.current.won.amountPrice.toFloat() - it.purchase.amount.toFloat()
                     sum += benefit
                 }
 
@@ -82,8 +127,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
             }
 
             if (it.overview.foreignStocks.isNotEmpty()) {
+                var sum = 0.0f
                 it.overview.foreignStocks.forEach {
-                    val benefit = it.current.won.amountPrice.toInt() - it.purchase.amountInWon.toInt()
+                    val benefit = it.current.won.amountPrice.toFloat() - it.purchase.amountInWon.toFloat()
                     sum += benefit
                 }
 
@@ -100,8 +146,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
             }
 
             if (it.overview.bitCoins.isNotEmpty()) {
+                var sum = 0.0f
                 it.overview.bitCoins.forEach {
-                    val benefit = it.current.won.amountPrice.toInt() - it.purchase.amount.toInt()
+                    val benefit = it.current.won.amountPrice.toFloat() - it.purchase.amount.toFloat()
                     sum += benefit
                 }
 
@@ -115,6 +162,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
             } else {
                 binding.tvInvestBitcoinBenefit.text = "등록하기"
                 binding.tvInvestBitcoinBenefit.setTextColor(resources.getColor(R.color.black_5, null))
+            }
+        }
+    }
+
+    fun navigateToDetail(position: Int) {
+        vm.memberStockStatus.value?.let {
+            HomeFragmentDirections.actionHomeToDetail(it, position).also {
+                findNavController().navigate(it)
             }
         }
     }

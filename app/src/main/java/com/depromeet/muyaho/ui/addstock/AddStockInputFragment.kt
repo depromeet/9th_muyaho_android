@@ -53,8 +53,8 @@ class AddStockInputFragment :
             if (isInputDataValidate()) {
                 vm.postMemberStock(
                     args.stock.id,
-                    binding.petAveragePrice.price.toInt(),
-                    binding.petQuantity.price.toInt()
+                    binding.petAveragePrice.price.toFloat(),
+                    binding.petQuantity.price.toFloat()
                 )
             }
         }
@@ -62,6 +62,7 @@ class AddStockInputFragment :
         // observe
         vm.isPostComplete.observe(viewLifecycleOwner) {
             if (it) {
+
                 requireActivity().finish()
             }
         }

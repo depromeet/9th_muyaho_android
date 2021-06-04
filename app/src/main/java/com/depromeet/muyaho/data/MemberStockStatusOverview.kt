@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class MemberStockStatusOverview(
-    val bitCoins: List<MemberStock>,
-    val domesticStocks: List<MemberStock>,
-    val foreignStocks: List<MemberStock>
+    var bitCoins: List<MemberStock>,
+    var domesticStocks: List<MemberStock>,
+    var foreignStocks: List<MemberStock>
 ): Parcelable
