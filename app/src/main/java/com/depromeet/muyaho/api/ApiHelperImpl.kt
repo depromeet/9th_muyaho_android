@@ -1,15 +1,9 @@
 package com.depromeet.muyaho.api
 
-import com.depromeet.muyaho.api.ApiDataModel.RequestPostMemberStockBody
-import com.depromeet.muyaho.api.ApiDataModel.RequestPutMemberStockBody
-import com.depromeet.muyaho.api.ApiDataModel.ResponseGetMemberStock
-import com.depromeet.muyaho.api.ApiDataModel.ResponsePostMemberStock
-import com.depromeet.muyaho.api.ApiDataModel.ResponsePutMemberStock
-import com.depromeet.muyaho.api.ApiDataModel.ResponseStockList
 import com.depromeet.muyaho.body.SignUpBody
 import com.depromeet.muyaho.models.LoginResult
 import com.depromeet.muyaho.models.MemberResult
-import com.depromeet.muyaho.util.PreferenceUtil.accessToken
+import com.depromeet.muyaho.util.PreferenceUtil
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -32,21 +26,34 @@ class ApiHelperImpl @Inject constructor(
     override suspend fun deleteMember(authorization: String): Response<Unit> =
         apiService.deleteMember(authorization)
 
-    override suspend fun getStockList(stockType: String): Response<ResponseStockList> =
+    override suspend fun getStockList(stockType: String): Response<ApiDataModel.ResponseStockList> =
         apiService.getStockList(stockType)
 
     override suspend fun getMemberStock(
         stockType: String
-    ): Response<ResponseGetMemberStock> =
-        apiService.getMemberStock(accessToken, stockType)
+    ): Response<ApiDataModel.ResponseGetMemberStock> =
+        apiService.getMemberStock(PreferenceUtil.accessToken, stockType)
 
     override suspend fun postMemberStock(
-        body: RequestPostMemberStockBody
-    ): Response<ResponsePostMemberStock> =
-        apiService.postMemberStock(accessToken, body)
+        body: ApiDataModel.RequestPostMemberStockBody
+    )
+            : Response<ApiDataModel.ResponsePostMemberStock> =
+        apiService.postMemberStock(PreferenceUtil.accessToken, body)
 
     override suspend fun putMemberStock(
-        body: RequestPutMemberStockBody
-    ): Response<ResponsePutMemberStock> =
-        apiService.putMemberStock(accessToken, body)
+        body: ApiDataModel.RequestPutMemberStockBody
+    )
+            : Response<ApiDataModel.ResponsePutMemberStock> =
+        apiService.putMemberStock(PreferenceUtil.accessToken, body)
+
+    override suspend fun deleteMemberStock(
+        memberStockId: Int
+    ): Response<ApiDataModel.ResponseDeleteMemberStock> =
+        apiService.deleteMemberStock(PreferenceUtil.accessToken, memberStockId)
+
+    override suspend fun getMemberStockStatus(): Response<ApiDataModel.ResponseMemberStockStatus> =
+        apiService.getMemberStockStatus(PreferenceUtil.accessToken)
+
+    override suspend fun getMemberStockStatusHistory(): Response<ApiDataModel.ResponseMemberStockStatus> =
+        apiService.getMemberStockStatusHistory(PreferenceUtil.accessToken)
 }

@@ -9,6 +9,7 @@ import com.depromeet.muyaho.data.StockType
 import com.depromeet.muyaho.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.Dispatcher
@@ -26,11 +27,17 @@ class AddStockInputViewModel @Inject constructor(
     val isProcessing: MutableLiveData<Boolean> = MutableLiveData(false)
     val isPostComplete: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    fun postMemberStock(stockId: Int, purchasePrice: Int, quantity: Int) {
+    fun postMemberStock(stockId: Int, purchasePrice: Float, quantity: Float) {
         isProcessing.value = true
 
         viewModelScope.launch(Dispatchers.Default) {
-            val result = mainRepository.postMemberStock(stockId, purchasePrice, quantity, if(stockType == StockType.Overseas.full_name) "DOLLAR" else "WON", purchasePrice * quantity)
+            val result = if (stockType == StockType.Overseas.full_name) {
+                mainRepository.postMemberStock(stockId, purchasePrice, quantity, "DOLLAR", purchasePrice * quantity * 1200)
+            } else {
+                mainRepository.postMemberStock(stockId, purchasePrice, quantity, "WON", purchasePrice * quantity)
+            }
+
+            mainRepository.getMemberStockStatus()
 
             withContext(Dispatchers.Main) {
                 isProcessing.value = false
