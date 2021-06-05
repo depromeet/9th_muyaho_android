@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Base.Theme.Muyaho" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.Muyaho" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
@@ -11,6 +11,7 @@
     <style name="Theme.Muyaho.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/black_1</item>
     </style>
 
     <style name="LaunchSplashTheme" parent="Theme.Muyaho.NoActionBar">
