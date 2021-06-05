@@ -10,4 +10,20 @@ object Constants {
     const val CODE_400_BAD_REQUEST = 400
     const val CODE_404_NOT_FOUND = 404
     const val CODE_409_CONFLICT = 409
+
+    val YOUNGCHAN_MENT_NONE = arrayOf(
+        arrayOf("zzzz...", "zzzzzz...")
+    )
+
+    val YOUNGCHAN_MENT_PLUS = arrayOf(
+        arrayOf("화려한 빨간불이", "나를 감싸네..."),
+        arrayOf("도지타고", "화성 갈꾸니깐"),
+        arrayOf("늦으면", "어시없다")
+   )
+
+    val YOUNGCHAN_MENT_MINUS = arrayOf(
+        arrayOf("우린...", "화성갈꺼니까..."),
+        arrayOf("영...차....", "영.......차......"),
+        arrayOf("존...버는", "승ㄹ...ㅣㅎ")
+    )
 }
