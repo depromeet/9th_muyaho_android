@@ -7,7 +7,6 @@ import androidx.navigation.fragment.findNavController
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
 import com.depromeet.muyaho.data.MemberStock
-import com.depromeet.muyaho.data.StockType
 import com.depromeet.muyaho.databinding.FragmentModifyStockSelectBinding
 import dagger.hilt.android.AndroidEntryPoint
 

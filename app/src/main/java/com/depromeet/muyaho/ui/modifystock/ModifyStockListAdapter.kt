@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.depromeet.muyaho.R
 import com.depromeet.muyaho.data.MemberStock
 import com.depromeet.muyaho.data.StockType
 import com.depromeet.muyaho.databinding.ListItemModifyStockBinding
@@ -42,8 +43,22 @@ class ModifyStockListAdapter: ListAdapter<MemberStock, RecyclerView.ViewHolder>(
         fun bind(item: MemberStock, position: Int) {
             binding.tvStockName.text = item.stock.name
 
-            // TODO: 5/19/21 수익/손실 금액 구현해야함
             val isDollar = (item.currencyType == "DOLLAR")
+
+            val benefit = if (isDollar) {
+                item.current.won.amountPrice.toBigDecimal().minus(item.purchase.amountInWon?.toBigDecimal() ?: 0.toBigDecimal())
+            } else {
+                item.current.won.amountPrice.toBigDecimal() - item.purchase.amount.toBigDecimal()
+            }
+            if (benefit > 0.toBigDecimal()) {
+                binding.tvBenefit.setTextColor(binding.root.resources.getColor(R.color.secondary_red, null))
+                binding.tvBenefit.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_upward_red_16, 0, 0, 0)
+            } else {
+                binding.tvBenefit.setTextColor(binding.root.resources.getColor(R.color.secondary_blue, null))
+                binding.tvBenefit.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_downward_blue_16, 0, 0, 0)
+            }
+            binding.tvBenefit.text = "${NumberFormatUtil.numWithComma(benefit)}(${item.profitOrLoseRate}%)"
+
             if (isDollar) {
                 binding.tvPrice.text = NumberFormatUtil.numWithComma(item.purchase.amount.toBigDecimal() * 1200.toBigDecimal())
             } else {
