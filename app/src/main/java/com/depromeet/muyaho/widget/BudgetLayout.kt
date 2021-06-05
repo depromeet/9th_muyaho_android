@@ -39,8 +39,8 @@ class BudgetLayout@JvmOverloads constructor(
             binding.clBudget.visibility = View.VISIBLE
         }
 
-        binding.tvSeed.text = "시드 ${NumberFormatUtil.numWithComma(memberStockStatus.seedAmount.toFloat())}"
-        binding.tvBudget.text = NumberFormatUtil.numWithComma(memberStockStatus.finalAsset.toFloat())
+        binding.tvSeed.text = "시드 ${NumberFormatUtil.numWithComma(memberStockStatus.seedAmount.toBigDecimal())}"
+        binding.tvBudget.text = NumberFormatUtil.numWithComma(memberStockStatus.finalAsset.toBigDecimal())
         binding.tvBenefitPercent.text = "${memberStockStatus.finalProfitOrLoseRate}%"
         if (memberStockStatus.finalProfitOrLoseRate.toFloat() > 0) {
             binding.tvBenefitPercent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_upward_red_16, 0, 0, 0)
@@ -48,9 +48,9 @@ class BudgetLayout@JvmOverloads constructor(
             binding.tvBenefitPercent.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_downward_blue_16, 0, 0, 0)
         }
 
-        val benefitPrice = memberStockStatus.finalAsset.toFloat() - memberStockStatus.seedAmount.toFloat()
+        val benefitPrice = memberStockStatus.finalAsset.toBigDecimal() - memberStockStatus.seedAmount.toBigDecimal()
         binding.tvBenefitPrice.text = NumberFormatUtil.numWithComma(benefitPrice)
-        if (benefitPrice > 0) {
+        if (benefitPrice > 0.toBigDecimal()) {
             binding.tvBenefitPrice.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_upward_red_16, 0, 0, 0)
         } else {
             binding.tvBenefitPrice.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_downward_blue_16, 0, 0, 0)

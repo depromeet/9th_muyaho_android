@@ -95,21 +95,21 @@ class HomeDetailContentFragment :
     fun observeMemberStockStatus(adapter: HomeDetailStockAdapter, stockType: String, list: List<MemberStock>) {
         adapter.submitList(list)
 
-        var budget = 0.0f
-        var benefit = 0.0f
+        var budget = 0.toBigDecimal()
+        var benefit = 0.toBigDecimal()
         list.forEach {
             if (stockType == StockType.Overseas.full_name) {
-                budget += it.current.won.amountPrice.toFloat()
-                benefit += it.current.won.amountPrice.toFloat() - it.purchase.amountInWon.toFloat()
+                budget += it.current.won.amountPrice.toBigDecimal()
+                benefit += it.current.won.amountPrice.toBigDecimal().minus(it.purchase.amountInWon?.toBigDecimal() ?: 0.toBigDecimal())
             } else {
-                budget += it.current.won.amountPrice.toFloat()
-                benefit += it.current.won.amountPrice.toFloat() - it.purchase.amount.toFloat()
+                budget += it.current.won.amountPrice.toBigDecimal()
+                benefit += it.current.won.amountPrice.toBigDecimal() - it.purchase.amount.toBigDecimal()
             }
         }
 
         binding.tvBudget.text = NumberFormatUtil.numWithComma(budget)
         binding.chBenefit.text = "${NumberFormatUtil.numWithComma(benefit)}원"
-        if (benefit >= 0) {
+        if (benefit >= 0.toBigDecimal()) {
             binding.chBenefit.setChipIconResource(R.drawable.ic_upward_red_16)
         } else {
             binding.chBenefit.setChipIconResource(R.drawable.ic_downward_blue_16)

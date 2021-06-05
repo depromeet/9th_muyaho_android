@@ -46,11 +46,11 @@ class HomeDetailStockAdapter: ListAdapter<MemberStock, RecyclerView.ViewHolder>(
             binding.tvStockName.text = item.stock.name
 
             val benefit = if (item.stock.type == StockType.Overseas.full_name) {
-                item.current.won.amountPrice.toFloat() - item.purchase.amountInWon.toFloat()
+                item.current.won.amountPrice.toBigDecimal().minus(item.purchase.amountInWon?.toBigDecimal() ?: 0.toBigDecimal())
             } else {
-                item.current.won.amountPrice.toFloat() - item.purchase.amount.toFloat()
+                item.current.won.amountPrice.toBigDecimal() - item.purchase.amount.toBigDecimal()
             }
-            if (benefit > 0) {
+            if (benefit > 0.toBigDecimal()) {
                 binding.tvStockBenefit.setTextColor(binding.root.resources.getColor(R.color.secondary_red, null))
                 binding.tvStockBenefit.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_upward_red_16, 0, 0, 0)
             } else {
@@ -59,30 +59,30 @@ class HomeDetailStockAdapter: ListAdapter<MemberStock, RecyclerView.ViewHolder>(
             }
             binding.tvStockBenefit.text = "${NumberFormatUtil.numWithComma(benefit)}(${item.profitOrLoseRate}%)"
 
-            binding.tvStockPrice.text = NumberFormatUtil.numWithComma(item.current.won.amountPrice.toFloat())
+            binding.tvStockPrice.text = NumberFormatUtil.numWithComma(item.current.won.amountPrice.toBigDecimal())
             when (item.stock.type) {
                 StockType.Domestic.full_name -> {
                     binding.clDetailDefault.visibility = View.VISIBLE
                     binding.clDetailBitcoin.visibility = View.GONE
 
-                    binding.tvNowPrice.text = NumberFormatUtil.numWithComma(item.current.won.unitPrice.toFloat())
-                    binding.tvAveragePrice.text = NumberFormatUtil.numWithComma(item.purchase.unitPrice.toFloat())
-                    binding.tvStockCount.text = NumberFormatUtil.numWithComma(item.quantity.toFloat())
+                    binding.tvNowPrice.text = NumberFormatUtil.numWithComma(item.current.won.unitPrice.toBigDecimal())
+                    binding.tvAveragePrice.text = NumberFormatUtil.numWithComma(item.purchase.unitPrice.toBigDecimal())
+                    binding.tvStockCount.text = NumberFormatUtil.numWithComma(item.quantity.toBigDecimal())
                 }
                 StockType.Overseas.full_name -> {
                     binding.clDetailDefault.visibility = View.VISIBLE
                     binding.clDetailBitcoin.visibility = View.GONE
 
-                    binding.tvNowPrice.text = NumberFormatUtil.numWithComma(item.current.dollar.unitPrice.toFloat())
-                    binding.tvAveragePrice.text = NumberFormatUtil.numWithComma(item.purchase.unitPrice.toFloat())
-                    binding.tvStockCount.text = NumberFormatUtil.numWithComma(item.quantity.toFloat())
+                    binding.tvNowPrice.text = NumberFormatUtil.numWithComma(item.current.dollar.unitPrice.toBigDecimal())
+                    binding.tvAveragePrice.text = NumberFormatUtil.numWithComma(item.purchase.unitPrice.toBigDecimal())
+                    binding.tvStockCount.text = NumberFormatUtil.numWithComma(item.quantity.toBigDecimal())
                 }
                 StockType.Bitcoin.full_name -> {
                     binding.clDetailDefault.visibility = View.GONE
                     binding.clDetailBitcoin.visibility = View.VISIBLE
 
-                    binding.tvBitcoinNowPrice.text = NumberFormatUtil.numWithComma(item.current.won.unitPrice.toFloat())
-                    binding.tvBitcoinAveragePrice.text = NumberFormatUtil.numWithComma(item.purchase.unitPrice.toFloat())
+                    binding.tvBitcoinNowPrice.text = NumberFormatUtil.numWithComma(item.current.won.unitPrice.toBigDecimal())
+                    binding.tvBitcoinAveragePrice.text = NumberFormatUtil.numWithComma(item.purchase.unitPrice.toBigDecimal())
                 }
             }
 

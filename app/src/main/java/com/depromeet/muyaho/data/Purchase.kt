@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 data class Purchase(
     val unitPrice: String,
     val amount: String,
-    val amountInWon: String
+    val amountInWon: String?
 ) : Parcelable

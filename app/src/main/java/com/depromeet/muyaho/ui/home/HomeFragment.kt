@@ -12,6 +12,7 @@ import com.depromeet.muyaho.ui.addstock.AddStockActivity
 import com.depromeet.muyaho.util.NumberFormatUtil
 import com.depromeet.muyaho.widget.BudgetLayout
 import dagger.hilt.android.AndroidEntryPoint
+import java.math.BigDecimal
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewModel.ViewAction>() {
@@ -90,10 +91,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
             } else {
                 binding.tvTodayBenefitEmpty.visibility = View.GONE
                 binding.llTodayBenefit.visibility = View.VISIBLE
-                binding.tvTodayBenefit.text = NumberFormatUtil.numWithComma(it.todayProfitOrLose.toFloat())
+                if (it.todayProfitOrLose.toBigDecimal() >= 0.toBigDecimal()) {
+                    binding.tvTodayBenefit.text = "+${NumberFormatUtil.numWithComma(it.todayProfitOrLose.toBigDecimal())}"
+                } else {
+                    binding.tvTodayBenefit.text = NumberFormatUtil.numWithComma(it.todayProfitOrLose.toBigDecimal())
+                }
 
-                val nTodayProfitOrLose = it.todayProfitOrLose.toFloat()
-                if (nTodayProfitOrLose > 0) {
+                val nTodayProfitOrLose = it.todayProfitOrLose.toBigDecimal()
+                if (nTodayProfitOrLose > 0.toBigDecimal()) {
                     // 수익이 난 상태
                     binding.tvTodayBenefit.setTextColor(resources.getColor(R.color.secondary_red, null))
                     binding.ivYoungchan.setImageResource(R.drawable.image_youngchan_red)
@@ -108,17 +113,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
 
 
             if (it.overview.domesticStocks.isNotEmpty()) {
-                var sum = 0.0f
+                var sum = BigDecimal(0)
                 it.overview.domesticStocks.forEach {
-                    val benefit = it.current.won.amountPrice.toFloat() - it.purchase.amount.toFloat()
+                    val benefit = it.current.won.amountPrice.toBigDecimal() - it.purchase.amount.toBigDecimal()
                     sum += benefit
                 }
 
-                if (sum > 0) {
-                    binding.tvInvestDomesticBenefit.text = "+${NumberFormatUtil.numWithComma(sum.toFloat())}"
+                if (sum > 0.toBigDecimal()) {
+                    binding.tvInvestDomesticBenefit.text = "+${NumberFormatUtil.numWithComma(sum)}"
                     binding.tvInvestDomesticBenefit.setTextColor(resources.getColor(R.color.secondary_red, null))
                 } else {
-                    binding.tvInvestDomesticBenefit.text = NumberFormatUtil.numWithComma(sum.toFloat())
+                    binding.tvInvestDomesticBenefit.text = NumberFormatUtil.numWithComma(sum)
                     binding.tvInvestDomesticBenefit.setTextColor(resources.getColor(R.color.secondary_blue, null))
                 }
             } else {
@@ -127,17 +132,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
             }
 
             if (it.overview.foreignStocks.isNotEmpty()) {
-                var sum = 0.0f
+                var sum = BigDecimal(0)
                 it.overview.foreignStocks.forEach {
-                    val benefit = it.current.won.amountPrice.toFloat() - it.purchase.amountInWon.toFloat()
+                    val benefit = it.current.won.amountPrice.toBigDecimal().minus(it.purchase.amountInWon?.toBigDecimal() ?: 0.toBigDecimal())
                     sum += benefit
                 }
 
-                if (sum > 0) {
-                    binding.tvInvestOverseasBenefit.text = "+${NumberFormatUtil.numWithComma(sum.toFloat())}"
+                if (sum > 0.toBigDecimal()) {
+                    binding.tvInvestOverseasBenefit.text = "+${NumberFormatUtil.numWithComma(sum)}"
                     binding.tvInvestOverseasBenefit.setTextColor(resources.getColor(R.color.secondary_red, null))
                 } else {
-                    binding.tvInvestOverseasBenefit.text = NumberFormatUtil.numWithComma(sum.toFloat())
+                    binding.tvInvestOverseasBenefit.text = NumberFormatUtil.numWithComma(sum)
                     binding.tvInvestOverseasBenefit.setTextColor(resources.getColor(R.color.secondary_blue, null))
                 }
             } else {
@@ -146,17 +151,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
             }
 
             if (it.overview.bitCoins.isNotEmpty()) {
-                var sum = 0.0f
+                var sum = BigDecimal(0)
                 it.overview.bitCoins.forEach {
-                    val benefit = it.current.won.amountPrice.toFloat() - it.purchase.amount.toFloat()
+                    val benefit = it.current.won.amountPrice.toBigDecimal() - it.purchase.amount.toBigDecimal()
                     sum += benefit
                 }
 
-                if (sum > 0) {
-                    binding.tvInvestBitcoinBenefit.text = "+${NumberFormatUtil.numWithComma(sum.toFloat())}"
+                if (sum > 0.toBigDecimal()) {
+                    binding.tvInvestBitcoinBenefit.text = "+${NumberFormatUtil.numWithComma(sum)}"
                     binding.tvInvestBitcoinBenefit.setTextColor(resources.getColor(R.color.secondary_red, null))
                 } else {
-                    binding.tvInvestBitcoinBenefit.text = NumberFormatUtil.numWithComma(sum.toFloat())
+                    binding.tvInvestBitcoinBenefit.text = NumberFormatUtil.numWithComma(sum)
                     binding.tvInvestBitcoinBenefit.setTextColor(resources.getColor(R.color.secondary_blue, null))
                 }
             } else {
