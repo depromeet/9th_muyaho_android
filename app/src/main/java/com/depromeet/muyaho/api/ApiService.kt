@@ -72,4 +72,8 @@ interface ApiService {
     suspend fun getMemberStockStatusHistory(
         @Header("Authorization") token: String
     ): Response<ApiDataModel.ResponseMemberStockStatus>
+
+    @GET("/api/v1/exchange/rate")
+    suspend fun getExchangeRate(
+    ): Response<ApiDataModel.ResponseExchangeRate>
 }

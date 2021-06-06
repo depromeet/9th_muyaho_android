@@ -9,6 +9,7 @@ import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
 import com.depromeet.muyaho.data.StockType
 import com.depromeet.muyaho.databinding.FragmentModifyStockInputBinding
+import com.depromeet.muyaho.other.Constants
 import com.depromeet.muyaho.ui.MainActivity
 import com.depromeet.muyaho.util.NumberFormatUtil
 import com.depromeet.muyaho.widget.PriceEditText
@@ -48,12 +49,23 @@ class ModifyStockInputFragment :
             }
         }
 
+        binding.petOverseasPurchasePrice.mOnEditCompleteListener = object : PriceEditText.OnEditCompleteListener{
+            override fun OnComplete() {
+                binding.tvStockPrice.text = NumberFormatUtil.numWithComma(binding.petOverseasPurchasePrice.price.toBigDecimal())
+            }
+        }
+
         binding.tvSave.setOnClickListener {
             binding.petAveragePrice.clearFocus()
             binding.petPurchasePrice.clearFocus()
             binding.petQuantity.clearFocus()
             if (isInputDataValidate()) {
-                vm.putMemberStock(args.memberStock.memberStockId, binding.petAveragePrice.price.toFloat(), binding.petQuantity.price.toFloat())
+                vm.putMemberStock(
+                    args.memberStock.memberStockId,
+                    binding.petAveragePrice.price.toFloat(),
+                    binding.petQuantity.price.toFloat(),
+                    binding.petOverseasPurchasePrice.price.toFloat()
+                )
             }
         }
 
@@ -76,6 +88,8 @@ class ModifyStockInputFragment :
                 binding.llInputPurchaseAmount.visibility = View.GONE
                 binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
                 binding.petQuantity.priceType = PriceEditText.PriceType.COUNT
+
+                binding.llOverseaOption.visibility = View.GONE
             }
             StockType.Overseas.full_name -> {
                 binding.tvStockType.text = "해외주식"
@@ -83,6 +97,8 @@ class ModifyStockInputFragment :
                 binding.llInputPurchaseAmount.visibility = View.GONE
                 binding.petAveragePrice.priceType = PriceEditText.PriceType.DOLLAR
                 binding.petQuantity.priceType = PriceEditText.PriceType.COUNT
+
+                binding.llOverseaOption.visibility = View.VISIBLE
             }
             StockType.Bitcoin.full_name -> {
                 binding.tvStockType.text = "가상화폐"
@@ -91,6 +107,8 @@ class ModifyStockInputFragment :
                 binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
                 binding.petPurchasePrice.priceType = PriceEditText.PriceType.WON
                 binding.petQuantity.priceType = PriceEditText.PriceType.COUNT
+
+                binding.llOverseaOption.visibility = View.GONE
             }
         }
         vm.stockType = args.memberStock.stock.type
@@ -99,13 +117,15 @@ class ModifyStockInputFragment :
 
         val isDollar = (args.memberStock.currencyType == "DOLLAR")
         if (isDollar) {
-            binding.tvStockPrice.text = NumberFormatUtil.numWithComma(args.memberStock.purchase.amount.toBigDecimal() * 1200.toBigDecimal())
+            binding.tvStockPrice.text = NumberFormatUtil.numWithComma(args.memberStock.purchase.amountInWon?.toBigDecimal()?: 0.toBigDecimal())
         } else {
             binding.tvStockPrice.text = NumberFormatUtil.numWithComma(args.memberStock.purchase.amount.toBigDecimal())
         }
         binding.petAveragePrice.price = args.memberStock.purchase.unitPrice
         binding.petPurchasePrice.price = args.memberStock.purchase.amount
         binding.petQuantity.price = args.memberStock.quantity
+        binding.petOverseasPurchasePrice.price = args.memberStock.purchase.amountInWon?: ""
+        binding.tvExchangeRate.text = NumberFormatUtil.numWithComma(Constants.OVERSEAS_EXCHANGE_RATE)
     }
 
     fun updatePrice() {
@@ -128,10 +148,11 @@ class ModifyStockInputFragment :
         var price = averagePrice * stockCount
         val isDollar = (vm.stockType == StockType.Overseas.full_name)
         if (isDollar) {
-            price *= 1200.toBigDecimal()
+            price *= Constants.OVERSEAS_EXCHANGE_RATE
         }
 
         binding.tvStockPrice.text = NumberFormatUtil.numWithComma(price)
+        binding.petOverseasPurchasePrice.price = price.toString()
     }
 
     fun updatePurchasePrice() {

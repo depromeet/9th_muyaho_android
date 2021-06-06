@@ -8,8 +8,10 @@ import com.depromeet.muyaho.data.AppDatabase
 import com.depromeet.muyaho.data.MemberStock
 import com.depromeet.muyaho.data.MemberStockStatus
 import com.depromeet.muyaho.data.StockType
+import com.depromeet.muyaho.other.Constants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import java.math.BigDecimal
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -115,5 +117,10 @@ class MainRepository @Inject constructor(
     suspend fun getMemberStockStatus(): MemberStockStatus? {
         memberStockStatusCache = apiHelper.getMemberStockStatus().body()?.data
         return memberStockStatusCache
+    }
+
+    suspend fun getExchangeRate() {
+        val exchangeRate = apiHelper.getExchangeRate().body()?.data?: Constants.DEFAULT_OVERSEAS_EXCHANGE_RATE
+        Constants.OVERSEAS_EXCHANGE_RATE = exchangeRate
     }
 }

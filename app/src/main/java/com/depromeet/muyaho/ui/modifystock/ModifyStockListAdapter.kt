@@ -60,7 +60,7 @@ class ModifyStockListAdapter: ListAdapter<MemberStock, RecyclerView.ViewHolder>(
             binding.tvBenefit.text = "${NumberFormatUtil.numWithComma(benefit)}(${item.profitOrLoseRate}%)"
 
             if (isDollar) {
-                binding.tvPrice.text = NumberFormatUtil.numWithComma(item.purchase.amount.toBigDecimal() * 1200.toBigDecimal())
+                binding.tvPrice.text = NumberFormatUtil.numWithComma(item.purchase.amountInWon?.toBigDecimal()?: 0.toBigDecimal())
             } else {
                 binding.tvPrice.text = NumberFormatUtil.numWithComma(item.purchase.amount.toBigDecimal())
             }

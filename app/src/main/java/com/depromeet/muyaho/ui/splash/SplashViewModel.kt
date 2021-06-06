@@ -24,6 +24,7 @@ class SplashViewModel @Inject constructor(
             mainRepository.loadStockList(StockType.Domestic.full_name)
             mainRepository.loadStockList(StockType.Overseas.full_name)
             mainRepository.loadStockList(StockType.Bitcoin.full_name)
+            mainRepository.getExchangeRate()
             withContext(Dispatchers.Main) {
                 actionSender.send(ViewAction.ShowMain)
             }

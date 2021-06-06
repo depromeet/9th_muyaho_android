@@ -3,6 +3,7 @@ package com.depromeet.muyaho.api
 import com.depromeet.muyaho.data.MemberStock
 import com.depromeet.muyaho.data.MemberStockStatus
 import com.depromeet.muyaho.data.Stock
+import java.math.BigDecimal
 
 object ApiDataModel {
 
@@ -65,5 +66,11 @@ object ApiDataModel {
         val code: String,
         val message: String,
         val data: MemberStockStatus
+    )
+
+    data class ResponseExchangeRate(
+        val code: String,
+        val message: String,
+        val data: BigDecimal
     )
 }

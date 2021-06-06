@@ -1,5 +1,7 @@
 package com.depromeet.muyaho.other
 
+import java.math.BigDecimal
+
 object Constants {
     const val BASE_URL = "http://muyaho-api-alb-302156047.ap-northeast-2.elb.amazonaws.com/"
     const val DATABASE_NAME = "muyaho-db"
@@ -10,6 +12,9 @@ object Constants {
     const val CODE_400_BAD_REQUEST = 400
     const val CODE_404_NOT_FOUND = 404
     const val CODE_409_CONFLICT = 409
+
+    val DEFAULT_OVERSEAS_EXCHANGE_RATE = 1200.toBigDecimal()
+    var OVERSEAS_EXCHANGE_RATE: BigDecimal = DEFAULT_OVERSEAS_EXCHANGE_RATE
 
     val YOUNGCHAN_MENT_NONE = arrayOf(
         arrayOf("zzzz...", "zzzzzz...")

@@ -38,4 +38,7 @@ interface ApiHelper {
 
     suspend fun getMemberStockStatusHistory()
             : Response<ApiDataModel.ResponseMemberStockStatus>
+
+    suspend fun getExchangeRate()
+            : Response<ApiDataModel.ResponseExchangeRate>
 }
