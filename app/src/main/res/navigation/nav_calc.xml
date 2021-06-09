@@ -38,11 +38,11 @@
     </navigation>
     <navigation
         android:id="@+id/navigation3"
-        app:startDestination="@id/revenueRateFragment">
+        app:startDestination="@id/incomeRateFragment">
         <fragment
-            android:id="@+id/revenueRateFragment"
-            android:name="com.depromeet.muyaho.ui.calc.RevenueRateFragment"
-            android:label="RevenueRateFragment" />
+            android:id="@+id/incomeRateFragment"
+            android:name="com.depromeet.muyaho.ui.calc.IncomeRateFragment"
+            android:label="IncomeRateFragment" />
     </navigation>
 
 </navigation>

@@ -6,12 +6,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RevenueRateViewModel @Inject constructor(
+class IncomeRateViewModel @Inject constructor(
 
-) : BaseViewModel<RevenueRateViewModel.ViewAction>() {
-    sealed class ViewAction : Action {
-
-    }
+) : BaseViewModel<IncomeRateViewModel.ViewAction>() {
+    sealed class ViewAction : Action
 
     init {
 

@@ -5,9 +5,12 @@
 
     <data>
 
+        <import type="com.depromeet.muyaho.ui.calc.CalcViewModel.Tab" />
+
         <variable
             name="vm"
             type="com.depromeet.muyaho.ui.calc.CalcViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,8 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="53dp"
+            android:alpha="@{vm.state.currentTab == Tab.HISTORY ? 1f : 0.4f}"
             android:onClick="@{() -> vm.onClickHistory()}"
-            android:text="기록"
+            android:text="@string/calc_history"
             android:textAppearance="@style/TextBody1"
             android:textColor="@color/white_1"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,16 +40,18 @@
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="@id/tv_history"
             app:layout_constraintStart_toStartOf="@id/tv_history"
-            app:layout_constraintTop_toBottomOf="@id/tv_history" />
+            app:layout_constraintTop_toBottomOf="@id/tv_history"
+            app:visibleIf="@{vm.state.currentTab == Tab.HISTORY}" />
 
         <TextView
-            android:id="@+id/tv_revenue_rate"
+            android:id="@+id/tv_income_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="53dp"
-            android:onClick="@{() -> vm.onClickRevenueRate()}"
-            android:text="수익률"
+            android:alpha="@{vm.state.currentTab == Tab.INCOME_RATE ? 1f : 0.4f}"
+            android:onClick="@{() -> vm.onClickIncomeRate()}"
+            android:text="@string/calc_rate"
             android:textAppearance="@style/TextBody1"
             android:textColor="@color/white_1"
             app:layout_constraintStart_toEndOf="@id/tv_history"
@@ -56,9 +62,10 @@
             android:layout_height="2dp"
             android:layout_marginTop="5dp"
             android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="@id/tv_revenue_rate"
-            app:layout_constraintStart_toStartOf="@id/tv_revenue_rate"
-            app:layout_constraintTop_toBottomOf="@id/tv_revenue_rate" />
+            app:layout_constraintEnd_toEndOf="@id/tv_income_rate"
+            app:layout_constraintStart_toStartOf="@id/tv_income_rate"
+            app:layout_constraintTop_toBottomOf="@id/tv_income_rate"
+            app:visibleIf="@{vm.state.currentTab == Tab.INCOME_RATE}" />
 
         <TextView
             android:id="@+id/tv_water"
@@ -66,11 +73,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="53dp"
+            android:alpha="@{vm.state.currentTab == Tab.WATER ? 1f : 0.4f}"
             android:onClick="@{() -> vm.onClickWater()}"
-            android:text="물타기"
+            android:text="@string/calc_water"
             android:textAppearance="@style/TextBody1"
             android:textColor="@color/white_1"
-            app:layout_constraintStart_toEndOf="@id/tv_revenue_rate"
+            app:layout_constraintStart_toEndOf="@id/tv_income_rate"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -80,7 +88,27 @@
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="@id/tv_water"
             app:layout_constraintStart_toStartOf="@id/tv_water"
-            app:layout_constraintTop_toBottomOf="@id/tv_water" />
+            app:layout_constraintTop_toBottomOf="@id/tv_water"
+            app:visibleIf="@{vm.state.currentTab == Tab.WATER}" />
+
+        <View
+            android:layout_width="169dp"
+            android:layout_height="161dp"
+            android:background="@drawable/ic_img_slime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{vm.state.currentTab == Tab.INCOME_RATE}" />
+
+        <View
+            android:id="@+id/view_download"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/ic_share_32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{vm.state.currentTab == Tab.INCOME_RATE}" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container"

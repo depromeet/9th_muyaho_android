@@ -15,17 +15,17 @@ fun bindSetCheckChangeListener(
     radioGroup.setOnCheckedChangeListener(listener)
 }
 
-@BindingAdapter("android:visibleIf")
+@BindingAdapter("visibleIf")
 fun View.setVisibleIf(value: Boolean) {
     isVisible = value
 }
 
-@BindingAdapter("android:invisibleIf")
+@BindingAdapter("invisibleIf")
 fun View.setInvisibleIf(value: Boolean) {
     isInvisible = value
 }
 
-@BindingAdapter("android:goneIf")
+@BindingAdapter("goneIf")
 fun View.setGoneIf(value: Boolean) {
     isGone = value
 }
