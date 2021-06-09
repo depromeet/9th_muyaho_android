@@ -61,5 +61,8 @@
     <!--modify_input_stock-->
     <string name="modify_stock_input_item">변경하실 투자 종목의\n가격과 수량을 입력해주세요!</string>
     <string name="modify_stock_modify_complete">변경완료</string>
+    <string name="calc_history">기록</string>
+    <string name="calc_rate">수익률</string>
+    <string name="calc_water">물타기</string>
 
 </resources>
