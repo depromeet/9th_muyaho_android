@@ -64,5 +64,14 @@
     <string name="calc_history">기록</string>
     <string name="calc_rate">수익률</string>
     <string name="calc_water">물타기</string>
+    <string name="income_rate_title">미래의 수익금을\n예상해보세요!</string>
+    <string name="income_rate_current_holding">현재 보유</string>
+    <string name="income_rate_holding_price">보유 평단가 (원)</string>
+    <string name="income_rate_holding_count">보유 수량 (원)</string>
+    <string name="income_rate_purchase_amount">매입 금액 (원)</string>
+    <string name="income_rate_target_income_rate">내 목표 수익률은?</string>
+    <string name="income_rate_desc">+1000%까지 입력 가능해요</string>
+    <string name="income_rate_target_income_rate_percent">목표 수익률 (%)</string>
+    <string name="income_rate_share">공유하기</string>
 
 </resources>
