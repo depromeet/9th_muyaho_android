@@ -61,5 +61,7 @@
     <!--modify_input_stock-->
     <string name="modify_stock_input_item">변경하실 투자 종목의\n가격과 수량을 입력해주세요!</string>
     <string name="modify_stock_modify_complete">변경완료</string>
+    <string name="mypage_sign_out">로그아웃</string>
+    <string name="mypage_leave">회원탈퇴</string>
 
 </resources>

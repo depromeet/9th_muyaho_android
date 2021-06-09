@@ -51,7 +51,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/shape_bg_radius_8dp"
             android:gravity="center"
-            android:text="로그아웃"
+            android:text="@string/mypage_sign_out"
             android:textAppearance="@style/TextCaption1.Bold"
             android:textColor="@color/primary_blue"
             app:layout_constraintBottom_toTopOf="@id/tv_leave" />
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="46dp"
-            android:text="회원탈퇴"
+            android:text="@string/mypage_leave"
             android:onClick="@{() -> vm.onClickLeave()}"
             android:textAppearance="@style/TextCaption1"
             android:textColor="@color/white"
