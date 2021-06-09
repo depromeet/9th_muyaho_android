@@ -19,6 +19,23 @@
         android:background="@color/black_1"
         tools:context=".ui.calc.CalcFragment">
 
+        <View
+            android:layout_width="169dp"
+            android:layout_height="161dp"
+            android:background="@drawable/ic_img_slime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{vm.state.currentTab == Tab.INCOME_RATE}" />
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/ic_water_illustration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{vm.state.currentTab == Tab.WATER}"
+            tools:visibility="gone" />
+
         <TextView
             android:id="@+id/tv_history"
             android:layout_width="wrap_content"
@@ -90,14 +107,6 @@
             app:layout_constraintStart_toStartOf="@id/tv_water"
             app:layout_constraintTop_toBottomOf="@id/tv_water"
             app:visibleIf="@{vm.state.currentTab == Tab.WATER}" />
-
-        <View
-            android:layout_width="169dp"
-            android:layout_height="161dp"
-            android:background="@drawable/ic_img_slime"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:visibleIf="@{vm.state.currentTab == Tab.INCOME_RATE}" />
 
         <View
             android:id="@+id/view_download"

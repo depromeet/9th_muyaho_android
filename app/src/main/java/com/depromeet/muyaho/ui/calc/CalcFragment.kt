@@ -30,6 +30,7 @@ class CalcFragment : BaseFragment<FragmentCalcBinding, CalcViewModel, CalcViewMo
         }
     }
 
+    // TODO Fragment 전환 애니메이션 추가하기
     private fun navigate(child: Fragment) {
         val childFt: FragmentTransaction = childFragmentManager.beginTransaction()
         if (!child.isAdded) {

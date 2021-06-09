@@ -1,21 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black_1">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="37dp"
-            android:text="미래의 평단가를\n예상해보세요!"
-            android:textAppearance="@style/TextH2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@color/black_1">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/water_title"
+                android:textAppearance="@style/TextH2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="105dp"
+                android:text="현재의 나는?"
+                android:textAppearance="@style/TextBody1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+            <com.github.angads25.toggle.widget.LabeledSwitch
+                android:layout_width="48dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/white"
+                android:textSize="9dp"
+                app:colorBorder="@color/gray_80"
+                app:colorOff="@color/gray_80"
+                app:colorOn="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/tv_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_subtitle"
+                app:on="true"
+                app:textOff="@string/dollar"
+                app:textOn="@string/won" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_holding_price"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/shape_bg_radius_10dp"
+                android:backgroundTint="@color/black_3"
+                android:hint="보유 평단가"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="12dp"
+                android:textAppearance="@style/TextCaption1"
+                android:textColor="@color/white_2"
+                android:textColorHint="@color/gray_40"
+                app:layout_constraintEnd_toStartOf="@id/et_holding_count"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_holding_count"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/shape_bg_radius_10dp"
+                android:backgroundTint="@color/black_3"
+                android:hint="보유 수량"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="12dp"
+                android:textAppearance="@style/TextCaption1"
+                android:textColor="@color/white_2"
+                android:textColorHint="@color/gray_40"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/et_holding_price"
+                app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_purchase_amount"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/shape_bg_radius_10dp"
+                android:backgroundTint="@color/black_2"
+                android:hint="매입 금액"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="12dp"
+                android:textAppearance="@style/TextCaption1"
+                android:textColor="@color/white_2"
+                android:textColorHint="@color/gray_40"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_holding_count" />
+
+            <TextView
+                android:id="@+id/tv_subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="28dp"
+                android:text="물/불타기"
+                android:textAppearance="@style/TextBody1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_purchase_amount" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_additional_price"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/shape_bg_radius_10dp"
+                android:backgroundTint="@color/black_3"
+                android:hint="보유 평단가"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="12dp"
+                android:textAppearance="@style/TextCaption1"
+                android:textColor="@color/white_2"
+                android:textColorHint="@color/gray_40"
+                app:layout_constraintEnd_toStartOf="@id/et_holding_count"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_subtitle2" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_additional_count"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/shape_bg_radius_10dp"
+                android:backgroundTint="@color/black_3"
+                android:hint="보유 수량"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="12dp"
+                android:textAppearance="@style/TextCaption1"
+                android:textColor="@color/white_2"
+                android:textColorHint="@color/gray_40"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/et_additional_price"
+                app:layout_constraintTop_toBottomOf="@id/tv_subtitle2" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_additional_price_2"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/shape_bg_radius_10dp"
+                android:backgroundTint="@color/black_2"
+                android:hint="매입 금액"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="12dp"
+                android:textAppearance="@style/TextCaption1"
+                android:textColor="@color/white_2"
+                android:textColorHint="@color/gray_40"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_additional_count" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>
