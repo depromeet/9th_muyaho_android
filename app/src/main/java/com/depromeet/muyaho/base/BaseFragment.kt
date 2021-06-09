@@ -17,6 +17,8 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel<A>, A : Actio
     abstract val layoutResId: Int
     abstract val vm: R
 
+    val TAG: String = this::class.java.toString()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

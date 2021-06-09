@@ -15,6 +15,7 @@ class MyPageViewModel @Inject constructor(
 ) : BaseViewModel<MyPageViewModel.ViewAction>() {
     sealed class ViewAction : Action {
         object GoSplash : ViewAction()
+        object Logout : ViewAction()
         data class ShowError(val code: Int, val error: String) : ViewAction()
     }
 
@@ -29,5 +30,9 @@ class MyPageViewModel @Inject constructor(
                     )
                 )
             }
+    }
+
+    fun onClickLogout() = viewModelScope.launch {
+        actionSender.send(ViewAction.Logout)
     }
 }
