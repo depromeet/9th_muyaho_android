@@ -1,7 +1,6 @@
 package com.depromeet.muyaho.ui.sign
 
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import com.depromeet.muyaho.R
@@ -20,11 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignActivity : BaseActivity<ActivitySignBinding, SignViewModel, SignViewModel.ViewAction>() {
     override val layoutResId: Int = R.layout.activity_sign
     override val vm: SignViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding.vm = vm
-    }
 
     override fun observeActionCommand(action: SignViewModel.ViewAction) {
         when (action) {

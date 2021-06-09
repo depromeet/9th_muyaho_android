@@ -94,6 +94,7 @@
     <string name="income_rate_target_income_rate_percent">목표 수익률 (%)</string>
     <string name="income_rate_share">공유하기</string>
 
+    <string name="mypage_title">%s님,\n환영합니다!</string>
     <string name="mypage_logout">로그아웃</string>
     <string name="mypage_leave">회원탈퇴</string>
 
