@@ -45,9 +45,9 @@ class ModifyStockListAdapter: ListAdapter<MemberStock, RecyclerView.ViewHolder>(
             // TODO: 5/19/21 수익/손실 금액 구현해야함
             val isDollar = (item.currencyType == "DOLLAR")
             if (isDollar) {
-                binding.tvPrice.text = NumberFormatUtil.numWithComma(item.purchase.amount.toFloat() * 1200)
+                binding.tvPrice.text = NumberFormatUtil.numWithComma(item.purchase.amount.toBigDecimal() * 1200.toBigDecimal())
             } else {
-                binding.tvPrice.text = NumberFormatUtil.numWithComma(item.purchase.amount.toFloat())
+                binding.tvPrice.text = NumberFormatUtil.numWithComma(item.purchase.amount.toBigDecimal())
             }
 
             if (selectedIndex == position) {

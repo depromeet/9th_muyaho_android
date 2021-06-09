@@ -11,6 +11,7 @@ import com.depromeet.muyaho.databinding.FragmentAddStockInputBinding
 import com.depromeet.muyaho.util.NumberFormatUtil
 import com.depromeet.muyaho.widget.PriceEditText
 import dagger.hilt.android.AndroidEntryPoint
+import java.math.BigDecimal
 
 @AndroidEntryPoint
 class AddStockInputFragment :
@@ -53,8 +54,8 @@ class AddStockInputFragment :
             if (isInputDataValidate()) {
                 vm.postMemberStock(
                     args.stock.id,
-                    binding.petAveragePrice.price.toInt(),
-                    binding.petQuantity.price.toInt()
+                    binding.petAveragePrice.price.toFloat(),
+                    binding.petQuantity.price.toFloat()
                 )
             }
         }
@@ -62,6 +63,7 @@ class AddStockInputFragment :
         // observe
         vm.isPostComplete.observe(viewLifecycleOwner) {
             if (it) {
+
                 requireActivity().finish()
             }
         }
@@ -99,24 +101,24 @@ class AddStockInputFragment :
     fun updatePrice() {
         val averagePrice = binding.petAveragePrice.price.let {
             if (it.isBlank()) {
-                0
+                0.toBigDecimal()
             } else {
-                it.toInt()
+                it.toBigDecimal()
             }
         }
 
         val stockCount = binding.petQuantity.price.let {
             if (it.isBlank()) {
-                0.0f
+                0.toBigDecimal()
             } else {
-                it.toFloat()
+                it.toBigDecimal()
             }
         }
 
-        var price: Float = averagePrice * stockCount
+        var price: BigDecimal = averagePrice * stockCount
         val isDollar = (vm.stockType == StockType.Overseas.full_name)
         if (isDollar) {
-            price *= 1200
+            price *= 1200.toBigDecimal()
         }
 
         binding.tvStockPrice.text = NumberFormatUtil.numWithComma(price)

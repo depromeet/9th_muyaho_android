@@ -3,11 +3,13 @@ package com.depromeet.muyaho.ui.modifystock
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
 import com.depromeet.muyaho.data.StockType
 import com.depromeet.muyaho.databinding.FragmentModifyStockInputBinding
+import com.depromeet.muyaho.ui.MainActivity
 import com.depromeet.muyaho.util.NumberFormatUtil
 import com.depromeet.muyaho.widget.PriceEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,14 +53,18 @@ class ModifyStockInputFragment :
             binding.petPurchasePrice.clearFocus()
             binding.petQuantity.clearFocus()
             if (isInputDataValidate()) {
-                vm.putMemberStock(args.memberStock.memberStockId, binding.petAveragePrice.price.toInt(), binding.petQuantity.price.toInt())
+                vm.putMemberStock(args.memberStock.memberStockId, binding.petAveragePrice.price.toFloat(), binding.petQuantity.price.toFloat())
             }
         }
 
         // observe
         vm.isPutComplete.observe(viewLifecycleOwner) {
             if (it) {
-                requireActivity().finish()
+                if (requireActivity() !is MainActivity) {
+                    requireActivity().finish()
+                } else {
+                    findNavController().popBackStack()
+                }
             }
         }
 
@@ -93,9 +99,9 @@ class ModifyStockInputFragment :
 
         val isDollar = (args.memberStock.currencyType == "DOLLAR")
         if (isDollar) {
-            binding.tvStockPrice.text = NumberFormatUtil.numWithComma(args.memberStock.purchase.amount.toFloat() * 1200)
+            binding.tvStockPrice.text = NumberFormatUtil.numWithComma(args.memberStock.purchase.amount.toBigDecimal() * 1200.toBigDecimal())
         } else {
-            binding.tvStockPrice.text = NumberFormatUtil.numWithComma(args.memberStock.purchase.amount.toFloat())
+            binding.tvStockPrice.text = NumberFormatUtil.numWithComma(args.memberStock.purchase.amount.toBigDecimal())
         }
         binding.petAveragePrice.price = args.memberStock.purchase.unitPrice
         binding.petPurchasePrice.price = args.memberStock.purchase.amount
@@ -105,24 +111,24 @@ class ModifyStockInputFragment :
     fun updatePrice() {
         val averagePrice = binding.petAveragePrice.price.let {
             if (it.isBlank()) {
-                0
+                0.toBigDecimal()
             } else {
-                it.toInt()
+                it.toBigDecimal()
             }
         }
 
         val stockCount = binding.petQuantity.price.let {
             if (it.isBlank()) {
-                0.0f
+                0.toBigDecimal()
             } else {
-                it.toFloat()
+                it.toBigDecimal()
             }
         }
 
-        var price: Float = averagePrice * stockCount
+        var price = averagePrice * stockCount
         val isDollar = (vm.stockType == StockType.Overseas.full_name)
         if (isDollar) {
-            price *= 1200
+            price *= 1200.toBigDecimal()
         }
 
         binding.tvStockPrice.text = NumberFormatUtil.numWithComma(price)

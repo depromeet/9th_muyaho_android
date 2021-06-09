@@ -1,18 +1,19 @@
 package com.depromeet.muyaho.util
 
+import java.math.BigDecimal
 import java.text.NumberFormat
 
 object NumberFormatUtil {
 
-    fun numWithDollar(num: Float): String {
+    fun numWithDollar(num: BigDecimal): String {
         return "${numWithComma(num)} USD"
     }
 
-    fun numWithCount(num: Float): String {
+    fun numWithCount(num: BigDecimal): String {
         return "${numWithComma(num)} 개"
     }
 
-    fun numWithComma(num: Float): String {
+    fun numWithComma(num: BigDecimal): String {
         return NumberFormat.getInstance().format(num)
     }
 }

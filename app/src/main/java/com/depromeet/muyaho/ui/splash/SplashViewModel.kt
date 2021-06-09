@@ -7,8 +7,8 @@ import com.depromeet.muyaho.data.StockType
 import com.depromeet.muyaho.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,7 +16,7 @@ class SplashViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : BaseViewModel<SplashViewModel.ViewAction>() {
     sealed class ViewAction : Action {
-        object ShowMain : ViewAction()
+        object CheckAutoLogin : ViewAction()
     }
 
     init {
@@ -24,9 +24,8 @@ class SplashViewModel @Inject constructor(
             mainRepository.loadStockList(StockType.Domestic.full_name)
             mainRepository.loadStockList(StockType.Overseas.full_name)
             mainRepository.loadStockList(StockType.Bitcoin.full_name)
-            withContext(Dispatchers.Main) {
-                actionSender.send(ViewAction.ShowMain)
-            }
+            delay(2000L)
+            actionSender.send(ViewAction.CheckAutoLogin)
         }
     }
 }

@@ -9,7 +9,40 @@
         android:id="@+id/fragment_calc"
         android:name="com.depromeet.muyaho.ui.calc.CalcFragment"
         tools:layout="@layout/fragment_calc">
-
+        <action
+            android:id="@+id/action_fragment_calc_to_navigation"
+            app:destination="@id/navigation" />
+        <action
+            android:id="@+id/action_fragment_calc_to_navigation2"
+            app:destination="@id/navigation2" />
+        <action
+            android:id="@+id/action_fragment_calc_to_navigation3"
+            app:destination="@id/navigation3" />
     </fragment>
+
+    <navigation
+        android:id="@+id/navigation"
+        app:startDestination="@id/waterFragment">
+        <fragment
+            android:id="@+id/waterFragment"
+            android:name="com.depromeet.muyaho.ui.calc.WaterFragment"
+            android:label="WaterFragment" />
+    </navigation>
+    <navigation
+        android:id="@+id/navigation2"
+        app:startDestination="@id/historyFragment">
+        <fragment
+            android:id="@+id/historyFragment"
+            android:name="com.depromeet.muyaho.ui.calc.HistoryFragment"
+            android:label="HistoryFragment" />
+    </navigation>
+    <navigation
+        android:id="@+id/navigation3"
+        app:startDestination="@id/incomeRateFragment">
+        <fragment
+            android:id="@+id/incomeRateFragment"
+            android:name="com.depromeet.muyaho.ui.calc.IncomeRateFragment"
+            android:label="IncomeRateFragment" />
+    </navigation>
 
 </navigation>

@@ -55,4 +55,21 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body body: ApiDataModel.RequestPutMemberStockBody
     ): Response<ApiDataModel.ResponsePutMemberStock>
+
+    @DELETE("/api/v1/member/stock")
+    @Headers("Content-Type: application/json")
+    suspend fun deleteMemberStock(
+        @Header("Authorization") token: String,
+        @Query("memberStockId") memberStockId: Int
+    ): Response<ApiDataModel.ResponseDeleteMemberStock>
+
+    @GET("/api/v1/member/stock/status")
+    suspend fun getMemberStockStatus(
+        @Header("Authorization") token: String
+    ): Response<ApiDataModel.ResponseMemberStockStatus>
+
+    @GET("/api/v1/member/stock/status/history")
+    suspend fun getMemberStockStatusHistory(
+        @Header("Authorization") token: String
+    ): Response<ApiDataModel.ResponseMemberStockStatus>
 }

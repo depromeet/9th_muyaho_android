@@ -2,59 +2,44 @@ package com.depromeet.muyaho.ui.calc
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.depromeet.muyaho.R
+import com.depromeet.muyaho.base.BaseFragment
+import com.depromeet.muyaho.databinding.FragmentCalcBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
+class CalcFragment : BaseFragment<FragmentCalcBinding, CalcViewModel, CalcViewModel.ViewAction>() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CalcFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class CalcFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override val layoutResId: Int = R.layout.fragment_calc
+    override val vm: CalcViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+        lifecycleScope.launchWhenResumed { vm.init() }
+    }
+
+    override fun observeActionCommand(action: CalcViewModel.ViewAction) {
+        when (action) {
+            CalcViewModel.ViewAction.ShowHistory -> navigate(HistoryFragment.newInstance())
+            CalcViewModel.ViewAction.ShowIncomeRate -> navigate(IncomeRateFragment.newInstance())
+            CalcViewModel.ViewAction.ShowWater -> navigate(WaterFragment.newInstance())
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calc, container, false)
+    private fun navigate(child: Fragment) {
+        val childFt: FragmentTransaction = childFragmentManager.beginTransaction()
+        if (!child.isAdded) {
+            childFt.replace(R.id.fragment_container, child)
+            childFt.commit()
+        }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CalcFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CalcFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = CalcFragment()
     }
 }

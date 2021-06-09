@@ -105,9 +105,9 @@ class PriceEditText@JvmOverloads constructor(
         }
 
         val formatPrice = when (priceType) {
-            PriceType.WON -> NumberFormatUtil.numWithComma(price.toFloat())
-            PriceType.DOLLAR -> NumberFormatUtil.numWithDollar(price.toFloat())
-            PriceType.COUNT -> NumberFormatUtil.numWithCount(price.toFloat())
+            PriceType.WON -> NumberFormatUtil.numWithComma(price.toBigDecimal())
+            PriceType.DOLLAR -> NumberFormatUtil.numWithDollar(price.toBigDecimal())
+            PriceType.COUNT -> NumberFormatUtil.numWithCount(price.toBigDecimal())
         }
         binding.tvPrice.text = formatPrice
     }

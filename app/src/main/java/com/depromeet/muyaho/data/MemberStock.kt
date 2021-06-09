@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class MemberStock(
+data class MemberStock(
     val memberStockId: Int,
     val stock: Stock,
     val purchase: Purchase,

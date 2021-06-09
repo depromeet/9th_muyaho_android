@@ -1,14 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.calc.CalcFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <import type="com.depromeet.muyaho.ui.calc.CalcViewModel.Tab" />
+
+        <variable
+            name="vm"
+            type="com.depromeet.muyaho.ui.calc.CalcViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/black_1"
+        tools:context=".ui.calc.CalcFragment">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tv_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="53dp"
+            android:alpha="@{vm.state.currentTab == Tab.HISTORY ? 1f : 0.4f}"
+            android:onClick="@{() -> vm.onClickHistory()}"
+            android:text="@string/calc_history"
+            android:textAppearance="@style/TextBody1"
+            android:textColor="@color/white_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/tv_history"
+            app:layout_constraintStart_toStartOf="@id/tv_history"
+            app:layout_constraintTop_toBottomOf="@id/tv_history"
+            app:visibleIf="@{vm.state.currentTab == Tab.HISTORY}" />
+
+        <TextView
+            android:id="@+id/tv_income_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="53dp"
+            android:alpha="@{vm.state.currentTab == Tab.INCOME_RATE ? 1f : 0.4f}"
+            android:onClick="@{() -> vm.onClickIncomeRate()}"
+            android:text="@string/calc_rate"
+            android:textAppearance="@style/TextBody1"
+            android:textColor="@color/white_1"
+            app:layout_constraintStart_toEndOf="@id/tv_history"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/tv_income_rate"
+            app:layout_constraintStart_toStartOf="@id/tv_income_rate"
+            app:layout_constraintTop_toBottomOf="@id/tv_income_rate"
+            app:visibleIf="@{vm.state.currentTab == Tab.INCOME_RATE}" />
+
+        <TextView
+            android:id="@+id/tv_water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="53dp"
+            android:alpha="@{vm.state.currentTab == Tab.WATER ? 1f : 0.4f}"
+            android:onClick="@{() -> vm.onClickWater()}"
+            android:text="@string/calc_water"
+            android:textAppearance="@style/TextBody1"
+            android:textColor="@color/white_1"
+            app:layout_constraintStart_toEndOf="@id/tv_income_rate"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/tv_water"
+            app:layout_constraintStart_toStartOf="@id/tv_water"
+            app:layout_constraintTop_toBottomOf="@id/tv_water"
+            app:visibleIf="@{vm.state.currentTab == Tab.WATER}" />
+
+        <View
+            android:layout_width="169dp"
+            android:layout_height="161dp"
+            android:background="@drawable/ic_img_slime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{vm.state.currentTab == Tab.INCOME_RATE}" />
+
+        <View
+            android:id="@+id/view_download"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/ic_share_32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{vm.state.currentTab == Tab.INCOME_RATE}" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="93dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/nav_calc" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

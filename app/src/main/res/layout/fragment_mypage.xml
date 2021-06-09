@@ -51,7 +51,8 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/shape_bg_radius_8dp"
             android:gravity="center"
-            android:text="@string/mypage_sign_out"
+            android:onClick="@{() -> vm.onClickLogout()}"
+            android:text="@string/mypage_logout"
             android:textAppearance="@style/TextCaption1.Bold"
             android:textColor="@color/primary_blue"
             app:layout_constraintBottom_toTopOf="@id/tv_leave" />

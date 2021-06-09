@@ -16,12 +16,26 @@ interface ApiHelper {
     suspend fun signUpKakao(body: SignUpBody): Response<LoginResult>
 
     suspend fun checkName(name: String): Response<Unit>
-
     suspend fun getMember(authorization: String): Response<MemberResult>
     suspend fun deleteMember(authorization: String): Response<Unit>
 
-    suspend fun getStockList(stockType: String): Response<ResponseStockList>
-    suspend fun getMemberStock(stockType: String): Response<ResponseGetMemberStock>
-    suspend fun postMemberStock(body: RequestPostMemberStockBody): Response<ResponsePostMemberStock>
-    suspend fun putMemberStock(body: RequestPutMemberStockBody): Response<ResponsePutMemberStock>
+    suspend fun getStockList(stockType: String): Response<ApiDataModel.ResponseStockList>
+
+    suspend fun getMemberStock(stockType: String)
+            : Response<ApiDataModel.ResponseGetMemberStock>
+
+    suspend fun postMemberStock(body: ApiDataModel.RequestPostMemberStockBody)
+            : Response<ApiDataModel.ResponsePostMemberStock>
+
+    suspend fun putMemberStock(body: ApiDataModel.RequestPutMemberStockBody)
+            : Response<ApiDataModel.ResponsePutMemberStock>
+
+    suspend fun deleteMemberStock(memberStockId: Int)
+            : Response<ApiDataModel.ResponseDeleteMemberStock>
+
+    suspend fun getMemberStockStatus()
+            : Response<ApiDataModel.ResponseMemberStockStatus>
+
+    suspend fun getMemberStockStatusHistory()
+            : Response<ApiDataModel.ResponseMemberStockStatus>
 }
