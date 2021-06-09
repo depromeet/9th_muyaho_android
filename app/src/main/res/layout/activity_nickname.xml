@@ -27,8 +27,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:layout_width="84dp"
-            android:layout_height="15dp"
+            android:layout_width="89dp"
+            android:layout_height="19dp"
             android:layout_marginTop="59dp"
             android:background="@drawable/ic_youngcha_logo"
             app:layout_constraintEnd_toEndOf="parent"
