@@ -59,31 +59,33 @@
     <string name="nickname_input_hint">닉네임 입력</string>
     <string name="nickname_desc">닉네임을 정해주세요!(최대 5자)</string>
 
-    <!--add_stock-->
+    <!-- add_stock -->
     <string name="add_stock_add_new_item">신규항목추가</string>
     <string name="add_stock_inform_new_item">신규 등록하실\n투자 종목을 알려주세요!</string>
     <string name="add_stock_search_stock_name">종목이름으로 검색해주세요.</string>
 
-    <!--add_search_stock-->
+    <!-- add_search_stock -->
     <string name="add_stock_search_stock">종목 검색하기</string>
     <string name="add_stock_search_edit_text_hint">종목 이름, 종목 코드로 검색해 주세요</string>
 
-    <!--add_input_stock-->
+    <!-- add_input_stock -->
     <string name="add_stock_input_stock">신규항목추가</string>
     <string name="add_stock_inform_input_stock">투자 종목의\n가격과 수량을 알려주세요!</string>
 
-    <!--modify_stock-->
+    <!-- modify_stock -->
     <string name="modify_stock_modify_item">기존정보수정</string>
     <string name="modify_stock_select_modify_item">수정하실 종목을\n선택해주세요</string>
 
-    <!--modify_input_stock-->
+    <!-- modify_input_stock -->
     <string name="modify_stock_input_item">변경하실 투자 종목의\n가격과 수량을 입력해주세요!</string>
     <string name="modify_stock_modify_complete">변경완료</string>
 
+    <!-- Calc -->
     <string name="calc_history">기록</string>
     <string name="calc_rate">수익률</string>
     <string name="calc_water">물타기</string>
 
+    <!-- IncomeRate -->
     <string name="income_rate_title">미래의 수익금을\n예상해보세요!</string>
     <string name="income_rate_current_holding">현재 보유</string>
     <string name="income_rate_holding_price">보유 평단가 (원)</string>
@@ -94,9 +96,19 @@
     <string name="income_rate_target_income_rate_percent">목표 수익률 (%)</string>
     <string name="income_rate_share">공유하기</string>
 
+    <!-- My Page -->
     <string name="mypage_title">%s님,\n환영합니다!</string>
     <string name="mypage_logout">로그아웃</string>
     <string name="mypage_leave">회원탈퇴</string>
+
+    <!-- Water -->
     <string name="water_title">미래의 평단가를\n예상해보세요!</string>
+    <string name="water_subtitle_current_state">현재의 나는?</string>
+    <string name="water_holding_price">보유 평단가</string>
+    <string name="water_holding_count">보유 수량</string>
+    <string name="water_purchase_amount">매입 금액</string>
+    <string name="water_subtitle_water_fire">물/불타기</string>
+    <string name="water_additional_price">추가 평단가</string>
+    <string name="water_additional_count">추가 수량</string>
 
 </resources>
