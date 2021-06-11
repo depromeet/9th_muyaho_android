@@ -37,6 +37,11 @@ class IncomeRateFragment :
         })
 
         binding.tvShare.setOnClickListener {
+            if (binding.etHoldingPrice.text.isNullOrBlank() ||
+                binding.etHoldingCount.text.isNullOrBlank() ||
+                binding.etTargetIncomeRate.text.isNullOrBlank()) {
+                return@setOnClickListener
+            }
             val holdingPrice = binding.etHoldingPrice.text.toString().toBigDecimal()
             val holdingCount = binding.etHoldingCount.text.toString().toBigDecimal()
             val budget = holdingPrice * holdingCount
