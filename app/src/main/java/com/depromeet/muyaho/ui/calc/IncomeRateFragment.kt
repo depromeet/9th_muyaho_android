@@ -3,9 +3,11 @@ package com.depromeet.muyaho.ui.calc
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
 import com.depromeet.muyaho.databinding.FragmentIncomeRateBinding
+import com.depromeet.muyaho.ui.modifystock.ModifyStockSelectFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,5 +41,19 @@ class IncomeRateFragment :
     companion object {
         @JvmStatic
         fun newInstance() = IncomeRateFragment()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.tvShare.setOnClickListener {
+            val holdingPrice = binding.etHoldingPrice.text.toString().toBigDecimal()
+            val holdingCount = binding.etHoldingCount.text.toString().toBigDecimal()
+            val budget = holdingPrice * holdingCount
+            val benefitRate = binding.etTargetIncomeRate.text.toString().toBigDecimal()
+            CalcFragmentDirections.actionCalcToShare(budget.toLong(), benefitRate.toFloat()).also {
+                findNavController().navigate(it)
+            }
+        }
     }
 }

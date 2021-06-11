@@ -18,6 +18,24 @@
         <action
             android:id="@+id/action_fragment_calc_to_navigation3"
             app:destination="@id/navigation3" />
+        <action
+            android:id="@+id/action_calc_to_share"
+            app:destination="@id/shareFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/shareFragment"
+        android:name="com.depromeet.muyaho.ui.calc.ShareFragment"
+        android:label="ShareFragment">
+
+        <argument
+            android:name="budget"
+            app:argType="long"/>
+
+        <argument
+            android:name="benefit_rate"
+            app:argType="float"/>
+
     </fragment>
 
     <navigation
@@ -42,7 +60,10 @@
         <fragment
             android:id="@+id/incomeRateFragment"
             android:name="com.depromeet.muyaho.ui.calc.IncomeRateFragment"
-            android:label="IncomeRateFragment" />
+            android:label="IncomeRateFragment">
+
+        </fragment>
+
     </navigation>
 
 </navigation>

@@ -116,5 +116,9 @@
     <string name="water_subtitle_water_fire">물/불타기</string>
     <string name="water_additional_price">추가 평단가</string>
     <string name="water_additional_count">추가 수량</string>
+    
+    <!-- Share -->
+    <string name="share_future_budget">미래 내 돈은</string>
+    <string name="share_save_image">이미지 저장하기</string>
 
 </resources>
