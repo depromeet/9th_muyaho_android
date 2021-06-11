@@ -7,7 +7,6 @@ import androidx.navigation.fragment.findNavController
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
 import com.depromeet.muyaho.databinding.FragmentIncomeRateBinding
-import com.depromeet.muyaho.ui.modifystock.ModifyStockSelectFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,15 +35,6 @@ class IncomeRateFragment :
             }
             binding.ivPredict.setImageResource(resId)
         })
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = IncomeRateFragment()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         binding.tvShare.setOnClickListener {
             val holdingPrice = binding.etHoldingPrice.text.toString().toBigDecimal()
@@ -55,5 +45,10 @@ class IncomeRateFragment :
                 findNavController().navigate(it)
             }
         }
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = IncomeRateFragment()
     }
 }
