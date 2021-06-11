@@ -7,7 +7,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.ceil
 
 @HiltViewModel
 class IncomeRateViewModel @Inject constructor(
@@ -19,11 +18,7 @@ class IncomeRateViewModel @Inject constructor(
     val holdingCount = MutableLiveData<String>()
     val purchaseAmount = MutableLiveData<String>()
     val targetIncomeRate = MutableLiveData<String>()
-    private val _predictAmount = MutableLiveData<Double>()
-    val predictAmount: LiveData<String>
-        get() = _predictAmount
-            .map { it.toString() }
-            .map { it.substring(0 until it.length - 2) }
+    val predictAmount = MutableLiveData<String>()
     val visiblePredictView: LiveData<Boolean>
         get() = predictAmount.map { it.isNotEmpty() }
 
@@ -32,11 +27,17 @@ class IncomeRateViewModel @Inject constructor(
             holdingCount.asFlow()
                 .distinctUntilChanged()
                 .combine(holdingPrice.asFlow()) { _count, _price ->
-                    val count = _count.toInt()
-                    val price = _price.toInt()
-                    count * price
+                    val decimal = if (_count.isNotEmpty() && _price.isNotEmpty()) {
+                        val count = _count.toDouble()
+                        val price = _price.toDouble()
+                        (count * price).toBigDecimal()
+                    } else (0.0).toBigDecimal()
+                    decimal.toInt()
                 }.collect { amount ->
-                    if (amount != 0) purchaseAmount.value = amount.toString()
+                    if (amount > 0) {
+                        val predict = amount.toString()
+                        purchaseAmount.value = predict
+                    }
                 }
 
         }
@@ -44,10 +45,12 @@ class IncomeRateViewModel @Inject constructor(
         targetIncomeRate.asFlow()
             .distinctUntilChanged()
             .combine(purchaseAmount.asFlow()) { rate, amount ->
-                (amount.toDouble() * (rate.toDouble() / 100))
+                if (amount.isNotEmpty() && rate.isNotEmpty()) (amount.toDouble() * (rate.toDouble() / 100))
+                else (0.0)
             }
             .onEach { total ->
-                _predictAmount.value = ceil(total)
+                val amount = String.format("%d", total.toLong())
+                predictAmount.value = amount
             }.launchIn(viewModelScope)
     }
 }

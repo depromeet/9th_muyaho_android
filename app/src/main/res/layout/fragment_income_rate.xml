@@ -40,6 +40,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/iv_predict"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_marginTop="30dp"
@@ -162,6 +163,7 @@
                     android:layout_marginTop="18dp"
                     android:background="@drawable/shape_bg_radius_10dp"
                     android:backgroundTint="@color/black_2"
+                    android:enabled="false"
                     android:gravity="center_vertical"
                     android:hint="@string/income_rate_purchase_amount"
                     android:inputType="numberDecimal"
