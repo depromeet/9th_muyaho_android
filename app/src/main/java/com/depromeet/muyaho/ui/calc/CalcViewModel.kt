@@ -28,12 +28,12 @@ class CalcViewModel @Inject constructor(
         get() = _state
 
     fun init() {
-        onClickHistory()
+        onClickIncomeRate()
     }
 
     fun onClickHistory() = viewModelScope.launch {
-        actionSender.send(ViewAction.ShowHistory)
-        _state.value = State(currentTab = Tab.HISTORY)
+//         actionSender.send(ViewAction.ShowHistory)
+//         _state.value = State(currentTab = Tab.HISTORY)
     }
 
     fun onClickIncomeRate() = viewModelScope.launch {

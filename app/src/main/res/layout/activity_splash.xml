@@ -15,15 +15,6 @@
         android:background="@color/black_1"
         android:paddingBottom="88dp">
 
-        <View
-            android:layout_width="172dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="230dp"
-            android:background="@drawable/ic_youngcha_logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
