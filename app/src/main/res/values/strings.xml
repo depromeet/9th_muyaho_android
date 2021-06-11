@@ -71,6 +71,11 @@
     <!-- add_input_stock -->
     <string name="add_stock_input_stock">신규항목추가</string>
     <string name="add_stock_inform_input_stock">투자 종목의\n가격과 수량을 알려주세요!</string>
+    <string name="add_stock_overseas_option">선택사항</string>
+    <string name="add_stock_overseas_option_content">매입금 미입력시 해외주식 매입 평균환율은\n 현재환율 기준으로 계산되어 오차가 발생 할 수 있습니다</string>
+    <string name="add_stock_overseas_option_adjust_exchange_rate">적용환율</string>
+    <string name="add_stock_overseas_option_adjust_exchange_rate_hana_back">기본 - 하나은행 기준환율</string>
+    <string name="add_stock_overseas_option_purchase_price">매입금</string>
 
     <!-- modify_stock -->
     <string name="modify_stock_modify_item">기존정보수정</string>

@@ -1,18 +1,23 @@
 package com.depromeet.muyaho.ui.home
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
+import com.depromeet.muyaho.data.MemberStockStatus
 import com.depromeet.muyaho.databinding.FragmentHomeBinding
+import com.depromeet.muyaho.other.Constants
 import com.depromeet.muyaho.ui.addstock.AddStockActivity
 import com.depromeet.muyaho.util.NumberFormatUtil
 import com.depromeet.muyaho.widget.BudgetLayout
 import dagger.hilt.android.AndroidEntryPoint
 import java.math.BigDecimal
+import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewModel.ViewAction>() {
@@ -110,7 +115,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
             }
 
             binding.budget.setData(it)
-
+            setYoungchanMent(it)
 
             if (it.overview.domesticStocks.isNotEmpty()) {
                 var sum = BigDecimal(0)
@@ -169,6 +174,46 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeViewMo
                 binding.tvInvestBitcoinBenefit.setTextColor(resources.getColor(R.color.black_5, null))
             }
         }
+    }
+
+    fun setYoungchanMent(memberStockStatus: MemberStockStatus) {
+
+        val colorId: Int
+        val ment01: String
+        val ment02: String
+
+        val random = Random()
+        if (memberStockStatus.seedAmount.isBlank() || memberStockStatus.seedAmount == "0") {
+            // 입력이 되지 않은 상태
+            ment01 = Constants.YOUNGCHAN_MENT_NONE[0][0]
+            ment02 = Constants.YOUNGCHAN_MENT_NONE[0][1]
+
+            colorId = Color.parseColor("#D0D0D0")
+        } else {
+            val nTodayProfitOrLose = memberStockStatus.todayProfitOrLose.toBigDecimal()
+            if (nTodayProfitOrLose > 0.toBigDecimal()) {
+                // 수익이 난 상태
+                val index = random.nextInt(3)
+
+                ment01 = Constants.YOUNGCHAN_MENT_PLUS[index][0]
+                ment02 = Constants.YOUNGCHAN_MENT_PLUS[index][1]
+
+                colorId = resources.getColor(R.color.secondary_red, null)
+            } else {
+                // 손실이 난 상태
+                val index = random.nextInt(3)
+
+                ment01 = Constants.YOUNGCHAN_MENT_MINUS[index][0]
+                ment02 = Constants.YOUNGCHAN_MENT_MINUS[index][1]
+
+                colorId = resources.getColor(R.color.primary_blue_dark, null)
+            }
+        }
+
+        binding.chYoungchanMent01.text = ment01
+        binding.chYoungchanMent02.text = ment02
+        binding.chYoungchanMent01.chipBackgroundColor = ColorStateList.valueOf(colorId)
+        binding.chYoungchanMent02.chipBackgroundColor = ColorStateList.valueOf(colorId)
     }
 
     fun navigateToDetail(position: Int) {

@@ -26,11 +26,11 @@ class ModifyStockInputViewModel @Inject constructor(
     val isProcessing: MutableLiveData<Boolean> = MutableLiveData(false)
     val isPutComplete: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    fun putMemberStock(memberStockId: Int, purchasePrice: Float, quantity: Float) {
+    fun putMemberStock(memberStockId: Int, purchasePrice: Float, quantity: Float, purchaseTotalPrice: Float) {
         isProcessing.value = true
 
         viewModelScope.launch(Dispatchers.Default) {
-            val result = mainRepository.putMemberStock(memberStockId, purchasePrice, quantity, purchasePrice * quantity)
+            val result = mainRepository.putMemberStock(memberStockId, purchasePrice, quantity, purchaseTotalPrice)
 
             mainRepository.getMemberStockStatus()
 

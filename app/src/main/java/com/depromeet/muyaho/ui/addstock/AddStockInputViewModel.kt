@@ -27,12 +27,12 @@ class AddStockInputViewModel @Inject constructor(
     val isProcessing: MutableLiveData<Boolean> = MutableLiveData(false)
     val isPostComplete: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    fun postMemberStock(stockId: Int, purchasePrice: Float, quantity: Float) {
+    fun postMemberStock(stockId: Int, purchasePrice: Float, quantity: Float, purchaseTotalPrice: Float) {
         isProcessing.value = true
 
         viewModelScope.launch(Dispatchers.Default) {
             val result = if (stockType == StockType.Overseas.full_name) {
-                mainRepository.postMemberStock(stockId, purchasePrice, quantity, "DOLLAR", purchasePrice * quantity * 1200)
+                mainRepository.postMemberStock(stockId, purchasePrice, quantity, "DOLLAR", purchaseTotalPrice)
             } else {
                 mainRepository.postMemberStock(stockId, purchasePrice, quantity, "WON", purchasePrice * quantity)
             }
