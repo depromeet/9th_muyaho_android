@@ -24,6 +24,7 @@
             android:text="@string/income_rate_title"
             android:textAppearance="@style/TextSubtitle1"
             android:textColor="@color/white_1"
+            app:goneIf="@{vm.visiblePredictView}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,15 +35,67 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/img_income_rate_illustration"
             android:elevation="16dp"
+            app:goneIf="@{vm.visiblePredictView}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/img_youngchan_default_130"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{vm.visiblePredictView}" />
+
+        <TextView
+            android:id="@+id/tv_future_income_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="43dp"
+            android:layout_marginEnd="20dp"
+            android:text="미래의 수익금은"
+            android:textAppearance="@style/TextBody2"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{vm.visiblePredictView}" />
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:text="@{vm.predictAmount}"
+            android:textAppearance="@style/TextH2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_future_income_rate"
+            app:visibleIf="@{vm.visiblePredictView}"
+            tools:text="56,680,000,000" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/shape_bg_radius_20dp"
+            android:backgroundTint="@color/secondary_red"
+            android:gravity="center"
+            android:text="@{@string/plus_percent(vm.targetIncomeRate)}"
+            android:textAppearance="@style/TextCaption1.Bold"
+            android:textColor="@color/secondary_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_amount"
+            app:visibleIf="@{vm.visiblePredictView}"
+            tools:text="+8.35%" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="66dp"
+            android:layout_marginTop="180dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -70,6 +123,7 @@
                     android:backgroundTint="@color/black_3"
                     android:hint="@string/income_rate_holding_price"
                     android:inputType="numberDecimal"
+                    android:maxLength="8"
                     android:paddingHorizontal="12dp"
                     android:text="@={vm.holdingPrice}"
                     android:textAppearance="@style/TextCaption1"
@@ -90,6 +144,7 @@
                     android:backgroundTint="@color/black_3"
                     android:hint="@string/income_rate_holding_count"
                     android:inputType="numberDecimal"
+                    android:maxLength="8"
                     android:paddingHorizontal="12dp"
                     android:text="@={vm.holdingCount}"
                     android:textAppearance="@style/TextCaption1"
@@ -151,7 +206,9 @@
                     android:backgroundTint="@color/black_2"
                     android:hint="@string/income_rate_target_income_rate_percent"
                     android:inputType="numberDecimal"
+                    android:maxLength="4"
                     android:paddingHorizontal="12dp"
+                    android:text="@={vm.targetIncomeRate}"
                     android:textAppearance="@style/TextCaption1"
                     android:textColor="@color/white_2"
                     android:textColorHint="@color/gray_40"

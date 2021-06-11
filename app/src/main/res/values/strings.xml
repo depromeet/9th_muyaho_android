@@ -100,6 +100,7 @@
     <string name="income_rate_desc">+1000%까지 입력 가능해요</string>
     <string name="income_rate_target_income_rate_percent">목표 수익률 (%)</string>
     <string name="income_rate_share">공유하기</string>
+    <string name="plus_percent">+%s%%</string>
 
     <!-- My Page -->
     <string name="mypage_title">%s님,\n환영합니다!</string>
