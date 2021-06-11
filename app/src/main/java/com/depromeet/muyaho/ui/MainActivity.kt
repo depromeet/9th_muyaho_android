@@ -55,6 +55,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainViewMo
                 }
             }
         })
+
+        binding.bottomNavigation.itemIconTintList = null
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

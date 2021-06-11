@@ -28,7 +28,8 @@
             app:itemIconTint="@color/white"
             app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/menu_bottom_navigation" />
+            app:menu="@menu/menu_bottom_navigation"
+            android:background="@color/black_1"/>
 
         <com.depromeet.muyaho.widget.HomeFABView
             android:id="@+id/view_fab"

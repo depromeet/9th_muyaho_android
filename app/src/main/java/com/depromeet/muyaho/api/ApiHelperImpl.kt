@@ -56,4 +56,7 @@ class ApiHelperImpl @Inject constructor(
 
     override suspend fun getMemberStockStatusHistory(): Response<ApiDataModel.ResponseMemberStockStatus> =
         apiService.getMemberStockStatusHistory(PreferenceUtil.accessToken)
+
+    override suspend fun getExchangeRate(): Response<ApiDataModel.ResponseExchangeRate> =
+        apiService.getExchangeRate()
 }

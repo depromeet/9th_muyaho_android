@@ -8,6 +8,7 @@ import com.depromeet.muyaho.R
 import com.depromeet.muyaho.base.BaseFragment
 import com.depromeet.muyaho.data.StockType
 import com.depromeet.muyaho.databinding.FragmentAddStockInputBinding
+import com.depromeet.muyaho.other.Constants
 import com.depromeet.muyaho.util.NumberFormatUtil
 import com.depromeet.muyaho.widget.PriceEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +48,12 @@ class AddStockInputFragment :
             }
         }
 
+        binding.petOverseasPurchasePrice.mOnEditCompleteListener = object : PriceEditText.OnEditCompleteListener{
+            override fun OnComplete() {
+                binding.tvStockPrice.text = NumberFormatUtil.numWithComma(binding.petOverseasPurchasePrice.price.toBigDecimal())
+            }
+        }
+
         binding.tvSave.setOnClickListener {
             binding.petAveragePrice.clearFocus()
             binding.petPurchasePrice.clearFocus()
@@ -55,7 +62,8 @@ class AddStockInputFragment :
                 vm.postMemberStock(
                     args.stock.id,
                     binding.petAveragePrice.price.toFloat(),
-                    binding.petQuantity.price.toFloat()
+                    binding.petQuantity.price.toFloat(),
+                    binding.petOverseasPurchasePrice.price.toFloat()
                 )
             }
         }
@@ -76,6 +84,8 @@ class AddStockInputFragment :
                 binding.llInputPurchaseAmount.visibility = View.GONE
                 binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
                 binding.petQuantity.priceType = PriceEditText.PriceType.COUNT
+
+                binding.llOverseaOption.visibility = View.GONE
             }
             StockType.Overseas.full_name -> {
                 binding.tvStockType.text = "해외주식"
@@ -83,6 +93,8 @@ class AddStockInputFragment :
                 binding.llInputPurchaseAmount.visibility = View.GONE
                 binding.petAveragePrice.priceType = PriceEditText.PriceType.DOLLAR
                 binding.petQuantity.priceType = PriceEditText.PriceType.COUNT
+
+                binding.llOverseaOption.visibility = View.VISIBLE
             }
             StockType.Bitcoin.full_name -> {
                 binding.tvStockType.text = "가상화폐"
@@ -91,11 +103,14 @@ class AddStockInputFragment :
                 binding.petAveragePrice.priceType = PriceEditText.PriceType.WON
                 binding.petPurchasePrice.priceType = PriceEditText.PriceType.WON
                 binding.petQuantity.priceType = PriceEditText.PriceType.COUNT
+
+                binding.llOverseaOption.visibility = View.GONE
             }
         }
         vm.stockType = args.stock.type
 
         binding.tvStockName.text = args.stock.name
+        binding.tvExchangeRate.text = NumberFormatUtil.numWithComma(Constants.OVERSEAS_EXCHANGE_RATE)
     }
 
     fun updatePrice() {
@@ -118,10 +133,11 @@ class AddStockInputFragment :
         var price: BigDecimal = averagePrice * stockCount
         val isDollar = (vm.stockType == StockType.Overseas.full_name)
         if (isDollar) {
-            price *= 1200.toBigDecimal()
+            price *= Constants.OVERSEAS_EXCHANGE_RATE
         }
 
         binding.tvStockPrice.text = NumberFormatUtil.numWithComma(price)
+        binding.petOverseasPurchasePrice.price = price.toString()
     }
 
     fun updatePurchasePrice() {
